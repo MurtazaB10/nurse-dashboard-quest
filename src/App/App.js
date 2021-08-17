@@ -8,18 +8,18 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Dashboard from './Dashboard';
-import Appointment from './Appointment';
-import Patient from './Patient';
-import PIQ from './PIQ';
-import Expense from './Expense';
-import Commission from './Commission';
-import Product from './Product';
-import Services from './Services';
-import Prescription from './Prescription';
-import Laboratory from './Laboratory';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import Dashboard from '../pages/Dashboard';
+import Appointment from '../pages/Appointment';
+import Patient from '../pages/Patient';
+import PIQ from '../pages/PIQ';
+import Expense from '../pages/Expense';
+import Commission from '../pages/Commission';
+import Product from '../pages/Product';
+import Services from '../pages/Services';
+import Prescription from '../pages/Prescription';
+import Laboratory from '../pages/Laboratory';
 
 const App = () => {
   return (

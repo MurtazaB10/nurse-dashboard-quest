@@ -1,15 +1,11 @@
-import React from 'react';
+import React from "react";
 import { render } from "react-dom";
 
-import { 
-  BrowserRouter
-} from "react-router-dom";
-
+import { BrowserRouter } from "react-router-dom";
 
 const Appointment = () => {
-    return (
-        <div>
-          
+  return (
+    <div>
       <div>
         <section className="dashboard">
           <div className=" container-fluid p-0">
@@ -20,13 +16,16 @@ const Appointment = () => {
                   <div className="panel-heading appointment-schedule appointment-list pt-3">
                     <div className="row align-items-center m-0">
                       <div className="col-md-2">
-                        <h3 className="panel-title pt-0 pb-0">
-                          Appointments
-                        </h3>
+                        <h3 className="panel-title pt-0 pb-0">Appointments</h3>
                       </div>
                     </div>
                     <hr />
-                    <button type="button" className="btn-raised btn btn-danger btn-floating " data-toggle="modal" data-target="#addappointmentModal">
+                    <button
+                      type="button"
+                      className="btn-raised btn btn-danger btn-floating "
+                      data-toggle="modal"
+                      data-target="#addappointmentModal"
+                    >
                       <i className="icon mdi mdi-plus" aria-hidden="true" />
                     </button>
                   </div>
@@ -35,235 +34,662 @@ const Appointment = () => {
                       <thead>
                         <tr>
                           <th width="10%">Time</th>
-                          <th width="18%"><span className="dr-name">DR Joe</span></th>
-                          <th width="18%"><span className="dr-name">DR John</span></th>
-                          <th width="18%"><span className="dr-name">DR Flash</span></th>
-                          <th width="18%"><span className="dr-name">DR Kwak</span></th>
-                          <th width="18%"><span className="dr-name">DR Doe</span></th>
+                          <th width="18%">
+                            <span className="dr-name">DR Joe</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR John</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR Flash</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR Kwak</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR Doe</span>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td width="10%">
-                            <table className="table" style={{width: '100%'}}>
-                              <tbody><tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 9:00 AM</span></td>
+                            <table className="table" style={{ width: "100%" }}>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:00 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 9:10 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:10 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 9:20 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:20 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 9:30 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:30 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 9:40 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:40 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 9:50 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:50 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 10:00 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:00 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 10:10 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:10 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 10:20 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:20 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 10:30 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:30 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 10:40 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:40 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 10:50 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:50 AM
+                                    </span>
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td><span className="time"><i className="mdi mdi-timer" /> 11:00 AM</span></td>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 11:00 AM
+                                    </span>
+                                  </td>
                                 </tr>
-                              </tbody></table>
+                              </tbody>
+                            </table>
                           </td>
                           <td width="18%">
                             <table className="table w-100">
-                              <tbody><tr>
-                                  <td>
-                                  </td>
+                              <tbody>
+                                <tr>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
-                              </tbody></table>
+                              </tbody>
+                            </table>
                           </td>
                           <td width="18%">
                             <table className="table w-100">
-                              <tbody><tr>
-                                  <td>
-                                  </td>
+                              <tbody>
+                                <tr>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
-                              </tbody></table>
+                                <tr>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td className="clearfix d-block" rowSpan={3}>
+                                    <div className="appointment-box">
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </td>
                           <td width="18%">
                             <table className="table w-100">
-                              <tbody><tr>
-                                  <td>
-                                  </td>
+                              <tbody>
+                                <tr>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
-                              </tbody></table>
+                              </tbody>
+                            </table>
                           </td>
                           <td width="18%">
                             <table className="table w-100">
-                              <tbody><tr>
+                              <tbody>
+                                <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
-                              </tbody></table>
+                              </tbody>
+                            </table>
                           </td>
                           <td width="18%">
                             <table className="table w-100">
-                              <tbody><tr>
-                                  <td>
-                                  </td>
+                              <tbody>
+                                <tr>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
-                                  <td>
-                                  </td>
+                                  <td></td>
                                 </tr>
                                 <tr>
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2"><a href>Edit <i className="mdi mdi-pencil" /></a> | <a href>Delete <i className="mdi mdi-delete" /></a> &nbsp; <span /></p>
-                                      <span className="patient-name">Patient Name</span>
-                                      <p className="mb-0"><a href><span className="badge badge-primary">Arrive</span></a> | <a href><span className="badge badge-danger">Cancel</span></a> | <a href><span className="badge badge-info">OTW</span></a> | <a href> <span className="badge badge-warning">Waiting</span></a></p>
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
                                     </div>
                                   </td>
                                 </tr>
-                              </tbody></table>
+                              </tbody>
+                            </table>
                           </td>
                         </tr>
                       </tbody>
@@ -276,12 +702,26 @@ const Appointment = () => {
           </div>
         </section>
         {/* Modal */}
-        <div className="modal fade" id="addappointmentModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div
+          className="modal fade"
+          id="addappointmentModal"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Add Appointment</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Add Appointment
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -289,7 +729,11 @@ const Appointment = () => {
                 <form className="forms-sample">
                   <div className="form-group">
                     <label htmlFor="exampleInputName1">Patient Name</label>
-                    <input type="text" className="form-control" placeholder="Enter Patient Name" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Patient Name"
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="exampleInputName1">Select Doctor</label>
@@ -304,7 +748,12 @@ const Appointment = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="exampleTextarea1">Select Date</label>
-                    <input type="text" className="form-control" id="datepicker1" placeholder="Select Date" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="datepicker1"
+                      placeholder="Select Date"
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="exampleInputName1">Time Slot</label>
@@ -319,18 +768,20 @@ const Appointment = () => {
                       </select>
                     </div>
                   </div>
-                  <button type="submit" className="btn btn-gradient-primary mr-2">Submit</button>
+                  <button
+                    type="submit"
+                    className="btn btn-gradient-primary mr-2"
+                  >
+                    Submit
+                  </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-        </div>
-      );
-}
-
-
+    </div>
+  );
+};
 
 export default Appointment;
