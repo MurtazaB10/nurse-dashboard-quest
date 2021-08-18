@@ -1,9 +1,6 @@
 import React from "react";
-import { render } from "react-dom";
 
-import { BrowserRouter } from "react-router-dom";
-
-const Laboratory = () => {
+const Prescription = () => {
   return (
     <div>
       <section className="dashboard">
@@ -15,7 +12,7 @@ const Laboratory = () => {
                 <div className="panel-heading appointment-schedule pt-3">
                   <div className="row align-items-center">
                     <div className="col-md-12">
-                      <h3 className="panel-title">Laboratory list</h3>
+                      <h3 className="panel-title">Prescription list</h3>
                     </div>
                   </div>
                   <hr />
@@ -27,7 +24,7 @@ const Laboratory = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Enter Laboratory"
+                              placeholder="Enter Product"
                             />
                           </div>
                         </div>
@@ -41,7 +38,7 @@ const Laboratory = () => {
                             type="button"
                             className="btn-raised btn btn-danger btn-floating position-static"
                             data-toggle="modal"
-                            data-target="#LaboratoryModal"
+                            data-target="#prescriptionModal"
                           >
                             <i
                               className="icon mdi mdi-plus"
@@ -60,60 +57,44 @@ const Laboratory = () => {
                       <tr>
                         <th width="15%">S.No</th>
                         <th width="15%">ID</th>
-                        <th width="20%">Test</th>
-                        <th width="15%">Test Status</th>
-                        <th width="20%">Accession Date</th>
-                        <th width="15%">Payment Status</th>
+                        <th width="15%">Date</th>
+                        <th width="20%">Medication</th>
+                        <th width="20%">Doses</th>
+                        <th width="15%">Frequency</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>1</td>
                         <td>#45685</td>
-                        <td>Blood Test</td>
-                        <td>
-                          <span className="badge badge-danger">Incomplete</span>
-                        </td>
-                        <td>14 Nov 2019 10:15 AM</td>
-                        <td>
-                          <span className="badge-warning">Due</span>
-                        </td>
+                        <td>14 Nov 2019</td>
+                        <td>Albuteol HFA</td>
+                        <td>250 mg</td>
+                        <td>2 Daily</td>
                       </tr>
                       <tr>
-                        <td>1</td>
+                        <td>2</td>
                         <td>#45685</td>
-                        <td>Blood Test</td>
-                        <td>
-                          <span className="badge badge-info">Complete</span>
-                        </td>
-                        <td>14 Nov 2019 10:15 AM</td>
-                        <td>
-                          <span className="badge badge-primary">Paid</span>
-                        </td>
+                        <td>14 Nov 2019</td>
+                        <td>Albuteol HFA</td>
+                        <td>250 mg</td>
+                        <td>2 Daily</td>
                       </tr>
                       <tr>
-                        <td>1</td>
+                        <td>3</td>
                         <td>#45685</td>
-                        <td>Blood Test</td>
-                        <td>
-                          <span className="badge badge-danger">Incomplete</span>
-                        </td>
-                        <td>14 Nov 2019 10:15 AM</td>
-                        <td>
-                          <span className="badge-warning">Due</span>
-                        </td>
+                        <td>14 Nov 2019</td>
+                        <td>Albuteol HFA</td>
+                        <td>250 mg</td>
+                        <td>2 Daily</td>
                       </tr>
                       <tr>
-                        <td>1</td>
+                        <td>4</td>
                         <td>#45685</td>
-                        <td>Blood Test</td>
-                        <td>
-                          <span className="badge badge-info">Complete</span>
-                        </td>
-                        <td>14 Nov 2019 10:15 AM</td>
-                        <td>
-                          <span className="badge badge-primary">Paid</span>
-                        </td>
+                        <td>14 Nov 2019</td>
+                        <td>Albuteol HFA</td>
+                        <td>250 mg</td>
+                        <td>2 Daily</td>
                       </tr>
                     </tbody>
                   </table>
@@ -126,7 +107,7 @@ const Laboratory = () => {
       </section>
       <div
         className="modal fade"
-        id="LaboratoryModal"
+        id="prescriptionModal"
         tabIndex={-1}
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -136,7 +117,7 @@ const Laboratory = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Laboratory list
+                Prescription list
               </h5>
               <button
                 type="button"
@@ -206,4 +187,4 @@ const Laboratory = () => {
   );
 };
 
-export default Laboratory;
+export default Prescription;

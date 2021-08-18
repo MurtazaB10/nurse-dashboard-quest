@@ -1,9 +1,6 @@
 import React from "react";
-import { render } from "react-dom";
 
-import { BrowserRouter } from "react-router-dom";
-
-const Prescription = () => {
+const Services = () => {
   return (
     <div>
       <section className="dashboard">
@@ -15,7 +12,7 @@ const Prescription = () => {
                 <div className="panel-heading appointment-schedule pt-3">
                   <div className="row align-items-center">
                     <div className="col-md-12">
-                      <h3 className="panel-title">Prescription list</h3>
+                      <h3 className="panel-title">Service list</h3>
                     </div>
                   </div>
                   <hr />
@@ -41,7 +38,7 @@ const Prescription = () => {
                             type="button"
                             className="btn-raised btn btn-danger btn-floating position-static"
                             data-toggle="modal"
-                            data-target="#prescriptionModal"
+                            data-target="#addproModal"
                           >
                             <i
                               className="icon mdi mdi-plus"
@@ -58,46 +55,40 @@ const Prescription = () => {
                   <table className="table table-striped">
                     <thead>
                       <tr>
-                        <th width="15%">S.No</th>
-                        <th width="15%">ID</th>
-                        <th width="15%">Date</th>
-                        <th width="20%">Medication</th>
-                        <th width="20%">Doses</th>
-                        <th width="15%">Frequency</th>
+                        <th width="20%">Nursing services</th>
+                        <th width="20%">Other professional services</th>
+                        <th width="15%">General services</th>
+                        <th width="15%">Fiscal services</th>
+                        <th width="15%">Administrative services</th>
+                        <th width="15%" className="text-left">
+                          Other services
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>1</td>
-                        <td>#45685</td>
-                        <td>14 Nov 2019</td>
-                        <td>Albuteol HFA</td>
-                        <td>250 mg</td>
-                        <td>2 Daily</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
                       </tr>
                       <tr>
-                        <td>2</td>
-                        <td>#45685</td>
-                        <td>14 Nov 2019</td>
-                        <td>Albuteol HFA</td>
-                        <td>250 mg</td>
-                        <td>2 Daily</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
                       </tr>
                       <tr>
-                        <td>3</td>
-                        <td>#45685</td>
-                        <td>14 Nov 2019</td>
-                        <td>Albuteol HFA</td>
-                        <td>250 mg</td>
-                        <td>2 Daily</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>#45685</td>
-                        <td>14 Nov 2019</td>
-                        <td>Albuteol HFA</td>
-                        <td>250 mg</td>
-                        <td>2 Daily</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
+                        <td>xyz</td>
                       </tr>
                     </tbody>
                   </table>
@@ -110,17 +101,17 @@ const Prescription = () => {
       </section>
       <div
         className="modal fade"
-        id="prescriptionModal"
+        id="addproModal"
         tabIndex={-1}
         role="dialog"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Prescription list
+                Add Service
               </h5>
               <button
                 type="button"
@@ -134,52 +125,48 @@ const Prescription = () => {
             <div className="modal-body">
               <form className="forms-sample">
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Date</label>
+                  <label htmlFor="exampleInputName1">Patient Name</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="datepicker"
-                    placeholder="Date"
+                    placeholder="Enter Patient Name"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Medication</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Medication"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">Doses</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Doses"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">Select Frequency</label>
+                  <label htmlFor="exampleInputName1">Select Doctor</label>
                   <div>
                     <select className="form-control" id="select-new2">
-                      <option>2 Daily</option>
-                      <option>3 Daily</option>
-                      <option>In Morning</option>
-                      <option>In Evening</option>
+                      <option>Doctor1</option>
+                      <option>Doctor2</option>
+                      <option>Doctor3</option>
+                      <option>Doctor4</option>
                     </select>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-md-6 ml-auto">
-                    <div className="form-group text-right">
-                      <label htmlFor="exampleTextarea1">
-                        <b>Doctor Name:</b> - John Doe
-                      </label>
-                    </div>
+                <div className="form-group">
+                  <label htmlFor="exampleTextarea1">Select Date</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="datepicker1"
+                    placeholder="Select Date"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Time Slot</label>
+                  <div>
+                    <select className="form-control" id="select-new3">
+                      <option>9:00 AM - 9:30 AM</option>
+                      <option>9:30 AM - 10:00 AM</option>
+                      <option>10:00 AM - 10:30 AM</option>
+                      <option>10:30 AM - 11:00 AM</option>
+                      <option>11:00 AM - 11:30 AM</option>
+                      <option>11:30 AM - 12:00 AM</option>
+                    </select>
                   </div>
                 </div>
                 <button type="submit" className="btn btn-gradient-primary mr-2">
-                  Save
+                  Submit
                 </button>
               </form>
             </div>
@@ -190,4 +177,4 @@ const Prescription = () => {
   );
 };
 
-export default Prescription;
+export default Services;

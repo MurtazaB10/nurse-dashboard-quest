@@ -1,16 +1,7 @@
-import React, { Component } from "react";
-// import React, { useState }  from 'react';
-import "../App/App.css";
+import React, {useState} from "react";
+const Header=()=>{
+const [showDropdown, setShowDropdown] = useState(false);
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showDropdown: false,
-    };
-  }
-
-  render() {
     return (
       <div className="Header">
         {/* partial:partials/_navbar.html */}
@@ -60,7 +51,7 @@ class Header extends Component {
                   aria-expanded="false"
                 >
                   <div className="nav-profile-img">
-                    <img src="assets/images/faces/face1.jpg" alt="image" />
+                    <img src="assets/images/faces/face1.jpg" alt="face1" />
                     <span className="availability-status online" />
                   </div>
                 </a>
@@ -86,7 +77,7 @@ class Header extends Component {
         {/* partial */}
       </div>
     );
-  }
+  
 }
 
 export default Header;

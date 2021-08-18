@@ -1,9 +1,6 @@
 import React from "react";
-import { render } from "react-dom";
 
-import { BrowserRouter } from "react-router-dom";
-
-const Services = () => {
+const Laboratory = () => {
   return (
     <div>
       <section className="dashboard">
@@ -15,7 +12,7 @@ const Services = () => {
                 <div className="panel-heading appointment-schedule pt-3">
                   <div className="row align-items-center">
                     <div className="col-md-12">
-                      <h3 className="panel-title">Service list</h3>
+                      <h3 className="panel-title">Laboratory list</h3>
                     </div>
                   </div>
                   <hr />
@@ -27,7 +24,7 @@ const Services = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Enter Product"
+                              placeholder="Enter Laboratory"
                             />
                           </div>
                         </div>
@@ -41,7 +38,7 @@ const Services = () => {
                             type="button"
                             className="btn-raised btn btn-danger btn-floating position-static"
                             data-toggle="modal"
-                            data-target="#addproModal"
+                            data-target="#LaboratoryModal"
                           >
                             <i
                               className="icon mdi mdi-plus"
@@ -58,40 +55,62 @@ const Services = () => {
                   <table className="table table-striped">
                     <thead>
                       <tr>
-                        <th width="20%">Nursing services</th>
-                        <th width="20%">Other professional services</th>
-                        <th width="15%">General services</th>
-                        <th width="15%">Fiscal services</th>
-                        <th width="15%">Administrative services</th>
-                        <th width="15%" className="text-left">
-                          Other services
-                        </th>
+                        <th width="15%">S.No</th>
+                        <th width="15%">ID</th>
+                        <th width="20%">Test</th>
+                        <th width="15%">Test Status</th>
+                        <th width="20%">Accession Date</th>
+                        <th width="15%">Payment Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
+                        <td>1</td>
+                        <td>#45685</td>
+                        <td>Blood Test</td>
+                        <td>
+                          <span className="badge badge-danger">Incomplete</span>
+                        </td>
+                        <td>14 Nov 2019 10:15 AM</td>
+                        <td>
+                          <span className="badge-warning">Due</span>
+                        </td>
                       </tr>
                       <tr>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
+                        <td>1</td>
+                        <td>#45685</td>
+                        <td>Blood Test</td>
+                        <td>
+                          <span className="badge badge-info">Complete</span>
+                        </td>
+                        <td>14 Nov 2019 10:15 AM</td>
+                        <td>
+                          <span className="badge badge-primary">Paid</span>
+                        </td>
                       </tr>
                       <tr>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
-                        <td>xyz</td>
+                        <td>1</td>
+                        <td>#45685</td>
+                        <td>Blood Test</td>
+                        <td>
+                          <span className="badge badge-danger">Incomplete</span>
+                        </td>
+                        <td>14 Nov 2019 10:15 AM</td>
+                        <td>
+                          <span className="badge-warning">Due</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>#45685</td>
+                        <td>Blood Test</td>
+                        <td>
+                          <span className="badge badge-info">Complete</span>
+                        </td>
+                        <td>14 Nov 2019 10:15 AM</td>
+                        <td>
+                          <span className="badge badge-primary">Paid</span>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -104,17 +123,17 @@ const Services = () => {
       </section>
       <div
         className="modal fade"
-        id="addproModal"
+        id="LaboratoryModal"
         tabIndex={-1}
         role="dialog"
-        aria-labelledby
+        aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Add Service
+                Laboratory list
               </h5>
               <button
                 type="button"
@@ -128,48 +147,52 @@ const Services = () => {
             <div className="modal-body">
               <form className="forms-sample">
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Patient Name</label>
+                  <label htmlFor="exampleInputName1">Date</label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Patient Name"
+                    id="datepicker"
+                    placeholder="Date"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Select Doctor</label>
+                  <label htmlFor="exampleInputName1">Medication</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Medication"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Doses</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Doses"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Select Frequency</label>
                   <div>
                     <select className="form-control" id="select-new2">
-                      <option>Doctor1</option>
-                      <option>Doctor2</option>
-                      <option>Doctor3</option>
-                      <option>Doctor4</option>
+                      <option>2 Daily</option>
+                      <option>3 Daily</option>
+                      <option>In Morning</option>
+                      <option>In Evening</option>
                     </select>
                   </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="exampleTextarea1">Select Date</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="datepicker1"
-                    placeholder="Select Date"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">Time Slot</label>
-                  <div>
-                    <select className="form-control" id="select-new3">
-                      <option>9:00 AM - 9:30 AM</option>
-                      <option>9:30 AM - 10:00 AM</option>
-                      <option>10:00 AM - 10:30 AM</option>
-                      <option>10:30 AM - 11:00 AM</option>
-                      <option>11:00 AM - 11:30 AM</option>
-                      <option>11:30 AM - 12:00 AM</option>
-                    </select>
+                <div className="row">
+                  <div className="col-md-6 ml-auto">
+                    <div className="form-group text-right">
+                      <label htmlFor="exampleTextarea1">
+                        <b>Doctor Name:</b> - John Doe
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <button type="submit" className="btn btn-gradient-primary mr-2">
-                  Submit
+                  Save
                 </button>
               </form>
             </div>
@@ -180,4 +203,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Laboratory;

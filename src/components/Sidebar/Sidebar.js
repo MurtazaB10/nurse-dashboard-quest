@@ -1,96 +1,87 @@
-import React, { Component } from "react";
-// import React, { useState }  from 'react';
-import "../App/App.css";
+import React, { Component,useState } from "react";
+import {Link} from 'react-router-dom';
 
-class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showDropdown: false,
-    };
-  }
-
-  render() {
+const Sidebar=()=> {
+ const [showDropdown, setShowDropdown] = useState(false);
     return (
       <div className="Sidebar">
         {/* partial:partials/_sidebar.html */}
         <nav className="sidebar sidebar-offcanvas" id="sidebar">
           <ul className="nav">
             <li className="nav-item">
-              <a className="nav-link" href="/Dashboard">
+              <Link className="nav-link" to="/Dashboard">
                 <i className="mdi mdi-home menu-icon" />
                 <span className="menu-title">Home</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Appointment">
+              <Link className="nav-link" to="/Appointment">
                 <i className="mdi mdi-file-document menu-icon" />
                 <span className="menu-title">Appointment</span>
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/Patient">
+              <Link className="nav-link" to="/Patient">
                 <i className="mdi mdi-hotel menu-icon" />
                 <span className="menu-title">Patient</span>
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/PIQ">
+              <Link className="nav-link" to="/PIQ">
                 <i className="mdi mdi-file-check menu-icon" />
                 <span className="menu-title">PIQ</span>
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/Expense">
+              <Link className="nav-link" to="/Expense">
                 <i className="mdi mdi-cash-multiple menu-icon" />
                 <span className="menu-title">Expenses</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Commission">
+              <Link className="nav-link" to="/Commission">
                 <i className="mdi mdi-cash menu-icon" />
                 <span className="menu-title">Commission</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Product">
+              <Link className="nav-link" to="/Productlist">
                 <i className="mdi mdi-package menu-icon" />
                 <span className="menu-title">Product </span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Services">
+              <Link className="nav-link" to="/Services">
                 <i className="mdi mdi-settings-box menu-icon" />
                 <span className="menu-title">Services</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Prescription">
+              <Link className="nav-link" to="/Prescription">
                 <i className="mdi mdi-file-document-box menu-icon" />
                 <span className="menu-title">Prescription</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Laboratory">
+              <Link className="nav-link" to="/Laboratory">
                 <i className="mdi mdi-hospital-building menu-icon" />
                 <span className="menu-title">Laboratory</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Dashboard">
+              <Link className="nav-link" to="/Dashboard">
                 <i className="mdi mdi-power menu-icon" />
                 <span className="menu-title">Logout</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
         {/* partial */}
       </div>
     );
-  }
 }
 
 export default Sidebar;

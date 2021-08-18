@@ -1,9 +1,7 @@
 import React from "react";
-import { render } from "react-dom";
+import ProductList from "./ProductList";
 
-import { BrowserRouter } from "react-router-dom";
-
-const Commission = () => {
+const Product = () => {
   return (
     <div>
       <section className="dashboard">
@@ -15,62 +13,39 @@ const Commission = () => {
                 <div className="panel-heading appointment-schedule pt-3">
                   <div className="row align-items-center">
                     <div className="col-md-12">
-                      <h3 className="panel-title">Commission list</h3>
+                      <h3 className="panel-title">Product list</h3>
                     </div>
                   </div>
                   <hr />
                   <div className="row align-items-center m-0">
                     <div className="col-md-8 text-left">
-                      <div className="row mt-3 filter-btn-row">
-                        <div className="col-md-3">
-                          <a href className="btn btn-gradient-primary w-100">
-                            Daily
-                          </a>
-                        </div>
-                        <div className="col-md-3">
-                          <a href className="btn btn-gradient-primary w-100">
-                            Weekly
-                          </a>
-                        </div>
-                        <div className="col-md-3">
-                          <a href className="btn btn-gradient-primary w-100">
-                            Month
-                          </a>
-                        </div>
-                      </div>
                       <div className="row align-items-center mt-3 filter-btn-row">
-                        <div className="col-md-3">
+                        <div className="col-md-6">
                           <div className="form-group mb-0">
                             <input
                               type="text"
                               className="form-control"
-                              id="datepicker"
-                              placeholder="From"
+                              placeholder="Enter Product"
                             />
-                          </div>
-                        </div>
-                        <div className="col-md-3">
-                          <div className="form-group mb-0">
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="datepicker3"
-                              placeholder="To"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-3">
-                          <div className="form-group doctor-appointment-filter mb-0">
-                            <select id="select-new" className="form-control">
-                              <option>Bawe</option>
-                              <option>Doctor</option>
-                            </select>
                           </div>
                         </div>
                         <div className="col-md-3">
                           <a href className="btn btn-gradient-primary w-100">
                             Search
                           </a>
+                        </div>
+                        <div className="col-md-2">
+                          <button
+                            type="button"
+                            className="btn-raised btn btn-danger btn-floating position-static"
+                            data-toggle="modal"
+                            data-target="#addproModal"
+                          >
+                            <i
+                              className="icon mdi mdi-plus"
+                              aria-hidden="true"
+                            />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -128,17 +103,17 @@ const Commission = () => {
       {/* Modal */}
       <div
         className="modal fade"
-        id="addexpenseModal"
+        id="addproModal"
         tabIndex={-1}
         role="dialog"
         aria-labelledby
         aria-hidden="true"
-      >
+       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Add Expense
+                Add Products
               </h5>
               <button
                 type="button"
@@ -204,4 +179,4 @@ const Commission = () => {
   );
 };
 
-export default Commission;
+export default Product;
