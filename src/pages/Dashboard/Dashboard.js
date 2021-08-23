@@ -1,5 +1,33 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux';
+import { onSubmitHandler } from "../Patient/addPatientSlice";
 const Dashboard = () => {
+  const [dashboardData, setDashboardData] = useState([]);
+  const [patientZero,setPatientZero]=useState([]);
+  const [patientList,setpatientList]=useState([]);
+  async function fetchData() {
+  
+    try {
+      const result = await axios.get(
+        "http://128.199.182.16:4000/nurse/dashboard"
+      );
+      setDashboardData(result.data.data);
+      setPatientZero(result.data.data.patient_list[0])
+      setpatientList(result.data.data.patient_list);
+    } catch (error) {
+      console.error(error);
+    }finally {
+      // setLoading(false);
+    }
+  }
+  console.log(dashboardData);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const dispatch = useDispatch()
   return (
     <div>
       <section className="dashboard">
@@ -14,7 +42,7 @@ const Dashboard = () => {
                       <i className="icon mdi mdi-account grey-600 font-size-24 vertical-align-bottom " />
                       Patient
                     </div>
-                    <span className="grey-700 font-size-30">1,253</span>
+                    <span className="grey-700 font-size-30">{dashboardData.total_patient}</span>
                   </div>
                   <div className="mb-20 grey-500">
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
@@ -34,7 +62,7 @@ const Dashboard = () => {
                       <i className="icon mdi mdi-flash grey-600 font-size-24 vertical-align-bottom " />
                       Appointment
                     </div>
-                    <span className=" grey-700 font-size-30">2,425</span>
+                    <span className=" grey-700 font-size-30">{dashboardData.total_appointment}</span>
                   </div>
                   <div className="mb-20 grey-500">
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
@@ -54,7 +82,7 @@ const Dashboard = () => {
                       <i className="icon mdi mdi-chart-bar grey-600 font-size-24 vertical-align-bottom" />
                       Sales
                     </div>
-                    <span className="grey-700 font-size-30">1,864</span>
+                    <span className="grey-700 font-size-30">{dashboardData.sales}</span>
                   </div>
                   <div className="mb-20 grey-500">
                     <i className="icon md-long-arrow-down red-500 font-size-16" />{" "}
@@ -74,7 +102,7 @@ const Dashboard = () => {
                       <i className="icon mdi mdi-view-list grey-600 font-size-24 vertical-align-bottom " />
                       Commission
                     </div>
-                    <span className=" grey-700 font-size-30">845</span>
+                    <span className=" grey-700 font-size-30">{dashboardData.commission}</span>
                   </div>
                   <div className="mb-20 grey-500">
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
@@ -103,11 +131,11 @@ const Dashboard = () => {
                         <img src="assets/images/other/5.jpg" alt="" />
                       </a>
                       <div className="float-left user-info-box">
-                        <div className="font-size-20">Robin Ahrens</div>
+                        <div className="font-size-20">{patientZero.name}</div>
                         <p className="mb-0 text-nowrap">
                           <span className="text-break">
                             <a href className="__cf_email__">
-                              91546558674
+                              {patientZero.tel_no}
                             </a>
                           </span>
                         </p>
@@ -125,156 +153,168 @@ const Dashboard = () => {
                 </div>
                 <div className="card-block py-0">
                   <ul className="list-group list-group-full list-group-dividered mb-0">
-                    <li className="list-group-item">
-                      <div className="media align-items-center">
-                        <div className="pr-20">
-                          <a
-                            className="avatar avatar-lg"
-                            href="javascript:void(0)"
-                          >
-                            <img
-                              className="img-responsive"
-                              src="assets/images/other/5.jpg"
-                              alt="..."
-                            />
-                          </a>
-                        </div>
-                        <div className="media-body">
-                          <h5 className="mt-0 mb-0">Herman Beck</h5>
-                          <small>91546558674</small>
-                          <div className="edit-icon">
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-pencil" />
-                            </a>
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-eye" />
-                            </a>
+                    {patientList&&
+                      patientList.map((patient)=>{
+                        return(
+                          <li className="list-group-item">
+                          <div className="media align-items-center">
+                            <div className="pr-20">
+                              <a
+                                className="avatar avatar-lg"
+                                href="javascript:void(0)"
+                              >
+                                <img
+                                  className="img-responsive"
+                                  src="assets/images/other/5.jpg"
+                                  alt="..."
+                                />
+                              </a>
+                            </div>
+                            <div className="media-body">
+                              <h5 className="mt-0 mb-0">{patient.name}</h5>
+                              <small>{patient.tel_no}</small>
+                              <div className="edit-icon">
+                                <a href="#" className="white mr-10">
+                                  <i className="icon mdi mdi-pencil" />
+                                </a>
+                                <a href="#" className="white mr-10">
+                                  <i className="icon mdi mdi-eye" />
+                                </a>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="list-group-item">
-                      <div className="media align-items-center">
-                        <div className="pr-20">
-                          <a
-                            className="avatar avatar-lg"
-                            href="javascript:void(0)"
-                          >
-                            <img
-                              className="img-responsive"
-                              src="assets/images/other/5.jpg"
-                              alt="..."
-                            />
-                          </a>
-                        </div>
-                        <div className="media-body">
-                          <h5 className="mt-0 mb-0">Mary Adams</h5>
-                          <small>91546558674</small>
-                          <div className="edit-icon">
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-pencil" />
-                            </a>
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-eye" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="list-group-item">
-                      <div className="media align-items-center">
-                        <div className="pr-20">
-                          <a
-                            className="avatar avatar-lg"
-                            href="javascript:void(0)"
-                          >
-                            <img
-                              className="img-responsive"
-                              src="assets/images/other/5.jpg"
-                              alt="..."
-                            />
-                          </a>
-                        </div>
-                        <div className="media-body">
-                          <h5 className="mt-0 mb-0">Caleb Richards</h5>
-                          <small>91546558674</small>
-                          <div className="edit-icon">
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-pencil" />
-                            </a>
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-eye" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="list-group-item">
-                      <div className="media align-items-center">
-                        <div className="pr-20">
-                          <a
-                            className="avatar avatar-lg"
-                            href="javascript:void(0)"
-                          >
-                            <img
-                              className="img-responsive"
-                              src="assets/images/other/5.jpg"
-                              alt="..."
-                            />
-                          </a>
-                        </div>
-                        <div className="media-body">
-                          <h5 className="mt-0 mb-0">Caleb Richards</h5>
-                          <small>91546558674</small>
-                          <div className="edit-icon">
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-pencil" />
-                            </a>
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-eye" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="list-group-item">
-                      <div className="media align-items-center">
-                        <div className="pr-20">
-                          <a
-                            className="avatar avatar-lg"
-                            href="javascript:void(0)"
-                          >
-                            <img
-                              className="img-responsive"
-                              src="assets/images/other/5.jpg"
-                              alt="..."
-                            />
-                          </a>
-                        </div>
-                        <div className="media-body">
-                          <h5 className="mt-0 mb-0">Caleb Richards</h5>
-                          <small>91546558674</small>
-                          <div className="edit-icon">
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-pencil" />
-                            </a>
-                            <a href="#" className="white mr-10">
-                              <i className="icon mdi mdi-eye" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                        </li>
+                        )
+                      })
+                    }
+                    
+                    
+                    
                   </ul>
                   <button
                     type="button"
                     className="btn-raised btn btn-danger btn-floating"
+                    data-toggle="modal"
+                    data-target="#addproModal"
                   >
                     <i className="icon mdi mdi-plus" aria-hidden="true" />
                   </button>
                 </div>
               </div>
               {/* End Widget User list */}
+            </div>
+            <div
+              className="modal fade"
+              id="addproModal"
+              tabIndex={-1}
+              role="dialog"
+              aria-labelledby
+              aria-hidden="true"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Add Patient
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form onSubmit={() => dispatch(onSubmitHandler())} className="forms-sample">
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">Patient Name
+                        <sup>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Patient Name"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">Select Gender<sup>*</sup></label>
+                        <div>
+                          <select className="form-control" id="select-new2" required>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleTextarea1">Birthday<sup>*</sup></label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="datepicker1"
+                          placeholder="Select Date"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">E-mail<sup>*</sup></label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter E-mail"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">Mobile Number<sup>*</sup></label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Mobile Number"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">Address<sup>*</sup></label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Address"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">Occupation<sup>*</sup></label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Occupation"
+                          required
+                        />
+                      </div>
+                
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">Phone Number</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Phone Number"
+              
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="btn btn-gradient-primary mr-2"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="col-xxl-6 col-lg-6">
               {/* Panel Projects Status */}
@@ -302,9 +342,99 @@ const Dashboard = () => {
                   <button
                     type="button"
                     className="btn-raised btn btn-danger btn-floating"
+                    data-toggle="modal"
+                    data-target="#addproModal1"
                   >
                     <i className="icon mdi mdi-plus" aria-hidden="true" />
                   </button>
+                </div>
+                <div
+                  className="modal fade"
+                  id="addproModal1"
+                  tabIndex={-1}
+                  role="dialog"
+                  aria-labelledby
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel1">
+                          Add Appointment
+                        </h5>
+                        <button
+                          type="button"
+                          className="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div className="modal-body">
+                        <form className="forms-sample">
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName1">
+                              Patient Name
+                              <sup>*</sup>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Enter Patient Name"
+                              required
+                            />
+                          </div>
+                          
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName4">Select Doctor<sup>*</sup></label>
+                            
+                              <select className="form-control" id="select-new3" required>
+                                <option>Doctor1</option>
+                                <option>Doctor2</option>
+                                <option>Doctor3</option>
+                              </select>
+                            </div>
+                          
+                         
+                          <div className="form-group">
+                            <label htmlFor="exampleTextarea1">
+                              Select Date
+                              <sup>*</sup>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="datepicker2"
+                              placeholder="DD/MM/YYY"
+                              required
+                            />
+                          </div>
+                          
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName4">Time Slot<sup>*</sup></label>
+                            <div>
+                              <select className="form-control" id="select-new4" required>
+                                <option>9:00 AM - 9:30 AM</option>
+                                <option>9:30 AM - 10:00 AM</option>
+                                <option>10:00 AM - 10:30 AM</option>
+                                <option>10:30 AM - 11:00 AM</option>
+                                <option>11:00 AM - 11:30 AM</option>
+                                <option>11:30 AM - 12:00 AM</option>
+                              </select>
+                            </div>
+                          </div>
+                          <br/>
+                          <button
+                            type="submit"
+                            className="btn btn-gradient-primary mr-2"
+                          >
+                            Submit
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <hr />
                 <div className="table-responsive p-3">

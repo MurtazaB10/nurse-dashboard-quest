@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  Paper,
+} from "@material-ui/core";
 function ProductList() {
   const [data, setData] = useState([]);
+  const [nameTerm,setNameTerm]=useState([]);
+  const [searchResults,setSearchResults]=useState([]);
 
   async function fetchData() {
     try {
@@ -10,6 +20,7 @@ function ProductList() {
         "http://128.199.182.16:4000/nurse/productList"
       );
       setData(result.data.data);
+      setSearchResults(result.data.data)
     } catch (error) {
       console.error(error);
     }
@@ -18,10 +29,25 @@ function ProductList() {
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(() => {
+    try {
+      const results = data.filter((product) => {
+        return (
+          product.name
+            .toLowerCase()
+            .includes(nameTerm.toLowerCase()) 
+        );
+      });
+
+      setSearchResults(results);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [nameTerm]);
 
   return (
     <>
-          <section className="dashboard">
+      <section className="dashboard">
         <div className=" container-fluid p-0">
           <div className="row" data-plugin="matchHeight" data-by-row="true">
             <div className="col-xxl-12 col-lg-12">
@@ -43,6 +69,9 @@ function ProductList() {
                               type="text"
                               className="form-control"
                               placeholder="Enter Product"
+                              onChange={(event) => {
+                                setNameTerm(event.target.value);
+                              }}
                             />
                           </div>
                         </div>
@@ -69,34 +98,107 @@ function ProductList() {
                   </div>
                   <hr />
                 </div>
-    <TableContainer component={Paper}>
-      <Table aria-label="a simple table" title='Product List'>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="left">Price</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">{row.description}</TableCell>
-              <TableCell align="left">{row.price}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
+                <TableContainer component={Paper}>
+                  <Table aria-label="a simple table" title="Prescription List">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell lign="center">Name</TableCell>
+                        <TableCell align="center">Description</TableCell>
+                        <TableCell align="center">Manufacturer</TableCell>
+                        <TableCell align="center">Note</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {searchResults.map((row) => (
+                        <TableRow key={row.name}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="center">
+                            {row.description}
+                          </TableCell>
+                          <TableCell align="center">{row.price}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div
+        className="modal fade"
+        id="prescriptionModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Add Prescription
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form className="forms-sample">
 
-    </div>
-    </div>
-    </div>
-    </section>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Name<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Name"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Description"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Manufacturer<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Manufacturer"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Note<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Note"
+                    required
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-gradient-primary mr-2">
+                  Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
-
 const Patient = () => {
+
   return (
     <div>
       <section className="dashboard">
@@ -15,12 +15,11 @@ const Patient = () => {
                   placeholder="Enter Patient Name"
                   defaultValue="John Doe"
                 />
-                <button
-                  type="button"
-                  className="btn-raised btn btn-danger btn-floating "
-                >
-                  <i className="icon mdi mdi-plus" aria-hidden="true" />
-                </button>
+                <div className="col-md-3">
+                  <a href className="btn btn-gradient-primary">
+                    Search
+                  </a>
+                </div>
               </div>
               {/* Widget User list */}
               <div className="card mb-3 patient-box" id="widgetUserList">
@@ -60,73 +59,53 @@ const Patient = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-md-9">
-                        <div className="other-details-patient">
-                          <ul>
-                            <li>
-                              <p>Patient Gender</p>
-                              <h5>Female</h5>
-                            </li>
-                            <li>
-                              <p>Years Old</p>
-                              <h5>Age: 23</h5>
-                            </li>
-                            <li>
-                              <p>Patient Height</p>
-                              <h5>176 cm</h5>
-                            </li>
-                            <li>
-                              <p>Patient Weight</p>
-                              <h5>67 Kg</h5>
-                            </li>
-                            <li>
-                              <p>Blood type</p>
-                              <h5>AB+</h5>
-                            </li>
-                            <li>
-                              <p>Allergies</p>
-                              <h5>Penicilin, peanuts</h5>
-                            </li>
-                            <li>
-                              <p>Diseases</p>
-                              <h5>Diabetes</h5>
-                            </li>
-                            <li>
-                              <p>Blood Pressure</p>
-                              <h5>130/80 mmHG</h5>
-                            </li>
-                            <li>
-                              <p>Temperture</p>
-                              <h5>36.8 Degree</h5>
-                            </li>
-                            <li>
-                              <p>Heart Rate</p>
-                              <h5>107 Per min</h5>
-                            </li>
-                            <li>
-                              <p>Glucose Rate</p>
-                              <h5>97 mg/dl</h5>
-                            </li>
-                            <li>
-                              <p>Clolesterol</p>
-                              <h5>124 mg/dl</h5>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                      <div class="col-md-9">
+                         <div class="other-details-patient">
+                           <ul>
+                             <li>
+                               <p>Patient Gender</p>
+                               <h5>Female</h5>
+                             </li>
+                             <li>
+                               <p>Years Old</p>
+                               <h5>Age: 23</h5>
+                             </li>
+                             <li>
+                               <p>Patient Height</p>
+                               <h5>176 cm</h5>
+                             </li>
+                             <li>
+                               <p>Patient Weight</p>
+                               <h5>67 Kg</h5>
+                             </li>
+                             <li>
+                               <p>Blood type</p>
+                               <h5>AB+</h5>
+                             </li>
+                             <li>
+                               <p>Allergies</p>
+                               <h5>Penicilin, peanuts</h5>
+                             </li>
+                           
+                             
+                           </ul>
+                         </div>
+                     </div>
                     </div>
                   </div>
                   <div className="contact-btn">
                     <a
                       href
                       className="btn btn-gradient-primary mr-2 white-color"
+                      data-toggle="modal"
+                      data-target="#addproModal"
                     >
-                      Contact Tracking
+                      Contact Tracing
                     </a>
                   </div>
                 </div>
               </div>
-              <div className="tabs-list-patient">
+              <div className="tabs-list-patient doctor-tab">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
                     <a
@@ -149,7 +128,19 @@ const Patient = () => {
                       aria-controls="patienttab2"
                       aria-selected="false"
                     >
-                      Notes
+                      Doctor's Notes
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-toggle="tab"
+                      href="#patienttab2"
+                      role="tab"
+                      aria-controls="patienttab2"
+                      aria-selected="false"
+                    >
+                      Nurse's Notes
                     </a>
                   </li>
                   <li class="nav-item">
@@ -248,8 +239,7 @@ const Patient = () => {
                                     aria-expanded="true"
                                     aria-controls="collapseOne"
                                   >
-                                    What Are The Hospital Timings And Official
-                                    Working Hours?
+                                    Did you experience any excessive bleeding?
                                     <div className="for-plus">
                                       <i
                                         className="mdi mdi-plus"
@@ -287,8 +277,8 @@ const Patient = () => {
                                     aria-expanded="false"
                                     aria-controls="collapseTwo"
                                   >
-                                    Is There Any Vaccine Which I Need To Take
-                                    Prior To Coming To India?
+                                    Did your blood pressure so low that affects
+                                    other vital organ?
                                     <div className="for-plus">
                                       <i
                                         className="mdi mdi-plus"
@@ -326,7 +316,7 @@ const Patient = () => {
                                     aria-expanded="false"
                                     aria-controls="collapseThree"
                                   >
-                                    What Is The Mode Of Payment?
+                                    Did you suffer from any infection?
                                     <div className="for-plus">
                                       <i
                                         className="mdi mdi-plus"
@@ -341,6 +331,44 @@ const Patient = () => {
                                 id="collapseThree"
                                 className="collapse"
                                 aria-labelledby="headingThree"
+                                data-parent="#accordionExample"
+                              >
+                                <div className="card-body">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing and typesetting industry. Lorem Ipsum
+                                  has been the industry's standard dummy text
+                                  ever since the 1500s, when an unknown printer
+                                  took a galley of type and scrambled it to make
+                                  a type specimen book.
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card">
+                              <div className="card-header" id="headingFour">
+                                <h2 className="mb-0">
+                                  <button
+                                    className="btn btn-link btn-block text-left collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseFour"
+                                    aria-expanded="false"
+                                    aria-controls="collapseFour"
+                                  >
+                                    Are you taking Anticoagulant Drug?
+                                    <div className="for-plus">
+                                      <i
+                                        className="mdi mdi-plus"
+                                        style={{ display: "none" }}
+                                      />
+                                      <i className="mdi mdi-minus" />
+                                    </div>
+                                  </button>
+                                </h2>
+                              </div>
+                              <div
+                                id="collapseFour"
+                                className="collapse"
+                                aria-labelledby="headingFour"
                                 data-parent="#accordionExample"
                               >
                                 <div className="card-body">
@@ -370,9 +398,10 @@ const Patient = () => {
                               <thead>
                                 <tr>
                                   <th scope="col">S. No.</th>
-                                  <th scope="col">Medication</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Interval</th>
                                   <th scope="col">Doses</th>
-                                  <th scope="col">Frequency</th>
+                                  <th scope="col">Date</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -381,36 +410,42 @@ const Patient = () => {
                                   <td>Albuteol HFA</td>
                                   <td>2 puffs</td>
                                   <td>3 Daily</td>
+                                  <td>17/10/1997</td>
                                 </tr>
                                 <tr>
                                   <th scope="row">2</th>
                                   <td>Crocin</td>
                                   <td>250 mg</td>
                                   <td>2 Daily</td>
+                                  <td>17/10/1997</td>
                                 </tr>
                                 <tr>
                                   <th scope="row">3</th>
                                   <td>Paracetamol</td>
                                   <td>200 mg</td>
                                   <td>1 Daily</td>
+                                  <td>17/10/1997</td>
                                 </tr>
                                 <tr>
                                   <th scope="row">4</th>
                                   <td>Albuteol HFA</td>
                                   <td>2 puffs</td>
                                   <td>1 Daily</td>
+                                  <td>17/10/1997</td>
                                 </tr>
                                 <tr>
                                   <th scope="row">5</th>
                                   <td>Albuteol HFA</td>
                                   <td>2 puffs</td>
                                   <td>1 Daily</td>
+                                  <td>17/10/1997</td>
                                 </tr>
                                 <tr>
                                   <th scope="row">6</th>
                                   <td>Albuteol HFA</td>
                                   <td>2 puffs</td>
                                   <td>1 Daily</td>
+                                  <td>17/10/1997</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -463,10 +498,6 @@ const Patient = () => {
                                           eiusmod tempor incididunt ut labore et
                                           dolore
                                         </p>
-                                        <img
-                                          src="assets/images/other/artist-img.jpg"
-                                          className="img-fluid"
-                                        />
                                       </div>
                                       <p className="notes-edit">
                                         <a href>
@@ -504,10 +535,6 @@ const Patient = () => {
                                           eiusmod tempor incididunt ut labore et
                                           dolore
                                         </p>
-                                        <img
-                                          src="assets/images/other/artist-img.jpg"
-                                          className="img-fluid"
-                                        />
                                       </div>
                                       <p className="notes-edit">
                                         <a href>
@@ -549,10 +576,6 @@ const Patient = () => {
                                           eiusmod tempor incididunt ut labore et
                                           dolore
                                         </p>
-                                        <img
-                                          src="assets/images/other/artist-img.jpg"
-                                          className="img-fluid"
-                                        />
                                       </div>
                                       <p className="notes-edit">
                                         <a href>
@@ -589,10 +612,6 @@ const Patient = () => {
                                           eiusmod tempor incididunt ut labore et
                                           dolore
                                         </p>
-                                        <img
-                                          src="assets/images/other/artist-img.jpg"
-                                          className="img-fluid"
-                                        />
                                       </div>
                                       <p className="notes-edit">
                                         <a href>
@@ -646,48 +665,31 @@ const Patient = () => {
                         <div className="modal-body">
                           <form className="forms-sample">
                             <div className="form-group">
-                              <label htmlFor="exampleInputName1">Name</label>
+                              <label htmlFor="exampleInputName1">
+                                Name<sup>*</sup>
+                              </label>
                               <input
                                 type="text"
                                 className="form-control"
                                 id="exampleInputName1"
-                                placeholder="Enter Your Name"
+                                placeholder="Enter  Name"
+                                required
                               />
                             </div>
                             <div className="form-group">
-                              <label htmlFor="exampleTextarea1">Add Note</label>
+                              <label htmlFor="exampleTextarea1">
+                                Add Note<sup>*</sup>
+                              </label>
                               <textarea
                                 className="form-control"
-                                id="exampleTextarea1"
+                                id="exampleTextarea2"
                                 rows={4}
                                 placeholder="Add Note"
                                 defaultValue={""}
+                                required
                               />
                             </div>
-                            <div className="form-group">
-                              <label>File upload</label>
-                              <input
-                                type="file"
-                                name="img[]"
-                                className="file-upload-default"
-                              />
-                              <div className="input-group col-xs-12">
-                                <input
-                                  type="text"
-                                  className="form-control file-upload-info"
-                                  disabled
-                                  placeholder="Upload Image/Video"
-                                />
-                                <span className="input-group-append">
-                                  <button
-                                    className="file-upload-browse btn btn-gradient-primary"
-                                    type="button"
-                                  >
-                                    Upload
-                                  </button>
-                                </span>
-                              </div>
-                            </div>
+
                             <button
                               type="submit"
                               className="btn btn-gradient-primary mr-2"
@@ -707,7 +709,7 @@ const Patient = () => {
                         <div className="panel-heading appointment-schedule">
                           <div className="row align-items-center">
                             <div className="col-md-6">
-                              <h3 className="panel-title">List of document</h3>
+                              <h3 className="panel-title">Documents</h3>
                             </div>
                           </div>
                         </div>
@@ -1068,11 +1070,11 @@ const Patient = () => {
                             <thead>
                               <tr>
                                 <th width="15%">S.No</th>
-                                <th width="15%">ID</th>
+                                <th width="15%">Patient</th>
                                 <th width="15%">Date</th>
-                                <th width="20%">Medication</th>
+                                <th width="20%">Name</th>
                                 <th width="20%">Doses</th>
-                                <th width="15%">Frequency</th>
+                                <th width="15%">Interval</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -1138,42 +1140,66 @@ const Patient = () => {
                           </button>
                         </div>
                         <div className="modal-body">
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName1">
+                              Name
+                              <sup>*</sup>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Name"
+                              required
+                            />
+                          </div>
                           <form className="forms-sample">
                             <div className="form-group">
-                              <label htmlFor="exampleInputName1">Date</label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="datepicker"
-                                placeholder="Date"
-                              />
-                            </div>
-                            <div className="form-group">
                               <label htmlFor="exampleInputName1">
-                                Medication
+                                Date
+                                <sup>*</sup>
                               </label>
                               <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Medication"
+                                id="datepicker1"
+                                placeholder="Date"
+                                required
                               />
                             </div>
                             <div className="form-group">
-                              <label htmlFor="exampleInputName1">Doses</label>
+                              <label htmlFor="exampleInputName1">
+                                Patient
+                                <sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Patient"
+                                required
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Doses
+                                <sup>*</sup>
+                              </label>
                               <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Doses"
+                                required
                               />
                             </div>
                             <div className="form-group">
                               <label htmlFor="exampleInputName1">
-                                Select Frequency
+                                Interval
+                                <sup>*</sup>
                               </label>
                               <div>
                                 <select
                                   className="form-control"
-                                  id="select-new2"
+                                  id="select-new3"
+                                  required
                                 >
                                   <option>2 Daily</option>
                                   <option>3 Daily</option>
@@ -1182,15 +1208,7 @@ const Patient = () => {
                                 </select>
                               </div>
                             </div>
-                            <div className="row">
-                              <div className="col-md-6 ml-auto">
-                                <div className="form-group text-right">
-                                  <label htmlFor="exampleTextarea1">
-                                    <b>Doctor Name:</b> - John Doe
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
+
                             <button
                               type="submit"
                               className="btn btn-gradient-primary mr-2"
@@ -1233,11 +1251,11 @@ const Patient = () => {
                             <thead>
                               <tr>
                                 <th width="15%">S.No</th>
-                                <th width="15%">ID</th>
-                                <th width="20%">Test</th>
-                                <th width="15%">Test Status</th>
-                                <th width="20%">Accession Date</th>
-                                <th width="15%">Payment Status</th>
+                                <th width="15%">Name</th>
+                                <th width="20%">Description</th>
+                                <th width="15%">Address</th>
+                                <th width="20%">E-mail</th>
+                                <th width="15%">Mobile Number</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -1320,7 +1338,7 @@ const Patient = () => {
                       <div className="modal-content">
                         <div className="modal-header">
                           <h5 className="modal-title" id="exampleModalLabel">
-                            Patient Laboratory Report
+                            Add Laboratory Report
                           </h5>
                           <button
                             type="button"
@@ -1335,48 +1353,60 @@ const Patient = () => {
                           <form className="forms-sample">
                             <div className="form-group">
                               <label htmlFor="exampleInputName1">
-                                Accession Date
+                                Name<sup>*</sup>
                               </label>
                               <input
                                 type="text"
                                 className="form-control"
-                                id="datepicker"
-                                placeholder="Date"
+                                placeholder="Name"
+                                required
                               />
                             </div>
                             <div className="form-group">
                               <label htmlFor="exampleInputName1">
-                                Select Test
+                                Description<sup>*</sup>
                               </label>
-                              <div>
-                                <select
-                                  className="form-control"
-                                  id="select-new2"
-                                >
-                                  <option>Test 1</option>
-                                  <option>Test 2</option>
-                                  <option>Test 3</option>
-                                  <option>Test 4</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div className="form-group">
-                              <label htmlFor="exampleInputName1">Test</label>
                               <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Medication"
+                                placeholder="Description"
+                                required
                               />
                             </div>
-                            <div className="row">
-                              <div className="col-md-6 ml-auto">
-                                <div className="form-group text-right">
-                                  <label htmlFor="exampleTextarea1">
-                                    <b>Doctor Name:</b> - John Doe
-                                  </label>
-                                </div>
-                              </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Address<sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Address"
+                                required
+                              />
                             </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                E-mail<sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="E-mail"
+                                required
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Contact Number<sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Contact Number"
+                                required
+                              />
+                            </div>
+
                             <button
                               type="submit"
                               className="btn btn-gradient-primary mr-2"
@@ -1389,6 +1419,170 @@ const Patient = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="modal fade"
+          id="addproModal"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Contact Tracing
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  z
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <form className="forms-sample">
+                  <div className="form-group">
+                    <label>
+                      Have you suffering from any of COVID 19 Symptoms?{" "}
+                    </label>
+                    <br></br>
+                    <label htmlFor="exampleInputName1">
+                      Patient Name<sup>*</sup>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Patient Name"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">Fever</label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new2"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">Cough</label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new10"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">
+                      Shortness of breadth
+                    </label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new4"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">Diarhea</label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new5"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">Sour throat</label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new6"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">Fatigue</label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new7"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">
+                      Have you been exposed to anyone with COVID 19 or someone
+                      who has symptoms for the last 14 days?
+                    </label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new8"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName1">
+                      Have you been out of the country for the last 6 months?
+                    </label>
+                    <div>
+                      <select
+                        className="form-control"
+                        id="select-new9"
+                        required
+                      >
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-gradient-primary mr-2"
+                  >
+                    Submit
+                  </button>
+                </form>
               </div>
             </div>
           </div>

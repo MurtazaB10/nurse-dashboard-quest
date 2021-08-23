@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core";
 function ProductList() {
   const [data, setData] = useState([]);
+  const [nameTerm,setNameTerm]=useState([]);
+  const [searchResults,setSearchResults]=useState([]);
 
   async function fetchData() {
     try {
@@ -18,6 +20,7 @@ function ProductList() {
         "http://128.199.182.16:4000/nurse/serviceList"
       );
       setData(result.data.data);
+      setSearchResults(result.data.data)
     } catch (error) {
       console.error(error);
     }
@@ -27,6 +30,21 @@ function ProductList() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    try {
+      const results = data.filter((product) => {
+        return (
+          product.name
+            .toLowerCase()
+            .includes(nameTerm.toLowerCase()) 
+        );
+      });
+
+      setSearchResults(results);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [nameTerm]);
   return (
     <>
       <section className="dashboard">
@@ -50,7 +68,10 @@ function ProductList() {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Enter Product"
+                              placeholder="Enter Service Name"
+                              onChange={(event) => {
+                                setNameTerm(event.target.value);
+                              }}
                             />
                           </div>
                         </div>
@@ -89,7 +110,7 @@ function ProductList() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.map((row) => (
+                      {searchResults.map((row) => (
                         <TableRow key={row.name}>
                           <TableCell component="th" scope="row">
                             {row.name}
@@ -110,6 +131,85 @@ function ProductList() {
           </div>
         </div>
       </section>
+      <div
+        className="modal fade"
+        id="addproModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby
+        aria-hidden="true"
+       >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Add Service
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form className="forms-sample">
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Service Name<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Service Name"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Description "
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Price<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Price"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Doctor's Commision<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Doctor's Commision"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Bawe's Commision<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Bawe's Commision"
+                    required
+                  />
+                </div>
+  
+                <button type="submit" className="btn btn-gradient-primary mr-2">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

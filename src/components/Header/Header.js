@@ -1,6 +1,14 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 const Header=()=>{
 const [showDropdown, setShowDropdown] = useState(false);
+const [user,setUser]=useState('');
+  
+useEffect(() => {
+  setUser(localStorage.getItem('user'));
+}, [])
+const history=useHistory();
 
     return (
       <div className="Header">
@@ -59,12 +67,19 @@ const [showDropdown, setShowDropdown] = useState(false);
                   className="dropdown-menu navbar-dropdown"
                   aria-labelledby="profileDropdown"
                 >
-                  <a className="dropdown-item" href="/">
+                    <a className="dropdown-item nav-profile-img" href="/">
+                    <img src="assets/images/faces/face1.jpg" alt="face1" />
+                     {user}{" "}
+                  </a>
+                  <a className="dropdown-item" href="/login" onClick={()=>{localStorage.clear()}} >
                     <i className="mdi mdi-power mr-2" /> Logout{" "}
                   </a>
+
                 </div>
+                
               </li>
             </ul>
+            
             <button
               className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
               type="button"

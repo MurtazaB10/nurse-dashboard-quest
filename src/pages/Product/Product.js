@@ -108,7 +108,7 @@ const Product = () => {
         role="dialog"
         aria-labelledby
         aria-hidden="true"
-       >
+        >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">

@@ -470,6 +470,7 @@
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 .other-details-patient ul li {
     list-style: none;
@@ -1015,4 +1016,7 @@ margin: 5px 0;
 }
 .position-static{
     position: static;
+}
+.tabs-list-patient.doctor-tab ul li{
+    width: 12%; 
 }

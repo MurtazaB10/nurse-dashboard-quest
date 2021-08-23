@@ -21,21 +21,23 @@ const PIQ = () => {
                       <form className="forms-sample">
                         <div className="form-group">
                           <label htmlFor="exampleInputName1">
-                            Email Address
+                            Email Address<sup>*</sup>
                           </label>
                           <input
                             type="text"
                             className="form-control"
                             placeholder="Email Address"
+                            required
                           />
                         </div>
                         <div className="form-group">
-                          <label htmlFor="exampleInputName1">Message</label>
+                          <label htmlFor="exampleInputName1">Message<sup>*</sup></label>
                           <textarea
                             className="form-control"
                             rows={6}
                             placeholder="Comment"
                             defaultValue={""}
+                            required
                           />
                         </div>
                         <button

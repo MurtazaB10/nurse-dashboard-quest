@@ -1,6 +1,8 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 const Laboratory = () => {
+  const [nameTerm,setNameTerm]=useState([]);
+  const [searchResults,setSearchResults]=useState([]);
   return (
     <div>
       <section className="dashboard">
@@ -25,6 +27,9 @@ const Laboratory = () => {
                               type="text"
                               className="form-control"
                               placeholder="Enter Laboratory"
+                              onChange={(event) => {
+                                setNameTerm(event.target.value);
+                              }}
                             />
                           </div>
                         </div>
@@ -56,11 +61,12 @@ const Laboratory = () => {
                     <thead>
                       <tr>
                         <th width="15%">S.No</th>
-                        <th width="15%">ID</th>
-                        <th width="20%">Test</th>
-                        <th width="15%">Test Status</th>
-                        <th width="20%">Accession Date</th>
-                        <th width="15%">Payment Status</th>
+                        <th width="15%">Name</th>
+                        <th width="20%">Description</th>
+                        <th width="15%">Address</th>
+                        <th width="15%">E-mail</th>
+                        <th width="20%">Contact Number</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -133,7 +139,7 @@ const Laboratory = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Laboratory list
+                Add Laboratory
               </h5>
               <button
                 type="button"
@@ -146,51 +152,54 @@ const Laboratory = () => {
             </div>
             <div className="modal-body">
               <form className="forms-sample">
+                
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Date</label>
+                  <label htmlFor="exampleInputName1">Laboratory Name<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    id="datepicker"
-                    placeholder="Date"
+                    placeholder="Name"
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Medication</label>
+                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Medication"
+                    placeholder="Description"
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Doses</label>
+                  <label htmlFor="exampleInputName1">Address<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Doses"
+                    placeholder="Address"
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Select Frequency</label>
-                  <div>
-                    <select className="form-control" id="select-new2">
-                      <option>2 Daily</option>
-                      <option>3 Daily</option>
-                      <option>In Morning</option>
-                      <option>In Evening</option>
-                    </select>
-                  </div>
+                  <label htmlFor="exampleInputName1">E-mail<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="E-mail"
+                    required
+                  />
                 </div>
-                <div className="row">
-                  <div className="col-md-6 ml-auto">
-                    <div className="form-group text-right">
-                      <label htmlFor="exampleTextarea1">
-                        <b>Doctor Name:</b> - John Doe
-                      </label>
-                    </div>
-                  </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Contact Number<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Contact Number"
+                    required
+                  />
                 </div>
+  
+
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Save
                 </button>

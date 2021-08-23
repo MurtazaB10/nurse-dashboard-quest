@@ -156,7 +156,7 @@ const Appointment = () => {
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
                                       <p className="notes-edit text-right mb-2">
-                                        <a href>
+                                        <a href >
                                           Edit <i className="mdi mdi-pencil" />
                                         </a>{" "}
                                         |{" "}
@@ -705,7 +705,7 @@ const Appointment = () => {
           role="dialog"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
-        >
+         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
@@ -724,17 +724,18 @@ const Appointment = () => {
               <div className="modal-body">
                 <form className="forms-sample">
                   <div className="form-group">
-                    <label htmlFor="exampleInputName1">Patient Name</label>
+                    <label htmlFor="exampleInputName1">Patient Name<sup>*</sup></label>
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Enter Patient Name"
+                      required
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="exampleInputName1">Select Doctor</label>
+                    <label htmlFor="exampleInputName1">Select Doctor<sup>*</sup></label>
                     <div>
-                      <select className="form-control" id="select-new2">
+                      <select className="form-control" id="select-new2" required>
                         <option>Doctor1</option>
                         <option>Doctor2</option>
                         <option>Doctor3</option>
@@ -743,18 +744,20 @@ const Appointment = () => {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="exampleTextarea1">Select Date</label>
+                    <label htmlFor="exampleTextarea1">Select Date<sup>*</sup></label>
                     <input
                       type="text"
                       className="form-control"
                       id="datepicker1"
                       placeholder="Select Date"
+                      required
+                      
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="exampleInputName1">Time Slot</label>
+                    <label htmlFor="exampleInputName1">Time Slot<sup>*</sup></label>
                     <div>
-                      <select className="form-control" id="select-new3">
+                      <select className="form-control" id="select-new3" required>
                         <option>9:00 AM - 9:30 AM</option>
                         <option>9:30 AM - 10:00 AM</option>
                         <option>10:00 AM - 10:30 AM</option>

@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  Paper,
+} from "@material-ui/core";
 function ProductList() {
   const [data, setData] = useState([]);
 
@@ -21,7 +29,7 @@ function ProductList() {
 
   return (
     <>
-          <section className="dashboard">
+      <section className="dashboard">
         <div className=" container-fluid p-0">
           <div className="row" data-plugin="matchHeight" data-by-row="true">
             <div className="col-xxl-12 col-lg-12">
@@ -93,39 +101,40 @@ function ProductList() {
                   </div>
                   <hr />
                 </div>
-    <TableContainer component={Paper}>
-      <Table aria-label="a simple table" title='Product List'>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="center">Date</TableCell>
-            <TableCell align="left">Amount</TableCell>
-            <TableCell align="left">Note</TableCell>
-            <TableCell align="left">Image</TableCell>
-
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">{row.date}</TableCell>
-              <TableCell align="left">{row.amount}</TableCell>
-              <TableCell align="left">{row.note}</TableCell>
-              <TableCell align="left">{row.image}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
-    </div>
-    </div>
-    </div>
-    </section>
-    <div
+                <TableContainer component={Paper}>
+                  <Table aria-label="a simple table" title="Product List">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell align="center">Date</TableCell>
+                        <TableCell align="left">Amount</TableCell>
+                        <TableCell align="left">Note</TableCell>
+                        <TableCell align="left">Image</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {data.map((row) => (
+                        <TableRow key={row.name}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="center">
+                            {row.date.substring(0, 10)}
+                          </TableCell>
+                          <TableCell align="left">{row.amount}</TableCell>
+                          <TableCell align="left">{row.note}</TableCell>
+                          <TableCell align="left">{row.image}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div
         className="modal fade"
         id="addexpenseModal"
         tabIndex={-1}
@@ -151,44 +160,73 @@ function ProductList() {
             <div className="modal-body">
               <form className="forms-sample">
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Patient Name</label>
+                  <label htmlFor="exampleInputName1">
+                    Name<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Patient Name"
+                    placeholder="Enter  Name"
+                    required
                   />
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Select Doctor</label>
-                  <div>
-                    <select className="form-control" id="select-new2">
-                      <option>Doctor1</option>
-                      <option>Doctor2</option>
-                      <option>Doctor3</option>
-                      <option>Doctor4</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleTextarea1">Select Date</label>
+                  <label htmlFor="exampleTextarea1">
+                    Select Date<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
                     id="datepicker1"
                     placeholder="Select Date"
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Time Slot</label>
-                  <div>
-                    <select className="form-control" id="select-new3">
-                      <option>9:00 AM - 9:30 AM</option>
-                      <option>9:30 AM - 10:00 AM</option>
-                      <option>10:00 AM - 10:30 AM</option>
-                      <option>10:30 AM - 11:00 AM</option>
-                      <option>11:00 AM - 11:30 AM</option>
-                      <option>11:30 AM - 12:00 AM</option>
-                    </select>
+                  <label htmlFor="exampleInputName1">
+                    Amount<sup>*</sup>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter  Amount"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">
+                    Note<sup>*</sup>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter  Note"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>File upload</label>
+                  <input
+                    type="file"
+                    name="img[]"
+                    className="file-upload-default"
+                  />
+                  <div className="input-group col-xs-12">
+                    <input
+                      type="text"
+                      className="form-control file-upload-info"
+                      disabled
+                      placeholder="Upload Image/Video"
+                    />
+                    <span className="input-group-append">
+                      <button
+                        className="file-upload-browse btn btn-gradient-primary"
+                        type="button"
+                      >
+                        Upload
+                      </button>
+                    </span>
                   </div>
                 </div>
                 <button type="submit" className="btn btn-gradient-primary mr-2">

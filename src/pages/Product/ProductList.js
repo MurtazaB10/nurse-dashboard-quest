@@ -3,6 +3,8 @@ import axios from "axios";
 import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
 function ProductList() {
   const [data, setData] = useState([]);
+  const [nameTerm,setNameTerm]=useState([]);
+  const [searchResults,setSearchResults]=useState([]);
 
   async function fetchData() {
     try {
@@ -10,14 +12,31 @@ function ProductList() {
         "http://128.199.182.16:4000/nurse/productList"
       );
       setData(result.data.data);
+      setSearchResults(result.data.data)
     } catch (error) {
       console.error(error);
     }
   }
-
+ 
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    try {
+      const results = data.filter((product) => {
+        return (
+          product.name
+            .toLowerCase()
+            .includes(nameTerm.toLowerCase()) 
+        );
+      });
+
+      setSearchResults(results);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [nameTerm]);
 
   return (
     <>
@@ -43,6 +62,9 @@ function ProductList() {
                               type="text"
                               className="form-control"
                               placeholder="Enter Product"
+                              onChange={(event) => {
+                                setNameTerm(event.target.value);
+                              }}
                             />
                           </div>
                         </div>
@@ -77,10 +99,11 @@ function ProductList() {
             <TableCell>Name</TableCell>
             <TableCell align="center">Description</TableCell>
             <TableCell align="left">Price</TableCell>
+            <TableCell align="left">Cost</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {searchResults.map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
@@ -125,46 +148,42 @@ function ProductList() {
             <div className="modal-body">
               <form className="forms-sample">
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Product Name</label>
+                  <label htmlFor="exampleInputName1">Product Name<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Patient Name"
+                    placeholder="Enter Product Name"
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Select Doctor</label>
-                  <div>
-                    <select className="form-control" id="select-new2">
-                      <option>Doctor1</option>
-                      <option>Doctor2</option>
-                      <option>Doctor3</option>
-                      <option>Doctor4</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleTextarea1">Select Date</label>
+                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    id="datepicker1"
-                    placeholder="Select Date"
+                    placeholder="Enter Product Description"
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Time Slot</label>
-                  <div>
-                    <select className="form-control" id="select-new3">
-                      <option>9:00 AM - 9:30 AM</option>
-                      <option>9:30 AM - 10:00 AM</option>
-                      <option>10:00 AM - 10:30 AM</option>
-                      <option>10:30 AM - 11:00 AM</option>
-                      <option>11:00 AM - 11:30 AM</option>
-                      <option>11:30 AM - 12:00 AM</option>
-                    </select>
-                  </div>
+                  <label htmlFor="exampleInputName1">Price<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Product Price"
+                    required
+                  />
                 </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">Cost<sup>*</sup></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Product Cost"
+                    required
+                  />
+                </div>
+
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Submit
                 </button>
