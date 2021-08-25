@@ -1,14 +1,10 @@
 import React, {useState,useEffect} from "react";
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 const Header=()=>{
-const [showDropdown, setShowDropdown] = useState(false);
 const [user,setUser]=useState('');
   
 useEffect(() => {
   setUser(localStorage.getItem('user'));
 }, [])
-const history=useHistory();
 
     return (
       <div className="Header">
@@ -54,7 +50,7 @@ const history=useHistory();
                 <a
                   className="nav-link dropdown-toggle"
                   id="profileDropdown"
-                  href="#"
+                  href="/"
                   data-toggle="dropdown"
                   aria-expanded="false"
                 >
@@ -71,7 +67,7 @@ const history=useHistory();
                     <img src="assets/images/faces/face1.jpg" alt="face1" />
                      {user}{" "}
                   </a>
-                  <a className="dropdown-item" href="/login" onClick={()=>{localStorage.clear()}} >
+                  <a className="dropdown-item" href="/Login" onClick={()=>{localStorage.clear()}} >
                     <i className="mdi mdi-power mr-2" /> Logout{" "}
                   </a>
 

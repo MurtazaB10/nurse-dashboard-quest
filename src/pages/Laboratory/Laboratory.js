@@ -1,8 +1,7 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 
 const Laboratory = () => {
-  const [nameTerm,setNameTerm]=useState([]);
-  const [searchResults,setSearchResults]=useState([]);
+
   return (
     <div>
       <section className="dashboard">
@@ -27,9 +26,9 @@ const Laboratory = () => {
                               type="text"
                               className="form-control"
                               placeholder="Enter Laboratory"
-                              onChange={(event) => {
-                                setNameTerm(event.target.value);
-                              }}
+                              // onChange={(event) => {
+                              //   setNameTerm(event.target.value);
+                              // }}
                             />
                           </div>
                         </div>

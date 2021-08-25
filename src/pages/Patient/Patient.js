@@ -14,8 +14,9 @@ const Patient = () => {
                   className="form-control"
                   placeholder="Enter Patient Name"
                   defaultValue="John Doe"
+              
                 />
-                <div className="col-md-3">
+                <div className="col-md-3 rounded">
                   <a href className="btn btn-gradient-primary">
                     Search
                   </a>
@@ -35,7 +36,7 @@ const Patient = () => {
                         <div className="vertical-align-middle patient-details">
                           <a
                             className="avatar avatar-100 float-left mr-20"
-                            href="javascript:void(0)"
+                            href="/"
                           >
                             <img src="assets/images/other/5.jpg" alt="" />
                           </a>
@@ -49,10 +50,10 @@ const Patient = () => {
                               </span>
                             </p>
                             <div className="text-nowrap font-size-18">
-                              <a href="#" className="white mr-10">
+                              <a href="/" className="white mr-10">
                                 <i className="icon mdi mdi-pencil-box" />
                               </a>
-                              <a href="#" className="white mr-10">
+                              <a href="/" className="white mr-10">
                                 <i className="icon mdi mdi-eye" />
                               </a>
                             </div>
@@ -731,15 +732,15 @@ const Patient = () => {
                                 <td>Dental Filling</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/artist-img.jpg" />
+                                    <img src="assets/images/other/artist-img.jpg" alt='artist-img' />
                                   </div>
                                 </td>
                                 <td>
                                   <div className="edit-icon">
-                                    <a href="#" className="white mr-10">
+                                    <a href="/" className="white mr-10">
                                       <i className="icon mdi mdi-pencil" />
                                     </a>
-                                    <a href="#" className="white mr-10">
+                                    <a href="/" className="white mr-10">
                                       <i className="icon mdi mdi-eye" />
                                     </a>
                                   </div>
@@ -751,15 +752,15 @@ const Patient = () => {
                                 <td>Dental Filling</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/icons/documents-folder.png" />
+                                    <img src="assets/images/icons/documents-folder.png" alt='document-folder' />
                                   </div>
                                 </td>
                                 <td>
                                   <div className="edit-icon">
-                                    <a href="#" className="white mr-10">
+                                    <a href="/" className="white mr-10">
                                       <i className="icon mdi mdi-pencil" />
                                     </a>
-                                    <a href="#" className="white mr-10">
+                                    <a href="/" className="white mr-10">
                                       <i className="icon mdi mdi-eye" />
                                     </a>
                                   </div>
@@ -771,15 +772,15 @@ const Patient = () => {
                                 <td>Dental Filling</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/icons/documents-folder.png" />
+                                    <img src="assets/images/icons/documents-folder.png" alt='documents-folder'/>
                                   </div>
                                 </td>
                                 <td>
                                   <div className="edit-icon">
-                                    <a href="#" className="white mr-10">
+                                    <a href="/" className="white mr-10">
                                       <i className="icon mdi mdi-pencil" />
                                     </a>
-                                    <a href="#" className="white mr-10">
+                                    <a href="/" className="white mr-10">
                                       <i className="icon mdi mdi-eye" />
                                     </a>
                                   </div>
@@ -824,7 +825,7 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" />
+                                    <img src="assets/images/other/sign.png" alt='sign' />
                                   </div>
                                 </td>
                               </tr>
@@ -836,7 +837,7 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" />
+                                    <img src="assets/images/other/sign.png" alt='sign'/>
                                   </div>
                                 </td>
                               </tr>
@@ -848,7 +849,7 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" />
+                                    <img src="assets/images/other/sign.png" alt='sign'/>
                                   </div>
                                 </td>
                               </tr>
@@ -860,7 +861,7 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" />
+                                    <img src="assets/images/other/sign.png" alt='sign'/>
                                   </div>
                                 </td>
                               </tr>
@@ -1428,7 +1429,7 @@ const Patient = () => {
           id="addproModal"
           tabIndex={-1}
           role="dialog"
-          aria-labelledby
+          aria-labelledby="dialog"
           aria-hidden="true"
         >
           <div className="modal-dialog" role="document">

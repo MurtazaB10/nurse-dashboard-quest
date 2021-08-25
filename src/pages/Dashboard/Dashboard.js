@@ -1,16 +1,15 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from 'react-redux';
-import { onSubmitHandler } from "../Patient/addPatientSlice";
+import { useDispatch } from 'react-redux';
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState([]);
   const [patientZero,setPatientZero]=useState([]);
   const [patientList,setpatientList]=useState([]);
   async function fetchData() {
-  
+
     try {
       const result = await axios.get(
-        "http://128.199.182.16:4000/nurse/dashboard"
+        "nurse/dashboard"
       );
       setDashboardData(result.data.data);
       setPatientZero(result.data.data.patient_list[0])
@@ -44,7 +43,7 @@ const Dashboard = () => {
                     </div>
                     <span className="grey-700 font-size-30">{dashboardData.total_patient}</span>
                   </div>
-                  <div className="mb-20 grey-500">
+                  <div className="mb-20 grey-800">
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
                     15% From this yesterday
                   </div>
@@ -64,7 +63,7 @@ const Dashboard = () => {
                     </div>
                     <span className=" grey-700 font-size-30">{dashboardData.total_appointment}</span>
                   </div>
-                  <div className="mb-20 grey-500">
+                  <div className="mb-20 grey-800">
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
                     34.2% From this week
                   </div>
@@ -84,7 +83,7 @@ const Dashboard = () => {
                     </div>
                     <span className="grey-700 font-size-30">{dashboardData.sales}</span>
                   </div>
-                  <div className="mb-20 grey-500">
+                  <div className="mb-20 grey-800">
                     <i className="icon md-long-arrow-down red-500 font-size-16" />{" "}
                     15% From this yesterday
                   </div>
@@ -104,7 +103,7 @@ const Dashboard = () => {
                     </div>
                     <span className=" grey-700 font-size-30">{dashboardData.commission}</span>
                   </div>
-                  <div className="mb-20 grey-500">
+                  <div className="mb-20 grey-800">
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
                     18.4% From this yesterday
                   </div>
@@ -126,7 +125,7 @@ const Dashboard = () => {
                     <div className="vertical-align-middle">
                       <a
                         className="avatar avatar-100 float-left mr-20"
-                        href="javascript:void(0)"
+                        href="/"
                       >
                         <img src="assets/images/other/5.jpg" alt="" />
                       </a>
@@ -140,10 +139,10 @@ const Dashboard = () => {
                           </span>
                         </p>
                         <div className="text-nowrap font-size-18">
-                          <a href="#" className="white mr-10">
+                          <a href="/" className="white mr-10">
                             <i className="icon mdi mdi-pencil-box" />
                           </a>
-                          <a href="#" className="white mr-10">
+                          <a href="/" className="white mr-10">
                             <i className="icon mdi mdi-eye" />
                           </a>
                         </div>
@@ -161,7 +160,7 @@ const Dashboard = () => {
                             <div className="pr-20">
                               <a
                                 className="avatar avatar-lg"
-                                href="javascript:void(0)"
+                                href="/"
                               >
                                 <img
                                   className="img-responsive"
@@ -174,10 +173,10 @@ const Dashboard = () => {
                               <h5 className="mt-0 mb-0">{patient.name}</h5>
                               <small>{patient.tel_no}</small>
                               <div className="edit-icon">
-                                <a href="#" className="white mr-10">
+                                <a href="/" className="white mr-10">
                                   <i className="icon mdi mdi-pencil" />
                                 </a>
-                                <a href="#" className="white mr-10">
+                                <a href="/" className="white mr-10">
                                   <i className="icon mdi mdi-eye" />
                                 </a>
                               </div>
@@ -208,7 +207,7 @@ const Dashboard = () => {
               id="addproModal"
               tabIndex={-1}
               role="dialog"
-              aria-labelledby
+              aria-labelledby="dialog"
               aria-hidden="true"
             >
               <div className="modal-dialog" role="document">
@@ -227,7 +226,7 @@ const Dashboard = () => {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form onSubmit={() => dispatch(onSubmitHandler())} className="forms-sample">
+                    <form className="forms-sample">
                       <div className="form-group">
                         <label htmlFor="exampleInputName1">Patient Name
                         <sup>*</sup>
@@ -353,7 +352,7 @@ const Dashboard = () => {
                   id="addproModal1"
                   tabIndex={-1}
                   role="dialog"
-                  aria-labelledby
+                  aria-labelledby="dialog"
                   aria-hidden="true"
                 >
                   <div className="modal-dialog" role="document">

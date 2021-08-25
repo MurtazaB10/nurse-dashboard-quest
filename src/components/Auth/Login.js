@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect,useHistory } from "react-router-dom";
+import Dashboard from "../../pages/Dashboard/Dashboard";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const history = useHistory();
-
+  const history=useHistory();
   async function loginFormHandler(e) {
     e.preventDefault();
 
@@ -17,7 +16,7 @@ function Login() {
     };
     console.log(loginUserData);
     const res = await axios.post(
-      "http://128.199.182.16:4000/nurse/loginNurse",
+      "nurse/loginNurse",
       loginUserData
     );
     console.log(res.data);
@@ -26,11 +25,10 @@ function Login() {
       console.log("success");
       localStorage.setItem("user", email);
       localStorage.setItem("token", res.data.data);
-
-      history.push("/Dashboard");
-      console.log(history);
+      history.push('/Dashboard')
+      // <Redirect to='/Dashboard'/>
     } else {
-      <Redirect to="/login" />;
+      <Redirect to="/Login" />;
     }
   }
 
@@ -46,6 +44,7 @@ function Login() {
                 type="email"
                 placeholder="Enter email"
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </Form.Group>
 
@@ -55,6 +54,7 @@ function Login() {
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </Form.Group>
             <Button variant="primary" type="submit" size="lg">

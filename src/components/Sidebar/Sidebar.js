@@ -1,8 +1,7 @@
-import React, { Component,useState } from "react";
+import React from "react";
 import {Link} from 'react-router-dom';
 
 const Sidebar=()=> {
- const [showDropdown, setShowDropdown] = useState(false);
     return (
       <div className="Sidebar">
         {/* partial:partials/_sidebar.html */}

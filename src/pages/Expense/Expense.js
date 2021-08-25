@@ -15,7 +15,7 @@ function ProductList() {
   async function fetchData() {
     try {
       const result = await axios.get(
-        "http://128.199.182.16:4000/nurse/expensesList"
+        "nurse/expensesList"
       );
       setData(result.data.data);
     } catch (error) {
@@ -139,7 +139,7 @@ function ProductList() {
         id="addexpenseModal"
         tabIndex={-1}
         role="dialog"
-        aria-labelledby
+        aria-labelledby="dialog"
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">

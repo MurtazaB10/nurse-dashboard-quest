@@ -1728,6 +1728,7 @@
 *,
 *::before,
 *::after {
+
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
@@ -13032,9 +13033,13 @@ dl {
             color: #bba8bff5; }
             .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
               margin-left: 0;
-              margin-right: auto; }
+              margin-right: auto; 
+              
+            }
             .sidebar .nav .nav-item .nav-link i.menu-icon:before {
-              vertical-align: middle; }
+              vertical-align: middle; 
+              color:#3f51b5;
+            }
           .sidebar .nav .nav-item .nav-link i.menu-arrow {
             font: normal normal normal 24px/1 "Material Design Icons";
             line-height: 1;

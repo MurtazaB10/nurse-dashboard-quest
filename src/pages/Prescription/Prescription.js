@@ -17,7 +17,7 @@ function ProductList() {
   async function fetchData() {
     try {
       const result = await axios.get(
-        "http://128.199.182.16:4000/nurse/productList"
+        "nurse/productList"
       );
       setData(result.data.data);
       setSearchResults(result.data.data)

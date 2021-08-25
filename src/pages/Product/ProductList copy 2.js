@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  TableContainer,
-  Table,
-  TableHead,
-  TableCell,
-  TableRow,
-  TableBody,
-  Paper,
-} from "@material-ui/core";
+import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
 function ProductList() {
   const [data, setData] = useState([]);
   const [nameTerm,setNameTerm]=useState([]);
@@ -17,7 +9,7 @@ function ProductList() {
   async function fetchData() {
     try {
       const result = await axios.get(
-        "nurse/serviceList"
+        "/nurse/productList"
       );
       setData(result.data.data);
       setSearchResults(result.data.data)
@@ -25,7 +17,7 @@ function ProductList() {
       console.error(error);
     }
   }
-
+ 
   useEffect(() => {
     fetchData();
   }, []);
@@ -45,9 +37,10 @@ function ProductList() {
       console.error(error);
     }
   }, [nameTerm]);
+
   return (
     <>
-      <section className="dashboard">
+          <section className="dashboard">
         <div className=" container-fluid p-0">
           <div className="row" data-plugin="matchHeight" data-by-row="true">
             <div className="col-xxl-12 col-lg-12">
@@ -56,7 +49,7 @@ function ProductList() {
                 <div className="panel-heading appointment-schedule pt-3">
                   <div className="row align-items-center">
                     <div className="col-md-12">
-                      <h3 className="panel-title">Service list</h3>
+                      <h3 className="panel-title">Product list</h3>
                     </div>
                   </div>
                   <hr />
@@ -68,7 +61,7 @@ function ProductList() {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Enter Service Name"
+                              placeholder="Enter Product"
                               onChange={(event) => {
                                 setNameTerm(event.target.value);
                               }}
@@ -76,9 +69,9 @@ function ProductList() {
                           </div>
                         </div>
                         <div className="col-md-3">
-                          <a href className="btn btn-gradient-primary w-100">
+                          <button className="btn btn-gradient-primary w-100">
                             Search
-                          </a>
+                          </button>
                         </div>
                         <div className="col-md-2">
                           <button
@@ -96,54 +89,52 @@ function ProductList() {
                       </div>
                     </div>
                   </div>
+                  
                 </div>
                 <hr />
                 <TableContainer component={Paper}>
-                  <Table aria-label="a simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="center">Description</TableCell>
-                        <TableCell align="left">Price</TableCell>
-                        <TableCell align="center">Doctor's Commision</TableCell>
-                        <TableCell align="center">Bawe's Commision</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {searchResults.map((row) => (
-                        <TableRow key={row.name}>
-                          <TableCell component="th" scope="row">
-                            {row.name}
-                          </TableCell>
-                          <TableCell align="center">
-                            {row.description}
-                          </TableCell>
-                          <TableCell align="left">{row.price}</TableCell>
-                          <TableCell align="center">{row.dr_commission}</TableCell>
-                          <TableCell align="center">{row.bawe_commission}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </div>
-            </div>
+      <Table aria-label="a simple table" title='Product List'>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell align="center">Description</TableCell>
+            <TableCell align="left">Price</TableCell>
+            <TableCell align="left">Cost</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {searchResults.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="center">{row.description}</TableCell>
+              <TableCell align="left">{row.price}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+                </div>
+                </div>
           </div>
         </div>
       </section>
-      <div
+
+    
+    <div
         className="modal fade"
         id="addproModal"
         tabIndex={-1}
         role="dialog"
-        aria-labelledby="dialog"
+        aria-labelledby=""
         aria-hidden="true"
        >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Add Service
+                Add Products
               </h5>
               <button
                 type="button"
@@ -157,11 +148,11 @@ function ProductList() {
             <div className="modal-body">
               <form className="forms-sample">
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Service Name<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">Product Name<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Service Name"
+                    placeholder="Enter Product Name"
                     required
                   />
                 </div>
@@ -170,7 +161,7 @@ function ProductList() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Description "
+                    placeholder="Enter Product Description"
                     required
                   />
                 </div>
@@ -179,29 +170,20 @@ function ProductList() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Price"
+                    placeholder="Enter Product Price"
                     required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Doctor's Commision<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">Cost<sup>*</sup></label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Doctor's Commision"
+                    placeholder="Enter Product Cost"
                     required
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">Bawe's Commision<sup>*</sup></label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Bawe's Commision"
-                    required
-                  />
-                </div>
-  
+
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Submit
                 </button>

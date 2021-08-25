@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector,useDispatch } from "react-redux";
 import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
+import {setProducts} from '../../redux/actions/productActions'
 function ProductList() {
-  const [data, setData] = useState([]);
+  const data=useSelector((state)=>state);
+  console.log(data);
+  const dispatch=useDispatch();
+  // const [data, setData] = useState([]);
   const [nameTerm,setNameTerm]=useState([]);
   const [searchResults,setSearchResults]=useState([]);
 
   async function fetchData() {
     try {
       const result = await axios.get(
-        "http://128.199.182.16:4000/nurse/productList"
+        "/nurse/productList"
       );
-      setData(result.data.data);
+      // setData(result.data.data);
+      dispatch(setProducts(result.data.data))
       setSearchResults(result.data.data)
     } catch (error) {
       console.error(error);
@@ -127,7 +133,7 @@ function ProductList() {
         id="addproModal"
         tabIndex={-1}
         role="dialog"
-        aria-labelledby
+        aria-labelledby=""
         aria-hidden="true"
        >
         <div className="modal-dialog" role="document">
