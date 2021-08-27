@@ -24,12 +24,13 @@ const BasicRoutes=()=>{
   }, [user])
 
   return (
+      <div className="content-wrapper">
         
         <Switch>
-        <Route exact path="/" render={() => {
+        {/* <Route exact path="/" render={() => {
             return user? <Redirect to='/'/> : <Redirect to="/Login"/> 
-          }} />
-          {/* <LoginLayoutRoute exact path="/" component={Dashboard} layout={BasicLayout}/> */}
+          }} /> */}
+          <LoginLayoutRoute exact path="/Dashboard" component={Dashboard} layout={BasicLayout}/>
           <LoginLayoutRoute exact path="/Dashboard" component={Dashboard} layout={BasicLayout}/>
           <LoginLayoutRoute path="/Appointment" component={Appointment} layout={BasicLayout} />
           <LoginLayoutRoute path="/Patient" component={Patient} layout={BasicLayout}/>
@@ -43,6 +44,7 @@ const BasicRoutes=()=>{
           <LoginLayoutRoute path="/Login" component={Login} layout={LoginLayout}/> 
         </Switch>
        
+      </div>
 
   );
 }

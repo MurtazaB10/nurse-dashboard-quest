@@ -66,7 +66,7 @@ function ProductList() {
                             <input
                               type="text"
                               className="form-control"
-                              id="datepicker"
+                              id="datepicker5"
                               placeholder="From"
                             />
                           </div>
@@ -76,7 +76,7 @@ function ProductList() {
                             <input
                               type="text"
                               className="form-control"
-                              id="datepicker3"
+                              id="datepicker6"
                               placeholder="To"
                             />
                           </div>
@@ -178,7 +178,7 @@ function ProductList() {
                   <input
                     type="text"
                     className="form-control"
-                    id="datepicker1"
+                    id="datepicker7"
                     placeholder="Select Date"
                     required
                   />

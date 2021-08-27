@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
 import {setProducts} from '../../redux/actions/productActions'
 function ProductList() {
-  const data=useSelector((state)=>state);
-  console.log(data);
+  const {register,handleSubmit,errors}=useForm();
+  const data=useSelector((state)=>state.allProducts.products);
   const dispatch=useDispatch();
-  // const [data, setData] = useState([]);
   const [nameTerm,setNameTerm]=useState([]);
   const [searchResults,setSearchResults]=useState([]);
-
+  const [userInfo,setUserInfo]=useState([]);
   async function fetchData() {
     try {
       const result = await axios.get(
         "/nurse/productList"
       );
-      // setData(result.data.data);
       dispatch(setProducts(result.data.data))
       setSearchResults(result.data.data)
     } catch (error) {
       console.error(error);
     }
+ 
   }
  
   useEffect(() => {
@@ -43,6 +43,10 @@ function ProductList() {
       console.error(error);
     }
   }, [nameTerm]);
+  const onSubmit=(data)=>{
+    setUserInfo(data);
+    console.log(data);
+  }
 
   return (
     <>
@@ -152,41 +156,55 @@ function ProductList() {
               </button>
             </div>
             <div className="modal-body">
-              <form className="forms-sample">
+              <pre>{JSON.stringify(userInfo,undefined,2)}</pre>
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">Product Name<sup>*</sup></label>
                   <input
                     type="text"
+                    name="productName"
                     className="form-control"
                     placeholder="Enter Product Name"
-                    required
+                    {...register("productName", {
+                      required: "Product Name is required",
+                    })}
+                   
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
                   <input
                     type="text"
+                    name="description"
                     className="form-control"
                     placeholder="Enter Product Description"
-                    required
+                    {...register("description", {
+                      required: "Required",
+                    })}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">Price<sup>*</sup></label>
                   <input
                     type="text"
+                    name="price"
                     className="form-control"
                     placeholder="Enter Product Price"
-                    required
+                    {...register("price", {
+                      required: "Required",
+                    })}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">Cost<sup>*</sup></label>
                   <input
                     type="text"
+                    name="cost"
                     className="form-control"
                     placeholder="Enter Product Cost"
-                    required
+                    {...register("cost", {
+                      required: "Required",
+                    })}
                   />
                 </div>
 

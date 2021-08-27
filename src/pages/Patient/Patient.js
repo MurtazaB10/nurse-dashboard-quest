@@ -16,7 +16,7 @@ const Patient = () => {
                   defaultValue="John Doe"
               
                 />
-                <div className="col-md-3 rounded">
+                <div className="col-md-3 rounded text-center">
                   <a href className="btn btn-gradient-primary">
                     Search
                   </a>
@@ -64,30 +64,37 @@ const Patient = () => {
                          <div class="other-details-patient">
                            <ul>
                              <li>
-                               <p>Patient Gender</p>
-                               <h5>Female</h5>
+                               <p>Gender</p>
+                               <h5>Male</h5>
                              </li>
                              <li>
-                               <p>Years Old</p>
-                               <h5>Age: 23</h5>
+                               <p>Age</p>
+                               <h5>23</h5>
                              </li>
                              <li>
-                               <p>Patient Height</p>
-                               <h5>176 cm</h5>
+                               <p>Address</p>
+                               <h5>Canada</h5>
                              </li>
                              <li>
-                               <p>Patient Weight</p>
-                               <h5>67 Kg</h5>
+                               <p>Email</p>
+                               <h5>xyz@gmail.com</h5>
                              </li>
                              <li>
-                               <p>Blood type</p>
-                               <h5>AB+</h5>
+                               <p>Birthday</p>
+                               <h5>17/10/1997</h5>
                              </li>
                              <li>
-                               <p>Allergies</p>
-                               <h5>Penicilin, peanuts</h5>
+                               <p>Occupation</p>
+                               <h5>Engineer</h5>
                              </li>
-                           
+                             <li>
+                               <p>Mobile</p>
+                               <h5>785465645</h5>
+                             </li>
+                             <li>
+                               <p>Tel Number</p>
+                               <h5>265464</h5>
+                             </li>
                              
                            </ul>
                          </div>
@@ -975,7 +982,7 @@ const Patient = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                id="datepicker"
+                                id="datepicker3"
                                 placeholder="Date"
                               />
                             </div>
@@ -1162,7 +1169,7 @@ const Patient = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                id="datepicker1"
+                                id="datepicker4"
                                 placeholder="Date"
                                 required
                               />

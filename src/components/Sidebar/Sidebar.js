@@ -71,7 +71,7 @@ const Sidebar=()=> {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/login">
+              <Link className="nav-link" to="/Login">
                 <i className="mdi mdi-power menu-icon" />
                 <span className="menu-title">Logout</span>
               </Link>

@@ -748,7 +748,7 @@ const Appointment = () => {
                     <input
                       type="text"
                       className="form-control"
-                      id="datepicker1"
+                      id="datepicker2"
                       placeholder="Select Date"
                       required
                       
