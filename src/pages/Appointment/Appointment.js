@@ -1,5 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+
 const Appointment = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [addAppointmentInfo, setAddAppointmentInfo] = useState([]);
+  const onSubmit = (data) => {
+    setAddAppointmentInfo(data);
+    console.log(data);
+  };
+  console.log(errors);
   return (
     <div>
       <div>
@@ -156,7 +169,7 @@ const Appointment = () => {
                                   <td className="clearfix d-block" rowSpan={3}>
                                     <div className="appointment-box">
                                       <p className="notes-edit text-right mb-2">
-                                        <a href >
+                                        <a href>
                                           Edit <i className="mdi mdi-pencil" />
                                         </a>{" "}
                                         |{" "}
@@ -703,13 +716,15 @@ const Appointment = () => {
           id="addappointmentModal"
           tabIndex={-1}
           role="dialog"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="dialog"
           aria-hidden="true"
-         >
+        >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
+                <pre>{JSON.stringify(addAppointmentInfo, undefined, 2)}</pre>
+                <br></br>
+                <h5 className="modal-title" id="exampleModalLabel1">
                   Add Appointment
                 </h5>
                 <button
@@ -722,42 +737,84 @@ const Appointment = () => {
                 </button>
               </div>
               <div className="modal-body">
-                <form className="forms-sample">
+                <form
+                  className="forms-sample"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <p className="formErrors">{errors.patientName?.message}</p>
                   <div className="form-group">
-                    <label htmlFor="exampleInputName1">Patient Name<sup>*</sup></label>
+                    <label htmlFor="exampleInputName1">
+                      Patient Name
+                      <sup>*</sup>
+                    </label>
                     <input
                       type="text"
+                      name="patientName"
                       className="form-control"
                       placeholder="Enter Patient Name"
-                      required
+                      {...register("patientName", {
+                        required: "patient Name is required",
+                        pattern: {
+                          value: /^[A-Za-z]+$/i,
+                          message: "Alphabets are only allowed",
+                        },
+                      })}
                     />
                   </div>
+                  <p className="formErrors">{errors.doctor?.message}</p>
+
                   <div className="form-group">
-                    <label htmlFor="exampleInputName1">Select Doctor<sup>*</sup></label>
-                    <div>
-                      <select className="form-control" id="select-new2" required>
-                        <option>Doctor1</option>
-                        <option>Doctor2</option>
-                        <option>Doctor3</option>
-                        <option>Doctor4</option>
-                      </select>
-                    </div>
+                    <label htmlFor="exampleInputName4">
+                      Select Doctor<sup>*</sup>
+                    </label>
+
+                    <select
+                      className="form-control"
+                      name="doctor"
+                      id="select-new2"
+                      {...register("doctor", {
+                        required: "Doctor is required",
+                      })}
+                    >
+                      <option></option>
+                      <option>Doctor1</option>
+                      <option>Doctor2</option>
+                      <option>Doctor3</option>
+                    </select>
                   </div>
+                  <p className="formErrors">{errors.date?.message}</p>
+
                   <div className="form-group">
-                    <label htmlFor="exampleTextarea1">Select Date<sup>*</sup></label>
+                    <label htmlFor="exampleTextarea1">
+                      Select Date
+                      <sup>*</sup>
+                    </label>
                     <input
                       type="text"
+                      name="date"
                       className="form-control"
-                      id="datepicker2"
+                      id="datepicker"
                       placeholder="Select Date"
-                      required
-                      
+                      {...register("date", {
+                        required: "Date is required",
+                      })}
                     />
                   </div>
+                  <p className="formErrors">{errors.timeslot?.message}</p>
+
                   <div className="form-group">
-                    <label htmlFor="exampleInputName1">Time Slot<sup>*</sup></label>
+                    <label htmlFor="exampleInputName4">
+                      Time Slot<sup>*</sup>
+                    </label>
                     <div>
-                      <select className="form-control" id="select-new3" required>
+                      <select
+                        className="form-control"
+                        name="timeslot"
+                        id="select-new2"
+                        {...register("timeslot", {
+                          required: "timeslot is required",
+                        })}
+                      >
                         <option>9:00 AM - 9:30 AM</option>
                         <option>9:30 AM - 10:00 AM</option>
                         <option>10:00 AM - 10:30 AM</option>
@@ -767,6 +824,7 @@ const Appointment = () => {
                       </select>
                     </div>
                   </div>
+                  <br />
                   <button
                     type="submit"
                     className="btn btn-gradient-primary mr-2"

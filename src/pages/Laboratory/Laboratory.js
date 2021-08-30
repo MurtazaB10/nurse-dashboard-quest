@@ -1,7 +1,17 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 const Laboratory = () => {
-
+  const [formData, setFormData] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    setFormData(data);
+    console.log(data);
+  };
+  console.log(errors);
   return (
     <div>
       <section className="dashboard">
@@ -65,7 +75,6 @@ const Laboratory = () => {
                         <th width="15%">Address</th>
                         <th width="15%">E-mail</th>
                         <th width="20%">Contact Number</th>
-                        
                       </tr>
                     </thead>
                     <tbody>
@@ -149,55 +158,97 @@ const Laboratory = () => {
                 <span aria-hidden="true">×</span>
               </button>
             </div>
+            <pre>{JSON.stringify(formData, undefined, 2)}</pre>
+
             <div className="modal-body">
-              <form className="forms-sample">
-                
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.Name?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Laboratory Name<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Laboratory Name<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="Name"
                     className="form-control"
                     placeholder="Name"
-                    required
+                    {...register("Name", {
+                      required: "* Name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Alphabets are only allowed",
+                      },
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.description?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Description<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="description"
                     className="form-control"
-                    placeholder="Description"
-                    required
+                    placeholder="Enter description"
+                    {...register("description", {
+                      required: "description is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.address?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Address<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Address<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="address"
                     className="form-control"
-                    placeholder="Address"
-                    required
+                    placeholder="Enter Address"
+                    {...register("address", {
+                      required: "Address is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.email?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">E-mail<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    E-mail<sup>*</sup>
+                  </label>
                   <input
-                    type="text"
+                    type="email"
+                    name="email"
                     className="form-control"
-                    placeholder="E-mail"
-                    required
+                    placeholder="Enter E-mail"
+                    {...register("email", {
+                      required: "Email is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.contactnumber?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Contact Number<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Contact Number<sup>*</sup>
+                  </label>
                   <input
-                    type="text"
+                    type="number"
+                    name="contactnumber"
                     className="form-control"
-                    placeholder="Contact Number"
-                    required
+                    placeholder="Enter Mobile Number"
+                    {...register("contactnumber", {
+                      required: "Mobile Number is required",
+                      pattern: {
+                        value: /^[0-9\b]+$/,
+                        message: "exact 10 numbers required",
+                      },
+                    })}
                   />
                 </div>
-  
 
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Save

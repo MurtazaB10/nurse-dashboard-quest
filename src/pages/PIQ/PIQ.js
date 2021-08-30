@@ -1,6 +1,18 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 const PIQ = () => {
+  const [info, setInfo] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    setInfo(data);
+    console.log(data);
+  };
+  console.log(errors);
   return (
     <div>
       <section className="dashboard">
@@ -16,28 +28,43 @@ const PIQ = () => {
                     </div>
                   </div>
                   <hr />
+                  <pre>{JSON.stringify(info, undefined, 2)}</pre>
                   <div className="row">
                     <div className="col-md-10 m-auto">
-                      <form className="forms-sample">
+                      <form
+                        className="forms-sample"
+                        onSubmit={handleSubmit(onSubmit)}
+                      >
+                        <p className="formErrors">{errors.email?.message}</p>
                         <div className="form-group">
                           <label htmlFor="exampleInputName1">
                             Email Address<sup>*</sup>
                           </label>
                           <input
-                            type="text"
+                            type="email"
+                            name="email"
                             className="form-control"
-                            placeholder="Email Address"
-                            required
+                            placeholder="Enter E-mail"
+                            {...register("email", {
+                              required: "Email is required",
+                            })}
                           />
                         </div>
+
                         <div className="form-group">
-                          <label htmlFor="exampleInputName1">Message<sup>*</sup></label>
+                          <p className="formErrors">{errors.msg?.message}</p>
+                          <label htmlFor="exampleInputName1">
+                            Message<sup>*</sup>
+                          </label>
                           <textarea
                             className="form-control"
                             rows={6}
+                            name="msg"
                             placeholder="Comment"
                             defaultValue={""}
-                            required
+                            {...register("msg", {
+                              required: "Message is required",
+                            })}
                           />
                         </div>
                         <button

@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useSelector,useDispatch } from "react-redux";
-import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
-import {setProducts} from '../../redux/actions/productActions'
+import { useSelector, useDispatch } from "react-redux";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  Paper,
+} from "@material-ui/core";
+import { setProducts } from "../../redux/actions/productActions";
 function ProductList() {
-  const {register,handleSubmit,errors}=useForm();
-  const data=useSelector((state)=>state.allProducts.products);
-  const dispatch=useDispatch();
-  const [nameTerm,setNameTerm]=useState([]);
-  const [searchResults,setSearchResults]=useState([]);
-  const [userInfo,setUserInfo]=useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const data = useSelector((state) => state.allProducts.products);
+  const dispatch = useDispatch();
+  const [nameTerm, setNameTerm] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
   async function fetchData() {
     try {
-      const result = await axios.get(
-        "/nurse/productList"
-      );
-      dispatch(setProducts(result.data.data))
-      setSearchResults(result.data.data)
+      const result = await axios.get("/nurse/productList");
+      dispatch(setProducts(result.data.data));
+      setSearchResults(result.data.data);
     } catch (error) {
       console.error(error);
     }
- 
   }
- 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -31,11 +41,7 @@ function ProductList() {
   useEffect(() => {
     try {
       const results = data.filter((product) => {
-        return (
-          product.name
-            .toLowerCase()
-            .includes(nameTerm.toLowerCase()) 
-        );
+        return product.name.toLowerCase().includes(nameTerm.toLowerCase());
       });
 
       setSearchResults(results);
@@ -43,14 +49,14 @@ function ProductList() {
       console.error(error);
     }
   }, [nameTerm]);
-  const onSubmit=(data)=>{
+  const onSubmit = (data) => {
     setUserInfo(data);
     console.log(data);
-  }
+  };
 
   return (
     <>
-          <section className="dashboard">
+      <section className="dashboard">
         <div className=" container-fluid p-0">
           <div className="row" data-plugin="matchHeight" data-by-row="true">
             <div className="col-xxl-12 col-lg-12">
@@ -99,47 +105,47 @@ function ProductList() {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
                 <hr />
                 <TableContainer component={Paper}>
-      <Table aria-label="a simple table" title='Product List'>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="left">Price</TableCell>
-            <TableCell align="left">Cost</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {searchResults.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">{row.description}</TableCell>
-              <TableCell align="left">{row.price}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-                </div>
-                </div>
+                  <Table aria-label="a simple table" title="Product List">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell align="center">Description</TableCell>
+                        <TableCell align="left">Price</TableCell>
+                        <TableCell align="left">Cost</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {searchResults.map((row) => (
+                        <TableRow key={row.name}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="center">
+                            {row.description}
+                          </TableCell>
+                          <TableCell align="left">{row.price}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-    
-    <div
+      <div
         className="modal fade"
         id="addproModal"
         tabIndex={-1}
         role="dialog"
         aria-labelledby=""
         aria-hidden="true"
-       >
+      >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -156,10 +162,13 @@ function ProductList() {
               </button>
             </div>
             <div className="modal-body">
-              <pre>{JSON.stringify(userInfo,undefined,2)}</pre>
+              <pre>{JSON.stringify(userInfo, undefined, 2)}</pre>
               <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.productName?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Product Name<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Product Name<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     name="productName"
@@ -168,42 +177,53 @@ function ProductList() {
                     {...register("productName", {
                       required: "Product Name is required",
                     })}
-                   
                   />
                 </div>
+                <p className="formErrors">{errors.description?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Description<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     name="description"
                     className="form-control"
                     placeholder="Enter Product Description"
                     {...register("description", {
-                      required: "Required",
+                      required: "Description is required",
                     })}
                   />
                 </div>
+                <p className="formErrors">{errors.price?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Price<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Price<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     name="price"
                     className="form-control"
                     placeholder="Enter Product Price"
                     {...register("price", {
-                      required: "Required",
+                      required: "Price is required",
                     })}
                   />
                 </div>
+                <p className="formErrors">{errors.cost?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Cost<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Cost<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     name="cost"
                     className="form-control"
                     placeholder="Enter Product Cost"
                     {...register("cost", {
-                      required: "Required",
+                      required: "Cost is Required",
                     })}
                   />
                 </div>

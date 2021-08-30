@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
 import axios from "axios";
 import {
   TableContainer,
@@ -10,17 +12,22 @@ import {
   Paper,
 } from "@material-ui/core";
 function ProductList() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [formData, setFormData] = useState([]);
   const [data, setData] = useState([]);
-  const [nameTerm,setNameTerm]=useState([]);
-  const [searchResults,setSearchResults]=useState([]);
+  const [nameTerm, setNameTerm] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   async function fetchData() {
     try {
-      const result = await axios.get(
-        "nurse/productList"
-      );
+      const result = await axios.get("nurse/productList");
       setData(result.data.data);
-      setSearchResults(result.data.data)
+      setSearchResults(result.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -32,11 +39,7 @@ function ProductList() {
   useEffect(() => {
     try {
       const results = data.filter((product) => {
-        return (
-          product.name
-            .toLowerCase()
-            .includes(nameTerm.toLowerCase()) 
-        );
+        return product.name.toLowerCase().includes(nameTerm.toLowerCase());
       });
 
       setSearchResults(results);
@@ -44,6 +47,11 @@ function ProductList() {
       console.error(error);
     }
   }, [nameTerm]);
+  const onSubmit = (data) => {
+    setFormData(data);
+    console.log(data);
+  };
+  console.log(errors);
 
   return (
     <>
@@ -152,42 +160,70 @@ function ProductList() {
               </button>
             </div>
             <div className="modal-body">
-              <form className="forms-sample">
-
+              <pre>{JSON.stringify(formData, undefined, 2)}</pre>
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.Name?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Name<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Name<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="Name"
                     className="form-control"
                     placeholder="Name"
-                    required
+                    {...register("Name", {
+                      required: "* Name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Alphabets are only allowed",
+                      },
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.description?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Description<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="description"
                     className="form-control"
-                    placeholder="Description"
-                    required
+                    placeholder="Enter description"
+                    {...register("description", {
+                      required: "description is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.manufacturer?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Manufacturer<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Manufacturer<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="manufacturer"
                     className="form-control"
-                    placeholder="Manufacturer"
-                    required
+                    placeholder="Enter manufacturer"
+                    {...register("manufacturer", {
+                      required: "manufacturer is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.note?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Note<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Note<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="note"
                     className="form-control"
-                    placeholder="Note"
-                    required
+                    placeholder="Enter Note"
+                    {...register("note", {
+                      required: "Note is required",
+                    })}
                   />
                 </div>
 

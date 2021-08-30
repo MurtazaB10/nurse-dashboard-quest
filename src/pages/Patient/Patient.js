@@ -1,6 +1,5 @@
 import React from "react";
 const Patient = () => {
-
   return (
     <div>
       <section className="dashboard">
@@ -14,7 +13,6 @@ const Patient = () => {
                   className="form-control"
                   placeholder="Enter Patient Name"
                   defaultValue="John Doe"
-              
                 />
                 <div className="col-md-3 rounded text-center">
                   <a href className="btn btn-gradient-primary">
@@ -61,44 +59,43 @@ const Patient = () => {
                         </div>
                       </div>
                       <div class="col-md-9">
-                         <div class="other-details-patient">
-                           <ul>
-                             <li>
-                               <p>Gender</p>
-                               <h5>Male</h5>
-                             </li>
-                             <li>
-                               <p>Age</p>
-                               <h5>23</h5>
-                             </li>
-                             <li>
-                               <p>Address</p>
-                               <h5>Canada</h5>
-                             </li>
-                             <li>
-                               <p>Email</p>
-                               <h5>xyz@gmail.com</h5>
-                             </li>
-                             <li>
-                               <p>Birthday</p>
-                               <h5>17/10/1997</h5>
-                             </li>
-                             <li>
-                               <p>Occupation</p>
-                               <h5>Engineer</h5>
-                             </li>
-                             <li>
-                               <p>Mobile</p>
-                               <h5>785465645</h5>
-                             </li>
-                             <li>
-                               <p>Tel Number</p>
-                               <h5>265464</h5>
-                             </li>
-                             
-                           </ul>
-                         </div>
-                     </div>
+                        <div class="other-details-patient">
+                          <ul>
+                            <li>
+                              <p>Gender</p>
+                              <h5>Male</h5>
+                            </li>
+                            <li>
+                              <p>Age</p>
+                              <h5>23</h5>
+                            </li>
+                            <li>
+                              <p>Address</p>
+                              <h5>Canada</h5>
+                            </li>
+                            <li>
+                              <p>Email</p>
+                              <h5>xyz@gmail.com</h5>
+                            </li>
+                            <li>
+                              <p>Birthday</p>
+                              <h5>17/10/1997</h5>
+                            </li>
+                            <li>
+                              <p>Occupation</p>
+                              <h5>Engineer</h5>
+                            </li>
+                            <li>
+                              <p>Mobile</p>
+                              <h5>785465645</h5>
+                            </li>
+                            <li>
+                              <p>Tel Number</p>
+                              <h5>265464</h5>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="contact-btn">
@@ -739,7 +736,10 @@ const Patient = () => {
                                 <td>Dental Filling</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/artist-img.jpg" alt='artist-img' />
+                                    <img
+                                      src="assets/images/other/artist-img.jpg"
+                                      alt="artist-img"
+                                    />
                                   </div>
                                 </td>
                                 <td>
@@ -759,7 +759,10 @@ const Patient = () => {
                                 <td>Dental Filling</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/icons/documents-folder.png" alt='document-folder' />
+                                    <img
+                                      src="assets/images/icons/documents-folder.png"
+                                      alt="document-folder"
+                                    />
                                   </div>
                                 </td>
                                 <td>
@@ -779,7 +782,10 @@ const Patient = () => {
                                 <td>Dental Filling</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/icons/documents-folder.png" alt='documents-folder'/>
+                                    <img
+                                      src="assets/images/icons/documents-folder.png"
+                                      alt="documents-folder"
+                                    />
                                   </div>
                                 </td>
                                 <td>
@@ -832,7 +838,10 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" alt='sign' />
+                                    <img
+                                      src="assets/images/other/sign.png"
+                                      alt="sign"
+                                    />
                                   </div>
                                 </td>
                               </tr>
@@ -844,7 +853,10 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" alt='sign'/>
+                                    <img
+                                      src="assets/images/other/sign.png"
+                                      alt="sign"
+                                    />
                                   </div>
                                 </td>
                               </tr>
@@ -856,7 +868,10 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" alt='sign'/>
+                                    <img
+                                      src="assets/images/other/sign.png"
+                                      alt="sign"
+                                    />
                                   </div>
                                 </td>
                               </tr>
@@ -868,7 +883,10 @@ const Patient = () => {
                                 <td>5:00 PM</td>
                                 <td>
                                   <div className="img-vid-box">
-                                    <img src="assets/images/other/sign.png" alt='sign'/>
+                                    <img
+                                      src="assets/images/other/sign.png"
+                                      alt="sign"
+                                    />
                                   </div>
                                 </td>
                               </tr>

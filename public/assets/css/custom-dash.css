@@ -423,6 +423,9 @@
 .auto-fill-patient{
 
 }
+.formErrors{
+    color: red;
+}
 
 @media (max-width: 991px){
 

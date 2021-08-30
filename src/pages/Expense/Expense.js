@@ -14,9 +14,7 @@ function ProductList() {
 
   async function fetchData() {
     try {
-      const result = await axios.get(
-        "nurse/expensesList"
-      );
+      const result = await axios.get("nurse/expensesList");
       setData(result.data.data);
     } catch (error) {
       console.error(error);

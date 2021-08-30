@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {TableContainer,Table,TableHead,TableCell,TableRow,TableBody,Paper} from '@material-ui/core'
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  Paper,
+} from "@material-ui/core";
 function ProductList() {
   const [data, setData] = useState([]);
-  const [nameTerm,setNameTerm]=useState([]);
-  const [searchResults,setSearchResults]=useState([]);
+  const [nameTerm, setNameTerm] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   async function fetchData() {
     try {
-      const result = await axios.get(
-        "/nurse/productList"
-      );
+      const result = await axios.get("/nurse/productList");
       setData(result.data.data);
-      setSearchResults(result.data.data)
+      setSearchResults(result.data.data);
     } catch (error) {
       console.error(error);
     }
   }
- 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -25,11 +31,7 @@ function ProductList() {
   useEffect(() => {
     try {
       const results = data.filter((product) => {
-        return (
-          product.name
-            .toLowerCase()
-            .includes(nameTerm.toLowerCase()) 
-        );
+        return product.name.toLowerCase().includes(nameTerm.toLowerCase());
       });
 
       setSearchResults(results);
@@ -40,7 +42,7 @@ function ProductList() {
 
   return (
     <>
-          <section className="dashboard">
+      <section className="dashboard">
         <div className=" container-fluid p-0">
           <div className="row" data-plugin="matchHeight" data-by-row="true">
             <div className="col-xxl-12 col-lg-12">
@@ -89,47 +91,47 @@ function ProductList() {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
                 <hr />
                 <TableContainer component={Paper}>
-      <Table aria-label="a simple table" title='Product List'>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="left">Price</TableCell>
-            <TableCell align="left">Cost</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {searchResults.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">{row.description}</TableCell>
-              <TableCell align="left">{row.price}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-                </div>
-                </div>
+                  <Table aria-label="a simple table" title="Product List">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell align="center">Description</TableCell>
+                        <TableCell align="left">Price</TableCell>
+                        <TableCell align="left">Cost</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {searchResults.map((row) => (
+                        <TableRow key={row.name}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="center">
+                            {row.description}
+                          </TableCell>
+                          <TableCell align="left">{row.price}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-    
-    <div
+      <div
         className="modal fade"
         id="addproModal"
         tabIndex={-1}
         role="dialog"
         aria-labelledby=""
         aria-hidden="true"
-       >
+      >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -148,7 +150,9 @@ function ProductList() {
             <div className="modal-body">
               <form className="forms-sample">
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Product Name<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Product Name<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -157,7 +161,9 @@ function ProductList() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Description<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -166,7 +172,9 @@ function ProductList() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Price<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Price<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -175,7 +183,9 @@ function ProductList() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Cost<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Cost<sup>*</sup>
+                  </label>
                   <input
                     type="text"
                     className="form-control"

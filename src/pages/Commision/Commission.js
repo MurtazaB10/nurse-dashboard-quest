@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+
 import {
   TableContainer,
   Table,
@@ -11,12 +13,15 @@ import {
 } from "@material-ui/core";
 function ProductList() {
   const [data, setData] = useState([]);
-
+  const [formData, setFormData] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   async function fetchData() {
     try {
-      const result = await axios.get(
-        "nurse/serviceList"
-      );
+      const result = await axios.get("nurse/serviceList");
       setData(result.data.data);
     } catch (error) {
       console.error(error);
@@ -26,6 +31,11 @@ function ProductList() {
   useEffect(() => {
     fetchData();
   }, []);
+  const onSubmit = (data) => {
+    setFormData(data);
+    console.log(data);
+  };
+  console.log(errors);
 
   return (
     <>
@@ -145,7 +155,7 @@ function ProductList() {
         role="dialog"
         aria-labelledby="dialog"
         aria-hidden="true"
-       >
+      >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -161,54 +171,92 @@ function ProductList() {
                 <span aria-hidden="true">×</span>
               </button>
             </div>
+            <pre>{JSON.stringify(formData, undefined, 2)}</pre>
             <div className="modal-body">
-              <form className="forms-sample">
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.Name?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Name<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Name<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="Name"
                     className="form-control"
-                    placeholder="Enter Name"
-                    required
+                    placeholder="Name"
+                    {...register("Name", {
+                      required: "* Name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Alphabets are only allowed",
+                      },
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.description?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Description<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Description<sup>*</sup>
+                  </label>
                   <input
                     type="text"
+                    name="description"
                     className="form-control"
-                    placeholder="Enter Description "
-                    required
+                    placeholder="Enter description"
+                    {...register("description", {
+                      required: "description is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.price?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Price<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Price<sup>*</sup>
+                  </label>
                   <input
-                    type="text"
+                    type="number"
+                    name="price"
                     className="form-control"
                     placeholder="Enter Price"
-                    required
+                    {...register("price", {
+                      required: "Price is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.drcommision?.message}</p>
+
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Doctor's Commision<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Doctor's Commision<sup>*</sup>
+                  </label>
                   <input
-                    type="text"
+                    type="number"
+                    name="drcommision"
                     className="form-control"
                     placeholder="Enter Doctor's Commision"
-                    required
+                    {...register("drcommision", {
+                      required: "Doctor's Commision is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.bawecommision?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">Bawe's Commision<sup>*</sup></label>
+                  <label htmlFor="exampleInputName1">
+                    Bawe's Commision<sup>*</sup>
+                  </label>
                   <input
-                    type="text"
+                    type="number"
+                    name="bawecommision"
                     className="form-control"
                     placeholder="Enter Bawe's Commision"
-                    required
+                    {...register("bawecommision", {
+                      required: "Bawe's Commision is required",
+                    })}
                   />
                 </div>
-  
+
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Submit
                 </button>
