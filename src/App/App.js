@@ -5,11 +5,6 @@ import store from "../redux/store";
 import { BrowserRouter } from "react-router-dom";
 import LoginLayout from "../layout/LoginLayout";
 const App = () => {
-  const [user, setUser] = useState("");
-
-  useEffect(() => {
-    setUser(localStorage.getItem("user"));
-  }, [user]);
   return (
     <div className="App">
       <Provider store={store}>
