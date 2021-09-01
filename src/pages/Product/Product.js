@@ -150,7 +150,7 @@ const Product = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="datepicker1"
+                    id="datepicker9"
                     placeholder="Select Date"
                   />
                 </div>

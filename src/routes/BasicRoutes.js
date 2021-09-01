@@ -24,14 +24,14 @@ const BasicRoutes = () => {
 
   return (
     <Switch>
-      <Route
+      {/* <Route
         exact
         path="/"
         render={() => {
           return user ? <Redirect to="/Dashboard" /> : <Redirect to="/Login" />;
         }}
-      />
-      {/* <LoginLayoutRoute exact path="/" component={Dashboard} layout={BasicLayout}/> */}
+      /> */}
+      <LoginLayoutRoute exact path="/" component={Dashboard} layout={BasicLayout}/>
       <LoginLayoutRoute
         exact
         path="/Dashboard"

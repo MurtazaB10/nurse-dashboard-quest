@@ -11,7 +11,7 @@ const LoginLayoutRoute = ({
       {...rest}
       render={(matchProps) => (
         <Layout>
-          <Component {...matchProps} /> : <Redirect to="/Login" />
+          <Component {...matchProps} /> 
         </Layout>
       )}
     />

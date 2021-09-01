@@ -1000,7 +1000,7 @@ const Patient = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                id="datepicker3"
+                                id="datepicker7"
                                 placeholder="Date"
                               />
                             </div>
@@ -1187,7 +1187,7 @@ const Patient = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                id="datepicker4"
+                                id="datepicker8"
                                 placeholder="Date"
                                 required
                               />

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-
+import { useForm,Controller } from "react-hook-form";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const Appointment = () => {
+  const [startdate, setStartDate] = useState(new Date());
   const {
     register,
-    handleSubmit,
+    handleSubmit,control,
     formState: { errors },
   } = useForm();
   const [addAppointmentInfo, setAddAppointmentInfo] = useState([]);
@@ -721,9 +723,8 @@ const Appointment = () => {
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
+            <pre>{JSON.stringify(addAppointmentInfo, undefined, 2)}</pre>
               <div className="modal-header">
-                <pre>{JSON.stringify(addAppointmentInfo, undefined, 2)}</pre>
-                <br></br>
                 <h5 className="modal-title" id="exampleModalLabel1">
                   Add Appointment
                 </h5>
@@ -789,16 +790,19 @@ const Appointment = () => {
                       Select Date
                       <sup>*</sup>
                     </label>
-                    <input
-                      type="text"
-                      name="date"
-                      className="form-control"
-                      id="datepicker"
-                      placeholder="Select Date"
-                      {...register("date", {
-                        required: "Date is required",
-                      })}
-                    />
+                    <Controller
+                          control={control}
+                          name="date"
+                          render={({ field }) => (
+                            <DatePicker
+                              selected={field.value}
+                              onChange={(date) => setStartDate(date)}
+                              minDate={new Date()}
+                              isClearable
+                              {...field}
+                            />
+                          )}
+                        />
                   </div>
                   <p className="formErrors">{errors.timeslot?.message}</p>
 

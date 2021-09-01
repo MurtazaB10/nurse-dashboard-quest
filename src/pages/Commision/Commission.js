@@ -11,9 +11,13 @@ import {
   TableBody,
   Paper,
 } from "@material-ui/core";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 function ProductList() {
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState([]);
+  const [startdate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const {
     register,
     handleSubmit,
@@ -73,22 +77,20 @@ function ProductList() {
                       <div className="row align-items-center mt-3 filter-btn-row">
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="datepicker"
-                              placeholder="From"
-                            />
+                          <DatePicker
+                      selected={startdate}
+                      onChange={(date) => setStartDate(date)}
+                      isClearable
+                      />
                           </div>
                         </div>
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="datepicker3"
-                              placeholder="To"
-                            />
+                          <DatePicker
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                      isClearable
+                      />
                           </div>
                         </div>
                         <div className="col-md-4">

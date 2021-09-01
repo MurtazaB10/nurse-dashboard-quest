@@ -9,8 +9,13 @@ import {
   TableBody,
   Paper,
 } from "@material-ui/core";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 function ProductList() {
   const [data, setData] = useState([]);
+  const [startdate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [addDate, setAddDate] = useState(new Date());
 
   async function fetchData() {
     try {
@@ -61,21 +66,19 @@ function ProductList() {
                       <div className="row align-items-center mt-3 filter-btn-row">
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="datepicker5"
-                              placeholder="From"
+                            <DatePicker
+                              selected={startdate}
+                              onChange={(date) => setStartDate(date)}
+                              isClearable
                             />
                           </div>
                         </div>
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="datepicker6"
-                              placeholder="To"
+                          <DatePicker
+                              selected={endDate}
+                              onChange={(date) => setEndDate(date)}
+                              isClearable
                             />
                           </div>
                         </div>
@@ -173,13 +176,11 @@ function ProductList() {
                   <label htmlFor="exampleTextarea1">
                     Select Date<sup>*</sup>
                   </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="datepicker7"
-                    placeholder="Select Date"
-                    required
-                  />
+                  <DatePicker
+                      selected={endDate}
+                      onChange={(date) => setAddDate(date)}
+                      isClearable
+                      />
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">

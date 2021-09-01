@@ -2,21 +2,33 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setDoctorsList } from "../../redux/actions/doctorActions";
-import { useForm } from "react-hook-form";
+import { Controller,useForm } from "react-hook-form";
 import DashboardAppointmentTable from "./DashboardAppointmentTable";
+import HighCharts from "../../components/Highcharts/highcharts";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import { DatePicker } from 'react-rainbow-components';
+
 const Dashboard = () => {
   const {
     register,
-    handleSubmit,
+    handleSubmit,control,
     formState: { errors },
   } = useForm();
+  const {
+    register: register2,
+    formState: { errors: errors2 },
+    handleSubmit: handleSubmit2,
+  } = useForm({
+    mode: "onBlur",
+  });
   const dispatch = useDispatch();
   const doctorsList = useSelector((state) => state.doctorsList.doctors);
   const [dashboardData, setDashboardData] = useState([]);
   const [patientZero, setPatientZero] = useState([]);
   const [patientList, setpatientList] = useState([]);
   const [patientInfo, setPatientInfo] = useState([]);
-
+  const [startdate, setStartDate] = useState(new Date());
   async function fetchData() {
     try {
       const result = await axios.get("nurse/dashboard");
@@ -42,6 +54,9 @@ const Dashboard = () => {
     setPatientInfo(data);
     console.log(data);
   };
+  const onSubmitAppointment = (data) => {
+    console.log(data);
+  };
   console.log(errors);
   return (
     <div>
@@ -65,7 +80,12 @@ const Dashboard = () => {
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
                     15% From this yesterday
                   </div>
-                  <div className="ct-chart h-50"></div>
+                  <div className="ct-chart h-50">
+                    <HighCharts
+                      colour="#7986CB"
+                      dataset={[0, 10, 3, 4, 5, 10, 20, 5, 0]}
+                    />
+                  </div>
                 </div>
               </div>
               {/* End Widget Linearea One */}
@@ -87,7 +107,12 @@ const Dashboard = () => {
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
                     34.2% From this week
                   </div>
-                  <div className="ct-chart h-50"></div>
+                  <div className="ct-chart h-50">
+                    <HighCharts
+                      colour="#FFD54F"
+                      dataset={[0, 10, 3, 0, 5, 10, 20, 5, 0]}
+                    />
+                  </div>
                 </div>
               </div>
               {/* End Widget Linearea Two */}
@@ -109,7 +134,12 @@ const Dashboard = () => {
                     <i className="icon md-long-arrow-down red-500 font-size-16" />{" "}
                     15% From this yesterday
                   </div>
-                  <div className="ct-chart h-50"></div>
+                  <div className="ct-chart h-50">
+                    <HighCharts
+                      colour="#4DD0E1"
+                      dataset={[0, 10, 3, 4, 9, 30, 20, 5, 0]}
+                    />
+                  </div>
                 </div>
               </div>
               {/* End Widget Linearea Three */}
@@ -131,7 +161,12 @@ const Dashboard = () => {
                     <i className="icon md-long-arrow-up green-500 font-size-16" />{" "}
                     18.4% From this yesterday
                   </div>
-                  <div className="ct-chart h-50"></div>
+                  <div className="ct-chart h-50">
+                    <HighCharts
+                      colour="#81c784"
+                      dataset={[0, 5, 3, 20, 5, 10, 20, 5, 0]}
+                    />
+                  </div>
                 </div>
               </div>
               {/* End Widget Linearea Four */}
@@ -295,16 +330,32 @@ const Dashboard = () => {
                         <label htmlFor="exampleTextarea1">
                           Birthday<sup>*</sup>
                         </label>
-                        <input
+                        <Controller
+                          control={control}
+                          name="birthday"
+                          render={({ field }) => (
+                            <DatePicker
+                              selected={field.value}
+                              onChange={(date) => setStartDate(date)}
+                              showMonthDropdown
+                              showYearDropdown
+                              dropdownMode="select"
+                              isClearable
+                              {...field}
+                            />
+                          )}
+                        />
+
+                        {/* <input
                           type="text"
                           name="birthday"
                           className="form-control"
-                          id="datepicker"
+                          id="datepicker4"
                           placeholder="Select Date"
                           {...register("birthday", {
                             required: "Birthday is required",
                           })}
-                        />
+                        /> */}
                       </div>
                       <p className="formErrors">{errors.email?.message}</p>
                       <div className="form-group">
@@ -458,10 +509,10 @@ const Dashboard = () => {
                       <div className="modal-body">
                         <form
                           className="forms-sample"
-                          onSubmit={handleSubmit(onSubmit)}
+                          onSubmit={handleSubmit2(onSubmitAppointment)}
                         >
                           <p className="formErrors">
-                            {errors.patientName?.message}
+                            {errors2.patientName?.message}
                           </p>
                           <div className="form-group">
                             <label htmlFor="exampleInputName1">
@@ -473,7 +524,7 @@ const Dashboard = () => {
                               name="patientName"
                               className="form-control"
                               placeholder="Enter Patient Name"
-                              {...register("patientName", {
+                              {...register2("patientName", {
                                 required: "patient Name is required",
                                 pattern: {
                                   value: /^[A-Za-z]+$/i,
@@ -482,7 +533,9 @@ const Dashboard = () => {
                               })}
                             />
                           </div>
-                          <p className="formErrors">{errors.doctor?.message}</p>
+                          <p className="formErrors">
+                            {errors2.doctor?.message}
+                          </p>
 
                           <div className="form-group">
                             <label htmlFor="exampleInputName4">
@@ -493,7 +546,7 @@ const Dashboard = () => {
                               className="form-control"
                               name="doctor"
                               id="select-new2"
-                              {...register("doctor", {
+                              {...register2("doctor", {
                                 required: "Doctor is required",
                               })}
                             >
@@ -502,26 +555,33 @@ const Dashboard = () => {
                               <option>Doctor3</option>
                             </select>
                           </div>
-                          <p className="formErrors">{errors.date?.message}</p>
+                          <p className="formErrors">{errors2.date?.message}</p>
 
                           <div className="form-group">
                             <label htmlFor="exampleTextarea1">
                               Select Date
                               <sup>*</sup>
                             </label>
-                            <input
+                            <DatePicker
+                              selected={startdate}
+                              onChange={(date) => setStartDate(date)}
+                              minDate={new Date()}
+                              showDisabledMonthNavigation
+                              isClearable
+                            />
+                            {/* <input
                               type="text"
                               name="date"
                               className="form-control"
-                              id="datepicker"
+                              id="datepicker3"
                               placeholder="Select Date"
-                              {...register("date", {
+                              {...register2("date", {
                                 required: "Date is required",
                               })}
-                            />
+                            /> */}
                           </div>
                           <p className="formErrors">
-                            {errors.timeslot?.message}
+                            {errors2.timeslot?.message}
                           </p>
 
                           <div className="form-group">
@@ -533,7 +593,7 @@ const Dashboard = () => {
                                 className="form-control"
                                 name="timeslot"
                                 id="select-new2"
-                                {...register("timeslot", {
+                                {...register2("timeslot", {
                                   required: "timeslot is required",
                                 })}
                               >

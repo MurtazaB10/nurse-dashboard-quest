@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+// import {useUserContext} from '../../context/userContext';
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const history = useHistory();
+  // const { logIn } = useUserContext();
 
   async function loginFormHandler(e) {
     e.preventDefault();
@@ -14,17 +16,16 @@ function Login() {
       email: "rahulsharma1@questglt.com",
       password: "1234567890",
     };
-    console.log(loginUserData);
     const res = await axios.post("nurse/loginNurse", loginUserData);
 
     if (res.data.success) {
       console.log("success");
-      localStorage.setItem("user", email);
+      setEmail(localStorage.setItem("user", email));
       localStorage.setItem("token", res.data.data);
-      setIsLoggedIn(true);
       history.push("/Dashboard");
       // <Redirect to='/Dashboard'/>
     }
+
   }
 
   return (
