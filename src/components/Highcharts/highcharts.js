@@ -4,7 +4,6 @@ import React from "react";
 
 function HighCharts(props) {
     const {colour,dataset}=props;
-    console.log(dataset);
   const areaChart1 = {
     chart: {
       type: "areaspline",

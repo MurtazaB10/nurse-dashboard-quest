@@ -5,14 +5,11 @@ import { useForm,Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { setAppointmentList } from "../../redux/actions/appointmentActions";
-import Time from "./Time";
-import Card from "./Card";
 
 const Appointment = () => {
   const [startdate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
   const appointmentList = useSelector((state) => state.doctorAppointmentList.appointments);
-  const doctorsList = useSelector((state) => state.doctorsList.doctors);
   const {
     register,
     handleSubmit,control,
@@ -30,14 +27,15 @@ const Appointment = () => {
     }
   }
 
-
+  // console.log(dashboardData);
   useEffect(() => {
     fetchData();
   }, []);
   const onSubmit = (data) => {
     setAddAppointmentInfo(data);
+    console.log(data);
   };
-
+  console.log(errors);
   return (
     <div>
       <div>
@@ -68,27 +66,229 @@ const Appointment = () => {
                       <thead>
                         <tr>
                           <th width="10%">Time</th>
-                          {
-                            doctorsList&&doctorsList.map((doctor,idx)=>{
-                              return(<th width="18%">
-                              <span className="dr-name">{doctor.name}</span>
-                            </th>)
-
-                            })
-                          }
+                          <th width="18%">
+                            <span className="dr-name">DR Joe</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR John</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR Flash</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR Kwak</span>
+                          </th>
+                          <th width="18%">
+                            <span className="dr-name">DR Doe</span>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <Time/>
+                          <td width="10%">
+                            <table className="table" style={{ width: "100%" }}>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:00 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:10 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:20 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:30 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:40 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 9:50 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:00 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:10 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:20 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:30 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:40 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 10:50 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <span className="time">
+                                      <i className="mdi mdi-timer" /> 11:00 AM
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
                           <td width="18%">
                             <table className="table w-100">
                               <tbody>
-                              {
-                                appointmentList&&appointmentList.map((appointment,idx)=>{
-                                  return <Card key={idx} appointment={appointment}/>
-                                })
-                              }
+                                <tr>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                 
+                                    <td className="clearfix d-block" rowSpan={3}>
+                                    <div className="appointment-box">
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
+                                    </div>
+                                  </td>
+                                  
+                                  
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td className="clearfix d-block" rowSpan={3}>
+                                    <div className="appointment-box">
+                                      <p className="notes-edit text-right mb-2">
+                                        <a href>
+                                          Edit <i className="mdi mdi-pencil" />
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          Delete{" "}
+                                          <i className="mdi mdi-delete" />
+                                        </a>{" "}
+                                        &nbsp; <span />
+                                      </p>
+                                      <span className="patient-name">
+                                        Patient Name
+                                      </span>
+                                      <p className="mb-0">
+                                        <a href>
+                                          <span className="badge badge-primary">
+                                            Arrive
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-danger">
+                                            Cancel
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          <span className="badge badge-info">
+                                            OTW
+                                          </span>
+                                        </a>{" "}
+                                        |{" "}
+                                        <a href>
+                                          {" "}
+                                          <span className="badge badge-warning">
+                                            Waiting
+                                          </span>
+                                        </a>
+                                      </p>
+                                    </div>
+                                  </td>
+                                </tr>
                               </tbody>
                             </table>
                           </td>

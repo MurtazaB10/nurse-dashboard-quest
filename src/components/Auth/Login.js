@@ -17,7 +17,7 @@ function Login() {
       password: "1234567890",
     };
     const res = await axios.post("nurse/loginNurse", loginUserData);
-
+    console.log(res);
     if (res.data.success) {
       console.log("success");
       setEmail(localStorage.setItem("user", email));

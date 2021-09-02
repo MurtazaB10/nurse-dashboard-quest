@@ -1,17 +1,11 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios';
-import { useDispatch, useSelector } from "react-redux";
-import MedicalQuestions from "./MedicalQuestions";
-import {setPatientInfo} from "../../redux/actions/patientActions";
-import Medications from "./Medications";
-import Documents from "./Documents";
 const Patient = () => {
-  const patientInfo = useSelector((state) => state.patientInfo.patient);
-  const dispatch = useDispatch();
+  const [patientInfo,setPatientInfo]=useState([]);
   async function fetchData() {
     try {
       const res = await axios.post("/nurse/patientDetails/6103f172ef6ebe0359c9e411");
-      dispatch(setPatientInfo(res.data.data));
+      setPatientInfo(res.data.data)
       console.log(res.data.data);
     } catch (error) {
       console.error(error);
@@ -242,8 +236,245 @@ const Patient = () => {
                 >
                   <div>
                     <div className="row mt-4">
-                      <MedicalQuestions/>
-                      <Medications/>
+                      <div className="col-md-7">
+                        <div className="panel ">
+                          <div className="panel-heading ">
+                            <div className="row align-items-center">
+                              <div className="col-md-12">
+                                <h3 className="panel-title">
+                                  Medical Questions
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className="accordion madical-ques p-3 "
+                            id="accordionExample"
+                          >
+                            <div className="card">
+                              <div className="card-header" id="headingOne">
+                                <h2 className="mb-0">
+                                  <button
+                                    className="btn btn-link btn-block text-left"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseOne"
+                                    aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                  >
+                                    Did you experience any excessive bleeding?
+                                    <div className="for-plus">
+                                      <i
+                                        className="mdi mdi-plus"
+                                        style={{ display: "none" }}
+                                      />
+                                      <i className="mdi mdi-minus" />
+                                    </div>
+                                  </button>
+                                </h2>
+                              </div>
+                              <div
+                                id="collapseOne"
+                                className="collapse show"
+                                aria-labelledby="headingOne"
+                                data-parent="#accordionExample"
+                              >
+                                <div className="card-body">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing and typesetting industry. Lorem Ipsum
+                                  has been the industry's standard dummy text
+                                  ever since the 1500s, when an unknown printer
+                                  took a galley of type and scrambled it to make
+                                  a type specimen book.
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card">
+                              <div className="card-header" id="headingTwo">
+                                <h2 className="mb-0">
+                                  <button
+                                    className="btn btn-link btn-block text-left collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseTwo"
+                                    aria-expanded="false"
+                                    aria-controls="collapseTwo"
+                                  >
+                                    Did your blood pressure so low that affects
+                                    other vital organ?
+                                    <div className="for-plus">
+                                      <i
+                                        className="mdi mdi-plus"
+                                        style={{ display: "none" }}
+                                      />
+                                      <i className="mdi mdi-minus" />
+                                    </div>
+                                  </button>
+                                </h2>
+                              </div>
+                              <div
+                                id="collapseTwo"
+                                className="collapse"
+                                aria-labelledby="headingTwo"
+                                data-parent="#accordionExample"
+                              >
+                                <div className="card-body">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing and typesetting industry. Lorem Ipsum
+                                  has been the industry's standard dummy text
+                                  ever since the 1500s, when an unknown printer
+                                  took a galley of type and scrambled it to make
+                                  a type specimen book.
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card">
+                              <div className="card-header" id="headingThree">
+                                <h2 className="mb-0">
+                                  <button
+                                    className="btn btn-link btn-block text-left collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseThree"
+                                    aria-expanded="false"
+                                    aria-controls="collapseThree"
+                                  >
+                                    Did you suffer from any infection?
+                                    <div className="for-plus">
+                                      <i
+                                        className="mdi mdi-plus"
+                                        style={{ display: "none" }}
+                                      />
+                                      <i className="mdi mdi-minus" />
+                                    </div>
+                                  </button>
+                                </h2>
+                              </div>
+                              <div
+                                id="collapseThree"
+                                className="collapse"
+                                aria-labelledby="headingThree"
+                                data-parent="#accordionExample"
+                              >
+                                <div className="card-body">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing and typesetting industry. Lorem Ipsum
+                                  has been the industry's standard dummy text
+                                  ever since the 1500s, when an unknown printer
+                                  took a galley of type and scrambled it to make
+                                  a type specimen book.
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card">
+                              <div className="card-header" id="headingFour">
+                                <h2 className="mb-0">
+                                  <button
+                                    className="btn btn-link btn-block text-left collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseFour"
+                                    aria-expanded="false"
+                                    aria-controls="collapseFour"
+                                  >
+                                    Are you taking Anticoagulant Drug?
+                                    <div className="for-plus">
+                                      <i
+                                        className="mdi mdi-plus"
+                                        style={{ display: "none" }}
+                                      />
+                                      <i className="mdi mdi-minus" />
+                                    </div>
+                                  </button>
+                                </h2>
+                              </div>
+                              <div
+                                id="collapseFour"
+                                className="collapse"
+                                aria-labelledby="headingFour"
+                                data-parent="#accordionExample"
+                              >
+                                <div className="card-body">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing and typesetting industry. Lorem Ipsum
+                                  has been the industry's standard dummy text
+                                  ever since the 1500s, when an unknown printer
+                                  took a galley of type and scrambled it to make
+                                  a type specimen book.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-5">
+                        <div className="panel">
+                          <div className="panel-heading ">
+                            <div className="row align-items-center">
+                              <div className="col-md-12">
+                                <h3 className="panel-title">Medications</h3>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="table-responsive p-3">
+                            <table className="table table-striped madication-table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">S. No.</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Interval</th>
+                                  <th scope="col">Doses</th>
+                                  <th scope="col">Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Albuteol HFA</td>
+                                  <td>2 puffs</td>
+                                  <td>3 Daily</td>
+                                  <td>17/10/1997</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td>Crocin</td>
+                                  <td>250 mg</td>
+                                  <td>2 Daily</td>
+                                  <td>17/10/1997</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">3</th>
+                                  <td>Paracetamol</td>
+                                  <td>200 mg</td>
+                                  <td>1 Daily</td>
+                                  <td>17/10/1997</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">4</th>
+                                  <td>Albuteol HFA</td>
+                                  <td>2 puffs</td>
+                                  <td>1 Daily</td>
+                                  <td>17/10/1997</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">5</th>
+                                  <td>Albuteol HFA</td>
+                                  <td>2 puffs</td>
+                                  <td>1 Daily</td>
+                                  <td>17/10/1997</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">6</th>
+                                  <td>Albuteol HFA</td>
+                                  <td>2 puffs</td>
+                                  <td>1 Daily</td>
+                                  <td>17/10/1997</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -494,7 +725,105 @@ const Patient = () => {
                     </div>
                   </div>
                 </div>
-                <Documents/>
+                <div class="tab-pane fade" id="patienttab3" role="tabpanel">
+                  <div className="row mt-4">
+                    <div className="col-xxl-12 col-lg-12">
+                      <div className="panel" id="projects-status">
+                        <div className="panel-heading appointment-schedule">
+                          <div className="row align-items-center">
+                            <div className="col-md-6">
+                              <h3 className="panel-title">Documents</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="table-responsive">
+                          <table className="table table-striped">
+                            <thead>
+                              <tr>
+                                <td>ID</td>
+                                <td>Date</td>
+                                <td>Descriprion</td>
+                                <td>Uploaded Document</td>
+                                <td className="text-left">Action</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>#619</td>
+                                <td>14 Nov 2019</td>
+                                <td>Dental Filling</td>
+                                <td>
+                                  <div className="img-vid-box">
+                                    <img
+                                      src="assets/images/other/artist-img.jpg"
+                                      alt="artist-img"
+                                    />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="edit-icon">
+                                    <a href="/" className="white mr-10">
+                                      <i className="icon mdi mdi-pencil" />
+                                    </a>
+                                    <a href="/" className="white mr-10">
+                                      <i className="icon mdi mdi-eye" />
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>#619</td>
+                                <td>14 Nov 2019</td>
+                                <td>Dental Filling</td>
+                                <td>
+                                  <div className="img-vid-box">
+                                    <img
+                                      src="assets/images/icons/documents-folder.png"
+                                      alt="document-folder"
+                                    />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="edit-icon">
+                                    <a href="/" className="white mr-10">
+                                      <i className="icon mdi mdi-pencil" />
+                                    </a>
+                                    <a href="/" className="white mr-10">
+                                      <i className="icon mdi mdi-eye" />
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>#619</td>
+                                <td>14 Nov 2019</td>
+                                <td>Dental Filling</td>
+                                <td>
+                                  <div className="img-vid-box">
+                                    <img
+                                      src="assets/images/icons/documents-folder.png"
+                                      alt="documents-folder"
+                                    />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="edit-icon">
+                                    <a href="/" className="white mr-10">
+                                      <i className="icon mdi mdi-pencil" />
+                                    </a>
+                                    <a href="/" className="white mr-10">
+                                      <i className="icon mdi mdi-eye" />
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="tab-pane fade" id="patienttab4" role="tabpanel">
                   <div className="row mt-4">
                     <div className="col-xxl-12 col-lg-12">
@@ -755,7 +1084,187 @@ const Patient = () => {
                     </div>
                   </div>
                 </div>
-                
+                <div class="tab-pane fade" id="patienttab6" role="tabpanel">
+                  <div className="row mt-4">
+                    <div className="col-xxl-12 col-lg-12">
+                      <div className="panel" id="projects-status">
+                        <div className="panel-heading appointment-schedule pb-0">
+                          <div className="row align-items-center">
+                            <div className="col-md-6">
+                              <h3 className="panel-title pb-0">
+                                Prescription List
+                              </h3>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            className="btn-raised btn btn-danger btn-floating "
+                            data-toggle="modal"
+                            data-target="#prescriptionModal"
+                          >
+                            <i
+                              className="icon mdi mdi-plus"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </div>
+                        <hr />
+                        <div className="table-responsive">
+                          <table className="table table-striped">
+                            <thead>
+                              <tr>
+                                <th width="15%">S.No</th>
+                                <th width="15%">Patient</th>
+                                <th width="15%">Date</th>
+                                <th width="20%">Name</th>
+                                <th width="20%">Doses</th>
+                                <th width="15%">Interval</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>#45685</td>
+                                <td>14 Nov 2019</td>
+                                <td>Albuteol HFA</td>
+                                <td>250 mg</td>
+                                <td>2 Daily</td>
+                              </tr>
+                              <tr>
+                                <td>2</td>
+                                <td>#45685</td>
+                                <td>14 Nov 2019</td>
+                                <td>Albuteol HFA</td>
+                                <td>250 mg</td>
+                                <td>2 Daily</td>
+                              </tr>
+                              <tr>
+                                <td>3</td>
+                                <td>#45685</td>
+                                <td>14 Nov 2019</td>
+                                <td>Albuteol HFA</td>
+                                <td>250 mg</td>
+                                <td>2 Daily</td>
+                              </tr>
+                              <tr>
+                                <td>4</td>
+                                <td>#45685</td>
+                                <td>14 Nov 2019</td>
+                                <td>Albuteol HFA</td>
+                                <td>250 mg</td>
+                                <td>2 Daily</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="modal fade"
+                    id="prescriptionModal"
+                    role="dialog"
+                    aria-labelledby=""
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="exampleModalLabel">
+                            Prescription list
+                          </h5>
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName1">
+                              Name
+                              <sup>*</sup>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Name"
+                              required
+                            />
+                          </div>
+                          <form className="forms-sample">
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Date
+                                <sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="datepicker8"
+                                placeholder="Date"
+                                required
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Patient
+                                <sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Patient"
+                                required
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Doses
+                                <sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Doses"
+                                required
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Interval
+                                <sup>*</sup>
+                              </label>
+                              <div>
+                                <select
+                                  className="form-control"
+                                  id="select-new3"
+                                  required
+                                >
+                                  <option>2 Daily</option>
+                                  <option>3 Daily</option>
+                                  <option>In Morning</option>
+                                  <option>In Evening</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <button
+                              type="submit"
+                              className="btn btn-gradient-primary mr-2"
+                            >
+                              Save
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="tab-pane fade" id="patienttab7" role="tabpanel">
                   <div className="row mt-4">
                     <div className="col-xxl-12 col-lg-12">
@@ -781,7 +1290,82 @@ const Patient = () => {
                           </button>
                         </div>
                         <hr />
-                        
+                        <div className="table-responsive">
+                          <table className="table table-striped">
+                            <thead>
+                              <tr>
+                                <th width="15%">S.No</th>
+                                <th width="15%">Name</th>
+                                <th width="20%">Description</th>
+                                <th width="15%">Address</th>
+                                <th width="20%">E-mail</th>
+                                <th width="15%">Mobile Number</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>#45685</td>
+                                <td>Blood Test</td>
+                                <td>
+                                  <span className="badge badge-danger">
+                                    Incomplete
+                                  </span>
+                                </td>
+                                <td>14 Nov 2019 10:15 AM</td>
+                                <td>
+                                  <span className="badge-warning">Due</span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>#45685</td>
+                                <td>Blood Test</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    Complete
+                                  </span>
+                                </td>
+                                <td>14 Nov 2019 10:15 AM</td>
+                                <td>
+                                  <span className="badge badge-primary">
+                                    Paid
+                                  </span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>#45685</td>
+                                <td>Blood Test</td>
+                                <td>
+                                  <span className="badge badge-danger">
+                                    Incomplete
+                                  </span>
+                                </td>
+                                <td>14 Nov 2019 10:15 AM</td>
+                                <td>
+                                  <span className="badge-warning">Due</span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>#45685</td>
+                                <td>Blood Test</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    Complete
+                                  </span>
+                                </td>
+                                <td>14 Nov 2019 10:15 AM</td>
+                                <td>
+                                  <span className="badge badge-primary">
+                                    Paid
+                                  </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>

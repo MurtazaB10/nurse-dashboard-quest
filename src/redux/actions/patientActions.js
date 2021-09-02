@@ -1,7 +1,7 @@
 import { ActionTypes } from "../constants/action-types";
-export const setDoctorsList = (patient) => {
+export const setPatientInfo = (patient) => {
   return {
-    type: ActionTypes.SET_PATIENT,
+    type: ActionTypes.SET_PATIENT_INFO,
     payload: patient,
   };
 };

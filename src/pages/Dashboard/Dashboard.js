@@ -45,7 +45,6 @@ const Dashboard = () => {
     }
   }
 
-  // console.log(dashboardData);
   useEffect(() => {
     fetchData();
   }, []);
@@ -58,6 +57,7 @@ const Dashboard = () => {
     console.log(data);
   };
   console.log(errors);
+  console.log(dashboardData);
   return (
     <div>
       <section className="dashboard">
