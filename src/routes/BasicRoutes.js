@@ -48,6 +48,11 @@ const BasicRoutes = () => {
         component={Patient}
         layout={BasicLayout}
       />
+      <LoginLayoutRoute
+        path="/Patient/:_id"
+        component={Patient}
+        layout={BasicLayout}
+      />
       <LoginLayoutRoute path="/PIQ" component={PIQ} layout={BasicLayout} />
       <LoginLayoutRoute
         path="/Expense"

@@ -13,8 +13,8 @@ function Login() {
   async function loginFormHandler(e) {
     e.preventDefault();
     const loginUserData = {
-      email: "rahulsharma1@questglt.com",
-      password: "1234567890",
+      email,
+      password,
     };
     const res = await axios.post("nurse/loginNurse", loginUserData);
     console.log(res);

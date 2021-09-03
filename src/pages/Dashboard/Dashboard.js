@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setDoctorsList } from "../../redux/actions/doctorActions";
-import { Controller,useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import DashboardAppointmentTable from "./DashboardAppointmentTable";
 import HighCharts from "../../components/Highcharts/highcharts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { setPatientsList } from "../../redux/actions/patientListActions";
 // import { DatePicker } from 'react-rainbow-components';
 
 const Dashboard = () => {
   const {
     register,
-    handleSubmit,control,
+    handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
   const {
@@ -34,6 +36,7 @@ const Dashboard = () => {
       const result = await axios.get("nurse/dashboard");
       const res = await axios.get("doctor/list");
       dispatch(setDoctorsList(res.data.data));
+      dispatch(setPatientsList(result.data.data.patient_list))
 
       setDashboardData(result.data.data);
       setPatientZero(result.data.data.patient_list[0]);
@@ -48,16 +51,19 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(() => {
+  }, [patientInfo]);
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
+
+    const result = await axios.post("/nurse/addPatient",data);
     setPatientInfo(data);
-    console.log(data);
+    console.log(result);
   };
   const onSubmitAppointment = (data) => {
     console.log(data);
   };
-  console.log(errors);
-  console.log(dashboardData);
+
   return (
     <div>
       <section className="dashboard">
@@ -283,9 +289,7 @@ const Dashboard = () => {
                       className="forms-sample"
                       onSubmit={handleSubmit(onSubmit)}
                     >
-                      <p className="formErrors">
-                        {errors.patientName?.message}
-                      </p>
+                      <p className="formErrors">{errors.name?.message}</p>
                       <div className="form-group">
                         <label htmlFor="exampleInputName1">
                           Patient Name
@@ -293,10 +297,10 @@ const Dashboard = () => {
                         </label>
                         <input
                           type="text"
-                          name="patientName"
+                          name="name"
                           className="form-control"
                           placeholder="Enter Patient Name"
-                          {...register("patientName", {
+                          {...register("name", {
                             required: "patient Name is required",
                             pattern: {
                               value: /^[A-Za-z]+$/i,
@@ -304,6 +308,44 @@ const Dashboard = () => {
                             },
                           })}
                         />
+                      </div>
+                      <p className="formErrors">{errors.doctor_id?.message}</p>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">
+                          Select doctor<sup>*</sup>
+                        </label>
+                        <div>
+                          <select
+                            id="select-new"
+                            className="form-control"
+                            name="doctor_id"
+                            {...register("doctor_id", {
+                              required: "Doctor is required",
+                            })}
+                          >
+                            
+                            {doctorsList &&
+                              doctorsList.map((doctor) => {
+                                return (
+                                  <option value={doctor._id}>
+                                    {doctor.name}
+                                  </option>
+                                );
+                              })}
+                          </select>
+                          {/* <select
+                            className="form-control"
+                            name="doctor"
+                            id="select-new2"
+                            {...register("doctor", {
+                              required: "Doctor is required",
+                            })}
+                          >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                          </select> */}
+                        </div>
                       </div>
                       <p className="formErrors">{errors.gender?.message}</p>
                       <div className="form-group">
@@ -372,17 +414,32 @@ const Dashboard = () => {
                           })}
                         />
                       </div>
-                      <p className="formErrors">{errors.mobileNo?.message}</p>
+                      <p className="formErrors">{errors.age?.message}</p>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">
+                          Age<sup>*</sup>
+                        </label>
+                        <input
+                          type="number"
+                          name="age"
+                          className="form-control"
+                          placeholder="Enter Age"
+                          {...register("age", {
+                            required: "Age  is required",
+                          })}
+                        />
+                        </div>
+                      <p className="formErrors">{errors.mobile?.message}</p>
                       <div className="form-group">
                         <label htmlFor="exampleInputName1">
                           Mobile Number<sup>*</sup>
                         </label>
                         <input
                           type="number"
-                          name="mobileNo"
+                          name="mobile"
                           className="form-control"
                           placeholder="Enter Mobile Number"
-                          {...register("mobileNo", {
+                          {...register("mobile", {
                             required: "Mobile Number is required",
                             pattern: {
                               value: /^[0-9\b]+$/,
@@ -421,15 +478,15 @@ const Dashboard = () => {
                           })}
                         />
                       </div>
-                      <p className="formErrors">{errors.phone?.message}</p>
+                      <p className="formErrors">{errors.tel_no?.message}</p>
                       <div className="form-group">
                         <label htmlFor="exampleInputName1">Phone Number</label>
                         <input
                           type="number"
-                          name="phone"
+                          name="tel_no"
                           className="form-control"
                           placeholder="Enter Phone Number"
-                          {...register("phone", {
+                          {...register("tel_no", {
                             required: "Phone Number is required",
                           })}
                         />
@@ -534,7 +591,7 @@ const Dashboard = () => {
                             />
                           </div>
                           <p className="formErrors">
-                            {errors2.doctor?.message}
+                            {errors2.doctor_id?.message}
                           </p>
 
                           <div className="form-group">
@@ -544,15 +601,19 @@ const Dashboard = () => {
 
                             <select
                               className="form-control"
-                              name="doctor"
+                              name="doctor_id"
                               id="select-new2"
-                              {...register2("doctor", {
+                              {...register2("doctor_id", {
                                 required: "Doctor is required",
                               })}
                             >
-                              <option>Doctor1</option>
-                              <option>Doctor2</option>
-                              <option>Doctor3</option>
+                              {doctorsList.map((doctor) => {
+                                return (
+                                  <option value={doctor._id}>
+                                    {doctor.name}
+                                  </option>
+                                );
+                              })}
                             </select>
                           </div>
                           <p className="formErrors">{errors2.date?.message}</p>

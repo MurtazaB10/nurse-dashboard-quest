@@ -40,7 +40,7 @@ function MedicalQuestions() {
               data-parent="#accordionExample"
             >
               <div className="card-body">
-                {questions&&questions.did_you_experience_any_excessive_bleeding}
+                {questions&&questions.did_you_experience_any_excessive_bleeding.toUpperCase()}
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ function MedicalQuestions() {
               data-parent="#accordionExample"
             >
               <div className="card-body">
-              {questions&&questions.did_your_blood_pressure_so_low_that_affects_other_vital_organ}
+              {questions&&questions.did_your_blood_pressure_so_low_that_affects_other_vital_organ.toUpperCase()}
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@ function MedicalQuestions() {
               data-parent="#accordionExample"
             >
               <div className="card-body">
-              {questions&&questions.did_you_suffer_from_any_infection}
+              {questions&&questions.did_you_suffer_from_any_infection.toUpperCase()}
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@ function MedicalQuestions() {
               data-parent="#accordionExample"
             >
               <div className="card-body">
-              {questions&&questions.are_you_taking_Anticoagulant_Drug}
+              {questions&&questions.are_you_taking_Anticoagulant_Drug.toUpperCase()}
               </div>
             </div>
           </div>

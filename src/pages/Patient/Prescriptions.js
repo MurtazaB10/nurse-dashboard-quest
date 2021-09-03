@@ -1,6 +1,9 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
 function Prescriptions() {
+  const prescriptions = useSelector(
+    (state) => state.patientInfo.patient.patientPrescription
+  );
   return (
     <div class="tab-pane fade" id="patienttab6" role="tabpanel">
       <div className="row mt-4">
@@ -35,38 +38,19 @@ function Prescriptions() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>#45685</td>
-                    <td>14 Nov 2019</td>
-                    <td>Albuteol HFA</td>
-                    <td>250 mg</td>
-                    <td>2 Daily</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>#45685</td>
-                    <td>14 Nov 2019</td>
-                    <td>Albuteol HFA</td>
-                    <td>250 mg</td>
-                    <td>2 Daily</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>#45685</td>
-                    <td>14 Nov 2019</td>
-                    <td>Albuteol HFA</td>
-                    <td>250 mg</td>
-                    <td>2 Daily</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>#45685</td>
-                    <td>14 Nov 2019</td>
-                    <td>Albuteol HFA</td>
-                    <td>250 mg</td>
-                    <td>2 Daily</td>
-                  </tr>
+                  {prescriptions &&
+                    prescriptions.map((prescription, idx) => {
+                      return (
+                        <tr>
+                          <td>{idx + 1}</td>
+                          <td>{prescription.patient_id}</td>
+                          <td>{prescription.date.substring(0, 10)}</td>
+                          <td>{prescription.name}</td>
+                          <td>{prescription.dose}</td>
+                          <td>{prescription.interval}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
