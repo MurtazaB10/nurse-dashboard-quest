@@ -2,6 +2,7 @@
   "name": "nurses-module",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://128.199.182.16:4000",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/data-grid": "^4.0.0-alpha.37",
