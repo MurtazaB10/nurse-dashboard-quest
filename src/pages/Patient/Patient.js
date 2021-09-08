@@ -205,8 +205,8 @@ const handleSelect=(e)=>{
                 <Documents />
                 <VisitLog />
                 <Payment />
-                <Prescriptions />
-                <PatientLab id={id}/>
+                <Prescriptions id={id} />
+                <PatientLab id={id} setId={setId}/>
               </div>
             </div>
           </div>

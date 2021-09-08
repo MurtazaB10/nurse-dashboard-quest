@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
+import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-function Prescriptions() {
+function Prescriptions({id}) {
   const {
     register,
-    handleSubmit,control,
+    handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
+  const [startDate, setStartDate] = useState(new Date());
   const prescriptions = useSelector(
     (state) => state.patientInfo.patient.patientPrescription
   );
-  const onSubmit = (data) => {
-    console.log(data);
-  }
+  const onSubmit = async(data) => {
+    data={...data,patient_id:id}
+    const result = await axios.post("/nurse/addPatientPrescription", data);
+    console.log(result);
+  };
   return (
     <div class="tab-pane fade" id="patienttab6" role="tabpanel">
       <div className="row mt-4">
@@ -92,61 +97,59 @@ function Prescriptions() {
               </button>
             </div>
             <div className="modal-body">
-            <p className="formErrors">{errors.name?.message}</p>
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.name?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Name<sup>*</sup>
                   </label>
                   <input
-                      type="text"
-                      name="patientName"
-                      className="form-control"
-                      placeholder="Enter  Name"
-                      {...register("name", {
-                         required: "Name is required",
-                        pattern: {
-                          value: /^[A-Za-z]+$/i,
-                          message: "Alphabets are only allowed",
-                        },
-                      })}
-                    />
-                </div>
-              <form className="forms-sample">
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">
-                    Date
-                    <sup>*</sup>
-                  </label>
-                  <input
-                    type="date"
+                    type="text"
+                    name="patientName"
                     className="form-control"
-                 
-                    placeholder="Date"
-                    required
+                    placeholder="Enter  Name"
+                    {...register("name", {
+                      required: "Name is required",
+                    })}
                   />
                 </div>
+
+                <p className="formErrors">{errors.date?.message}</p>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">
-                    Patient
-                    <sup>*</sup>
+                  <label htmlFor="exampleTextarea1">
+                    Date<sup>*</sup>
                   </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Patient"
-                    required
+                  <Controller
+                    control={control}
+                    name="date"
+                    placeholderText="Select Date"
+                    render={({ field }) => (
+                      <DatePicker
+                        selected={field.value}
+                        onChange={(date) => setStartDate(date)}
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                        placeholderText="select Date"
+                        isClearable
+                        {...field}
+                      />
+                    )}
                   />
                 </div>
+                <p className="formErrors">{errors.dose?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
-                    Doses
-                    <sup>*</sup>
+                    Dose<sup>*</sup>
                   </label>
                   <input
-                    type="text"
+                    type="number"
+                    name="dose"
                     className="form-control"
-                    placeholder="Doses"
-                    required
+                    placeholder="Enter Number of Dose"
+                    {...register("dose", {
+                      required: "Dose  is required",
+                    })}
                   />
                 </div>
                 <div className="form-group">
@@ -155,7 +158,14 @@ function Prescriptions() {
                     <sup>*</sup>
                   </label>
                   <div>
-                    <select className="form-control" id="select-new3" required>
+                    <select
+                      className="form-control"
+                      name="interval"
+                      // id="select-new3"
+                      {...register("interval", {
+                        required: "interval  is required",
+                      })}
+                    >
                       <option>2 Daily</option>
                       <option>3 Daily</option>
                       <option>In Morning</option>

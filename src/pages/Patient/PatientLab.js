@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import axios from 'axios';
 import { Controller, useForm } from "react-hook-form";
-function PatientLab({id}) {
+function PatientLab({id,setId}) {
   const {
     register,
     handleSubmit,
@@ -13,8 +13,8 @@ function PatientLab({id}) {
   const onSubmit=async(data)=>{
     data={...data,patient_id:id}
     const result = await axios.post("/nurse/addPatientLabNote", data);
-    console.log(result);
-    console.log(data);
+    setId(id);
+
   }
   return (
     <div class="tab-pane fade" id="patienttab7" role="tabpanel">
