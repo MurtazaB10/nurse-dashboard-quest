@@ -1,17 +1,18 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 function NurseNotes() {
   const {
     register,
-    handleSubmit,control,
+    handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
   const [addNote, setAddNote] = useState([]);
   const onSubmit = (data) => {
     setAddNote(data);
     console.log(data);
-  }
+  };
   return (
     <div class="tab-pane fade" id="nursenote" role="tabpanel">
       <div>
@@ -100,7 +101,7 @@ function NurseNotes() {
                           </p>
                         </div>
                       </li>
-                    </ul> 
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -134,40 +135,40 @@ function NurseNotes() {
             <pre>{JSON.stringify(addNote, undefined, 2)}</pre>
             <div className="modal-body">
               <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
-              <p className="formErrors">{errors.patientName?.message}</p>
+                <p className="formErrors">{errors.patientName?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Name<sup>*</sup>
                   </label>
                   <input
-                      type="text"
-                      name="patientName"
-                      className="form-control"
-                      placeholder="Enter Patient Name"
-                      {...register("patientName", {
-                        required: "patient Name is required",
-                        pattern: {
-                          value: /^[A-Za-z]+$/i,
-                          message: "Alphabets are only allowed",
-                        },
-                      })}
-                    />
+                    type="text"
+                    name="patientName"
+                    className="form-control"
+                    placeholder="Enter Patient Name"
+                    {...register("patientName", {
+                      required: "patient Name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Alphabets are only allowed",
+                      },
+                    })}
+                  />
                 </div>
                 <div className="form-group">
-                <p className="formErrors">{errors.addNote?.message}</p>
+                  <p className="formErrors">{errors.addNote?.message}</p>
                   <label htmlFor="exampleTextarea1">
                     Add Note<sup>*</sup>
                   </label>
                   <textarea
-                          type="text"
-                          name="addNote"
-                          rows={4}
-                          className="form-control"
-                          placeholder="Enter Address"
-                          {...register("addNote", {
-                            required: "Note is required",
-                          })}
-                        />
+                    type="text"
+                    name="addNote"
+                    rows={4}
+                    className="form-control"
+                    placeholder="Enter Address"
+                    {...register("addNote", {
+                      required: "Note is required",
+                    })}
+                  />
                 </div>
 
                 <button type="submit" className="btn btn-gradient-primary mr-2">

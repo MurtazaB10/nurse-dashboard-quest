@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import axios from 'axios';
 import { Controller, useForm } from "react-hook-form";
-function PatientLab() {
+function PatientLab({id}) {
   const {
     register,
     handleSubmit,
@@ -9,6 +10,12 @@ function PatientLab() {
     formState: { errors },
   } = useForm();
   const labs = useSelector((state) => state.patientInfo.patient.patientlab);
+  const onSubmit=async(data)=>{
+    data={...data,patient_id:id}
+    const result = await axios.post("/nurse/addPatientLabNote", data);
+    console.log(result);
+    console.log(data);
+  }
   return (
     <div class="tab-pane fade" id="patienttab7" role="tabpanel">
       <div className="row mt-4">
@@ -84,63 +91,39 @@ function PatientLab() {
               </button>
             </div>
             <div className="modal-body">
-              <form className="forms-sample">
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.name?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Name<sup>*</sup>
                   </label>
                   <input
                     type="text"
+                    name="name"
                     className="form-control"
-                    placeholder="Name"
-                    required
+                    placeholder="Enter Patient Name"
+                    {...register("name", {
+                      required: " Name is required",
+                    })}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputName1">
-                    Description<sup>*</sup>
+                  <p className="formErrors">{errors.note?.message}</p>
+                  <label htmlFor="exampleTextarea1">
+                    Add Note<sup>*</sup>
                   </label>
-                  <input
+                  <textarea
                     type="text"
+                    name="note"
+                    rows={4}
                     className="form-control"
-                    placeholder="Description"
-                    required
+                    placeholder="Enter Address"
+                    {...register("note", {
+                      required: "Note is required",
+                    })}
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">
-                    Address<sup>*</sup>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Address"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">
-                    E-mail<sup>*</sup>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="E-mail"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputName1">
-                    Contact Number<sup>*</sup>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Contact Number"
-                    required
-                  />
-                </div>
-
+                
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Save
                 </button>

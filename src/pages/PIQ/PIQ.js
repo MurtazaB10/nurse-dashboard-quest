@@ -28,7 +28,7 @@ const PIQ = () => {
                     </div>
                   </div>
                   <hr />
-                  <pre>{JSON.stringify(info, undefined, 2)}</pre>
+                  {/* <pre>{JSON.stringify(info, undefined, 2)}</pre> */}
                   <div className="row">
                     <div className="col-md-10 m-auto">
                       <form

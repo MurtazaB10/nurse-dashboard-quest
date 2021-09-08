@@ -14,19 +14,23 @@ import ProfileCard from "./ProfileCard";
 import DoctorsNotes from "./DoctorsNote";
 import NurseNotes from "./NursesNote";
 import { setPatientsList } from "../../redux/actions/patientListActions";
+import Loader from '../../utils/Loader'
 
 const Patient = () => {
   const patientInfo = useSelector((state) => state.patientInfo.patient);
   const patientsList = useSelector((state) => state.patientsList.patients);
   const [id,setId]=useState("6103f172ef6ebe0359c9e411");
+  const [loading,setLoading]=useState(false);
   const dispatch = useDispatch();
   async function fetchData() {
+    setLoading(false);
     try {
       const res = await axios.post(`/nurse/patientDetails/${id}`);
       const result = await axios.get("nurse/dashboard");
       dispatch(setPatientsList(result.data.data.patient_list))
       dispatch(setPatientInfo(res.data.data));
       console.log(res.data.data);
+      setLoading(true);
     } catch (error) {
       console.error(error);
     } finally {
@@ -196,13 +200,13 @@ const handleSelect=(e)=>{
                     </div>
                   </div>
                 </div>
-                <DoctorsNotes />
+                <DoctorsNotes id={id}/>
                 <NurseNotes />
                 <Documents />
                 <VisitLog />
                 <Payment />
                 <Prescriptions />
-                <PatientLab />
+                <PatientLab id={id}/>
               </div>
             </div>
           </div>
@@ -210,7 +214,7 @@ const handleSelect=(e)=>{
         <ContactTracing />
       </section>
     </div>
-  );
+                        );
 };
 
 export default Patient;

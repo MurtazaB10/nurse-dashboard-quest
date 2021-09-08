@@ -39,7 +39,7 @@ function ProductList() {
     setFormData(data);
     console.log(data);
   };
-  console.log(errors);
+  const onClickDaily = () => {};
 
   return (
     <>
@@ -59,7 +59,11 @@ function ProductList() {
                     <div className="col-md-6 text-left">
                       <div className="row mt-3 filter-btn-row">
                         <div className="col-md-4">
-                          <a href className="btn btn-gradient-primary w-100">
+                          <a
+                            onClick={onClickDaily}
+                            href
+                            className="btn btn-gradient-primary w-100"
+                          >
                             Daily
                           </a>
                         </div>
@@ -77,20 +81,20 @@ function ProductList() {
                       <div className="row align-items-center mt-3 filter-btn-row">
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                          <DatePicker
-                      selected={startdate}
-                      onChange={(date) => setStartDate(date)}
-                      isClearable
-                      />
+                            <DatePicker
+                              selected={startdate}
+                              onChange={(date) => setStartDate(date)}
+                              isClearable
+                            />
                           </div>
                         </div>
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                          <DatePicker
-                      selected={endDate}
-                      onChange={(date) => setEndDate(date)}
-                      isClearable
-                      />
+                            <DatePicker
+                              selected={endDate}
+                              onChange={(date) => setEndDate(date)}
+                              isClearable
+                            />
                           </div>
                         </div>
                         <div className="col-md-4">
@@ -271,3 +275,4 @@ function ProductList() {
   );
 }
 export default ProductList;
+

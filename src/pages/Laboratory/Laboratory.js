@@ -11,7 +11,7 @@ const Laboratory = () => {
     setFormData(data);
     console.log(data);
   };
-  console.log(errors);
+ 
   return (
     <div>
       <section className="dashboard">

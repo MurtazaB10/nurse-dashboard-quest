@@ -1,9 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 function Prescriptions() {
+  const {
+    register,
+    handleSubmit,control,
+    formState: { errors },
+  } = useForm();
   const prescriptions = useSelector(
     (state) => state.patientInfo.patient.patientPrescription
   );
+  const onSubmit = (data) => {
+    console.log(data);
+  }
   return (
     <div class="tab-pane fade" id="patienttab6" role="tabpanel">
       <div className="row mt-4">
@@ -81,18 +92,25 @@ function Prescriptions() {
               </button>
             </div>
             <div className="modal-body">
-              <div className="form-group">
-                <label htmlFor="exampleInputName1">
-                  Name
-                  <sup>*</sup>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Name"
-                  required
-                />
-              </div>
+            <p className="formErrors">{errors.name?.message}</p>
+                <div className="form-group">
+                  <label htmlFor="exampleInputName1">
+                    Name<sup>*</sup>
+                  </label>
+                  <input
+                      type="text"
+                      name="patientName"
+                      className="form-control"
+                      placeholder="Enter  Name"
+                      {...register("name", {
+                         required: "Name is required",
+                        pattern: {
+                          value: /^[A-Za-z]+$/i,
+                          message: "Alphabets are only allowed",
+                        },
+                      })}
+                    />
+                </div>
               <form className="forms-sample">
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
@@ -100,9 +118,9 @@ function Prescriptions() {
                     <sup>*</sup>
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
-                    id="datepicker8"
+                 
                     placeholder="Date"
                     required
                   />
@@ -145,7 +163,6 @@ function Prescriptions() {
                     </select>
                   </div>
                 </div>
-
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Save
                 </button>

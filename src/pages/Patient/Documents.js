@@ -1,8 +1,13 @@
-import React from "react";
+import React,{useState} from "react";
 import {  useSelector } from "react-redux";
 
 function Documents() {
+  const [noOfElement,setNoOfElement]=useState(4);
     const documents = useSelector((state) => state.patientInfo.patient.patientDocument);
+    const slice=documents&&documents.slice(0,noOfElement);
+    const loadMore=()=>{
+      setNoOfElement(noOfElement+noOfElement);
+    }
   return (
     <div class="tab-pane fade" id="patienttab3" role="tabpanel">
       <div className="row mt-4">
@@ -28,7 +33,7 @@ function Documents() {
                   </tr>
                 </thead>
                 <tbody>
-                    {documents&&documents.map((document,idx)=>{
+                    {slice&&slice.map((document,idx)=>{
                         return(
                   <tr key={idx}>
                     <td>{idx+1}</td>
@@ -57,6 +62,7 @@ function Documents() {
                   })
                   }
                 </tbody>
+                <button className="btn" onClick={()=>loadMore()}>Load More...</button>
               </table>
             </div>
           </div>

@@ -1,16 +1,21 @@
 import React,{useState} from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-function DoctorsNotes() {
+import { useSelector } from "react-redux";
+function DoctorsNotes(props) {
+  const {id}=props;
   const {
     register,
     handleSubmit,control,
     formState: { errors },
   } = useForm();
   const [addNote, setAddNote] = useState([]);
-  const onSubmit = (data) => {
+  const doctorsList = useSelector((state) => state.doctorsList.doctors);
+  console.log(doctorsList);
+  const onSubmit = async(data) => {
+    data={...data,patient_id:id,date:new Date()}
+    const result = await axios.post("/nurse/addPatientDocNote",data);
     setAddNote(data);
-    console.log(data);
   }
   return (
     <div class="tab-pane fade" id="patienttab2" role="tabpanel">
@@ -206,7 +211,7 @@ function DoctorsNotes() {
             <pre>{JSON.stringify(addNote, undefined, 2)}</pre>
             <div className="modal-body">
               <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
-              <p className="formErrors">{errors.patientName?.message}</p>
+              {/* <p className="formErrors">{errors.patientName?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Name<sup>*</sup>
@@ -224,23 +229,61 @@ function DoctorsNotes() {
                         },
                       })}
                     />
-                </div>
+                </div> */}
                 <div className="form-group">
-                <p className="formErrors">{errors.addNote?.message}</p>
+                <p className="formErrors">{errors.note?.message}</p>
                   <label htmlFor="exampleTextarea1">
                     Add Note<sup>*</sup>
                   </label>
                   <textarea
                           type="text"
-                          name="addNote"
+                          name="note"
                           rows={4}
                           className="form-control"
                           placeholder="Enter Address"
-                          {...register("addNote", {
+                          {...register("note", {
                             required: "Note is required",
                           })}
                         />
                 </div>
+                <p className="formErrors">{errors.doctor_id?.message}</p>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName1">
+                          Select doctor<sup>*</sup>
+                        </label>
+                        <div>
+                          <select
+                            id="select-new"
+                            className="form-control"
+                            name="doctor_id"
+                            {...register("doctor_id", {
+                              required: "Doctor is required",
+                            })}
+                          >
+                            
+                            {doctorsList &&
+                              doctorsList.map((doctor) => {
+                                return (
+                                  <option value={doctor._id}>
+                                    {doctor.name}
+                                  </option>
+                                );
+                              })}
+                          </select>
+                          {/* <select
+                            className="form-control"
+                            name="doctor"
+                            id="select-new2"
+                            {...register("doctor", {
+                              required: "Doctor is required",
+                            })}
+                          >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                          </select> */}
+                        </div>
+                      </div>
 
                 <button type="submit" className="btn btn-gradient-primary mr-2">
                   Submit

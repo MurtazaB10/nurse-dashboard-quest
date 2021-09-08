@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm,Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
 import { setAppointmentList } from "../../redux/actions/appointmentActions";
 import Time from "./Time";
@@ -11,17 +12,23 @@ import Card from "./Card";
 const Appointment = () => {
   const [startdate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
-  const appointmentList = useSelector((state) => state.doctorAppointmentList.appointments);
+  const patientsList = useSelector((state) => state.patientsList.patients);
+  const appointmentList = useSelector(
+    (state) => state.doctorAppointmentList.appointments.total_data
+  );
   const doctorsList = useSelector((state) => state.doctorsList.doctors);
   const {
-    register,
-    handleSubmit,control,
-    formState: { errors },
+    register: register2,
+    handleSubmit: handleSubmit2,
+    control: control2,
+    formState: { errors: errors2 },
   } = useForm();
   const [addAppointmentInfo, setAddAppointmentInfo] = useState([]);
   async function fetchData() {
     try {
-      const res = await axios.get("/doctor/appointment-list/6123440f81333d452a6596a1");
+      const res = await axios.get(
+        "/nurse/all-doctors-appointments"
+      );
       dispatch(setAppointmentList(res.data.data));
     } catch (error) {
       console.error(error);
@@ -34,8 +41,10 @@ const Appointment = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  const onSubmit = (data) => {
-    setAddAppointmentInfo(data);
+  const onSubmitAppointment = async (data) => {
+
+    const result = await axios.post("/nurse/addPatientAppointment", data);
+
   };
 
   return (
@@ -68,464 +77,41 @@ const Appointment = () => {
                       <thead>
                         <tr>
                           <th width="10%">Time</th>
-                          {
-                            doctorsList&&doctorsList.map((doctor,idx)=>{
-                              return(<th width="18%">
-                              <span className="dr-name">{doctor.name}</span>
-                            </th>)
-
-                            })
-                          }
+                          {appointmentList &&
+                            appointmentList.map((doctor, idx) => {
+                              return (
+                                <th width="18%">
+                                  <span className="dr-name">{doctor.doctors.name}</span>
+                                </th>
+                              );
+                            })}
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <Time/>
-                          <td width="18%">
+                          <Time />
+                          {appointmentList&&appointmentList.map((doctor,key)=>{
+                            console.log(doctor);
+                            return(
+                              
+                          <td width="18%" key={key}>
                             <table className="table w-100">
                               <tbody>
-                              {
-                                appointmentList&&appointmentList.map((appointment,idx)=>{
-                                  return <Card key={idx} appointment={appointment}/>
-                                })
-                              }
+                                {doctor.Appointment &&
+                                  doctor.Appointment.map((appointment, idx) => {
+                                    console.log(appointment);
+                                    return (
+                                      <Card
+                                        key={idx}
+                                        appointment={appointment}
+                                      />
+                                    );
+                                  }
+                                  )}
                               </tbody>
                             </table>
-                          </td>
-                          <td width="18%">
-                            <table className="table w-100">
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                          <td width="18%">
-                            <table className="table w-100">
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                          <td width="18%">
-                            <table className="table w-100">
-                              <tbody>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                          <td width="18%">
-                            <table className="table w-100">
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td className="clearfix d-block" rowSpan={3}>
-                                    <div className="appointment-box">
-                                      <p className="notes-edit text-right mb-2">
-                                        <a href>
-                                          Edit <i className="mdi mdi-pencil" />
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          Delete{" "}
-                                          <i className="mdi mdi-delete" />
-                                        </a>{" "}
-                                        &nbsp; <span />
-                                      </p>
-                                      <span className="patient-name">
-                                        Patient Name
-                                      </span>
-                                      <p className="mb-0">
-                                        <a href>
-                                          <span className="badge badge-primary">
-                                            Arrive
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-danger">
-                                            Cancel
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          <span className="badge badge-info">
-                                            OTW
-                                          </span>
-                                        </a>{" "}
-                                        |{" "}
-                                        <a href>
-                                          {" "}
-                                          <span className="badge badge-warning">
-                                            Waiting
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
+                          </td>)
+                           })} 
                         </tr>
                       </tbody>
                     </table>
@@ -547,7 +133,6 @@ const Appointment = () => {
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-            <pre>{JSON.stringify(addAppointmentInfo, undefined, 2)}</pre>
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel1">
                   Add Appointment
@@ -564,29 +149,31 @@ const Appointment = () => {
               <div className="modal-body">
                 <form
                   className="forms-sample"
-                  onSubmit={handleSubmit(onSubmit)}
+                  onSubmit={handleSubmit2(onSubmitAppointment)}
                 >
-                  <p className="formErrors">{errors.patientName?.message}</p>
-                  <div className="form-group">
-                    <label htmlFor="exampleInputName1">
-                      Patient Name
-                      <sup>*</sup>
-                    </label>
-                    <input
-                      type="text"
-                      name="patientName"
-                      className="form-control"
-                      placeholder="Enter Patient Name"
-                      {...register("patientName", {
-                        required: "patient Name is required",
-                        pattern: {
-                          value: /^[A-Za-z]+$/i,
-                          message: "Alphabets are only allowed",
-                        },
-                      })}
-                    />
-                  </div>
-                  <p className="formErrors">{errors.doctor?.message}</p>
+                  {/* <p className="formErrors">
+                            {errors2.patientName?.message}
+                          </p>
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName1">
+                              Patient Name
+                              <sup>*</sup>
+                            </label>
+                            <input
+                              type="text"
+                              name="patientName"
+                              className="form-control"
+                              placeholder="Enter Patient Name"
+                              {...register2("patientName", {
+                                required: "patient Name is required",
+                                pattern: {
+                                  value: /^[A-Za-z]+$/i,
+                                  message: "Alphabets are only allowed",
+                                },
+                              })}
+                            />
+                          </div> */}
+                  <p className="formErrors">{errors2.doctor_id?.message}</p>
 
                   <div className="form-group">
                     <label htmlFor="exampleInputName4">
@@ -595,62 +182,84 @@ const Appointment = () => {
 
                     <select
                       className="form-control"
-                      name="doctor"
+                      name="doctor_id"
                       id="select-new2"
-                      {...register("doctor", {
+                      {...register2("doctor_id", {
                         required: "Doctor is required",
                       })}
                     >
-                      <option></option>
-                      <option>Doctor1</option>
-                      <option>Doctor2</option>
-                      <option>Doctor3</option>
+                      {doctorsList.map((doctor) => {
+                        return (
+                          <option value={doctor._id}>{doctor.name}</option>
+                        );
+                      })}
                     </select>
                   </div>
-                  <p className="formErrors">{errors.date?.message}</p>
-
-                  <div className="form-group">
-                    <label htmlFor="exampleTextarea1">
-                      Select Date
-                      <sup>*</sup>
-                    </label>
-                    <Controller
-                          control={control}
-                          name="date"
-                          render={({ field }) => (
-                            <DatePicker
-                              selected={field.value}
-                              onChange={(date) => setStartDate(date)}
-                              minDate={new Date()}
-                              isClearable
-                              {...field}
-                            />
-                          )}
-                        />
-                  </div>
-                  <p className="formErrors">{errors.timeslot?.message}</p>
+                  <p className="formErrors">{errors2.patient_id?.message}</p>
 
                   <div className="form-group">
                     <label htmlFor="exampleInputName4">
-                      Time Slot<sup>*</sup>
+                      Select Patient<sup>*</sup>
                     </label>
-                    <div>
-                      <select
-                        className="form-control"
-                        name="timeslot"
-                        id="select-new2"
-                        {...register("timeslot", {
-                          required: "timeslot is required",
-                        })}
-                      >
-                        <option>9:00 AM - 9:30 AM</option>
-                        <option>9:30 AM - 10:00 AM</option>
-                        <option>10:00 AM - 10:30 AM</option>
-                        <option>10:30 AM - 11:00 AM</option>
-                        <option>11:00 AM - 11:30 AM</option>
-                        <option>11:30 AM - 12:00 AM</option>
-                      </select>
-                    </div>
+
+                    <select
+                      className="form-control"
+                      name="patient_id"
+                      id="select-new2"
+                      {...register2("patient_id", {
+                        required: "Patient is required",
+                      })}
+                    >
+                      {patientsList.map((patient) => {
+                        return (
+                          <option value={patient._id}>{patient.name}</option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <p className="formErrors">{errors2.date?.message}</p>
+                  <div className="form-group">
+                    <label htmlFor="exampleTextarea1">
+                      Select Date<sup>*</sup>
+                    </label>
+                    <Controller
+                      control={control2}
+                      name="date"
+                      render={({ field }) => (
+                        <DatePicker
+                          selected={field.value}
+                          onChange={(date) => setStartDate(date)}
+                          showMonthDropdown
+                          showYearDropdown
+                          dropdownMode="select"
+                          isClearable
+                          {...field}
+                        />
+                      )}
+                    />
+                  </div>
+                  <p className="formErrors">{errors2.start_time?.message}</p>
+
+                  <div className="form-group">
+                    <label htmlFor="exampleInputName4">
+                      Start Time<sup>*</sup>
+                    </label>
+                    <Controller
+                      control={control2}
+                      name="start_time"
+                      render={({ field }) => (
+                        <DatePicker
+                          selected={field.value}
+                          onChange={(date) => setStartDate(date)}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={20}
+                          timeCaption="Time"
+                          dateFormat="h:mm aa"
+                          {...field}
+                        />
+                      )}
+                    />
                   </div>
                   <br />
                   <button

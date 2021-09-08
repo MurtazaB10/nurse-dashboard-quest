@@ -3,12 +3,11 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setDoctorsList } from "../../redux/actions/doctorActions";
 import { Controller, useForm } from "react-hook-form";
-import DashboardAppointmentTable from "./DashboardAppointmentTable";
+import DashboardAppointmentTable from "./DashboardAppointment.js/DashboardAppointmentTable";
 import HighCharts from "../../components/Highcharts/highcharts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { setPatientsList } from "../../redux/actions/patientListActions";
-// import { DatePicker } from 'react-rainbow-components';
 
 const Dashboard = () => {
   const {
@@ -19,28 +18,31 @@ const Dashboard = () => {
   } = useForm();
   const {
     register: register2,
+    control: control2,
     formState: { errors: errors2 },
     handleSubmit: handleSubmit2,
   } = useForm({
     mode: "onBlur",
   });
   const dispatch = useDispatch();
+  const [noOfElement,setNoOfElement]=useState(3);
   const doctorsList = useSelector((state) => state.doctorsList.doctors);
+  const patientsList = useSelector((state) => state.patientsList.patients);
   const [dashboardData, setDashboardData] = useState([]);
   const [patientZero, setPatientZero] = useState([]);
-  const [patientList, setpatientList] = useState([]);
+  const [startTime,setStartTime]=useState(new Date());
+  const [endTime,setEndTime]=useState(new Date());
   const [patientInfo, setPatientInfo] = useState([]);
-  const [startdate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   async function fetchData() {
     try {
       const result = await axios.get("nurse/dashboard");
       const res = await axios.get("doctor/list");
       dispatch(setDoctorsList(res.data.data));
-      dispatch(setPatientsList(result.data.data.patient_list))
+      dispatch(setPatientsList(result.data.data.patient_list));
 
       setDashboardData(result.data.data);
       setPatientZero(result.data.data.patient_list[0]);
-      setpatientList(result.data.data.patient_list);
     } catch (error) {
       console.error(error);
     } finally {
@@ -51,17 +53,24 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  useEffect(() => {
-  }, [patientInfo]);
+  useEffect(() => {}, [patientInfo]);
 
-  const onSubmit = async(data) => {
+  const slice=patientsList&&patientsList.slice(0,noOfElement);
 
-    const result = await axios.post("/nurse/addPatient",data);
-    setPatientInfo(data);
-    console.log(result);
-  };
-  const onSubmitAppointment = (data) => {
+  const loadMore=()=>{
+    setNoOfElement(noOfElement+noOfElement);
+  }
+
+  const onSubmit = async (data) => {
+    const result = await axios.post("/nurse/addPatient", data);
+
     console.log(data);
+  };
+  const onSubmitAppointment = async (data) => {
+    console.log(data);
+    setPatientInfo(data);
+    // const result = await axios.post("/nurse/addPatientAppointment", data);
+    // console.log(result);
   };
 
   return (
@@ -217,8 +226,8 @@ const Dashboard = () => {
                 </div>
                 <div className="card-block py-0">
                   <ul className="list-group list-group-full list-group-dividered mb-0">
-                    {patientList &&
-                      patientList.map((patient) => {
+                    {slice &&
+                      slice.map((patient) => {
                         return (
                           <li className="list-group-item">
                             <div className="media align-items-center">
@@ -248,6 +257,9 @@ const Dashboard = () => {
                         );
                       })}
                   </ul>
+                  <div className="text-center">
+                  <button className="btn " onClick={()=>loadMore()}>Load More...</button>
+                  </div>
                   <button
                     type="button"
                     className="btn-raised btn btn-danger btn-floating"
@@ -284,7 +296,7 @@ const Dashboard = () => {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <pre>{JSON.stringify(patientInfo, undefined, 2)}</pre>
+                    {/* <pre>{JSON.stringify(patientInfo, undefined, 2)}</pre> */}
                     <form
                       className="forms-sample"
                       onSubmit={handleSubmit(onSubmit)}
@@ -323,7 +335,6 @@ const Dashboard = () => {
                               required: "Doctor is required",
                             })}
                           >
-                            
                             {doctorsList &&
                               doctorsList.map((doctor) => {
                                 return (
@@ -375,6 +386,7 @@ const Dashboard = () => {
                         <Controller
                           control={control}
                           name="birthday"
+                          placeholderText="Select DOB"
                           render={({ field }) => (
                             <DatePicker
                               selected={field.value}
@@ -382,22 +394,12 @@ const Dashboard = () => {
                               showMonthDropdown
                               showYearDropdown
                               dropdownMode="select"
+                              placeholderText="select DOB"
                               isClearable
                               {...field}
                             />
                           )}
                         />
-
-                        {/* <input
-                          type="text"
-                          name="birthday"
-                          className="form-control"
-                          id="datepicker4"
-                          placeholder="Select Date"
-                          {...register("birthday", {
-                            required: "Birthday is required",
-                          })}
-                        /> */}
                       </div>
                       <p className="formErrors">{errors.email?.message}</p>
                       <div className="form-group">
@@ -428,7 +430,7 @@ const Dashboard = () => {
                             required: "Age  is required",
                           })}
                         />
-                        </div>
+                      </div>
                       <p className="formErrors">{errors.mobile?.message}</p>
                       <div className="form-group">
                         <label htmlFor="exampleInputName1">
@@ -564,11 +566,12 @@ const Dashboard = () => {
                         </button>
                       </div>
                       <div className="modal-body">
+                      {/* <pre>{JSON.stringify(patientInfo, undefined, 2)}</pre> */}
                         <form
                           className="forms-sample"
                           onSubmit={handleSubmit2(onSubmitAppointment)}
                         >
-                          <p className="formErrors">
+                          {/* <p className="formErrors">
                             {errors2.patientName?.message}
                           </p>
                           <div className="form-group">
@@ -589,7 +592,7 @@ const Dashboard = () => {
                                 },
                               })}
                             />
-                          </div>
+                          </div> */}
                           <p className="formErrors">
                             {errors2.doctor_id?.message}
                           </p>
@@ -616,58 +619,107 @@ const Dashboard = () => {
                               })}
                             </select>
                           </div>
-                          <p className="formErrors">{errors2.date?.message}</p>
-
-                          <div className="form-group">
-                            <label htmlFor="exampleTextarea1">
-                              Select Date
-                              <sup>*</sup>
-                            </label>
-                            <DatePicker
-                              selected={startdate}
-                              onChange={(date) => setStartDate(date)}
-                              minDate={new Date()}
-                              showDisabledMonthNavigation
-                              isClearable
-                            />
-                            {/* <input
-                              type="text"
-                              name="date"
-                              className="form-control"
-                              id="datepicker3"
-                              placeholder="Select Date"
-                              {...register2("date", {
-                                required: "Date is required",
-                              })}
-                            /> */}
-                          </div>
                           <p className="formErrors">
-                            {errors2.timeslot?.message}
+                            {errors2.patient_id?.message}
                           </p>
 
                           <div className="form-group">
                             <label htmlFor="exampleInputName4">
-                              Time Slot<sup>*</sup>
+                              Select Patient<sup>*</sup>
                             </label>
-                            <div>
-                              <select
-                                className="form-control"
-                                name="timeslot"
-                                id="select-new2"
-                                {...register2("timeslot", {
-                                  required: "timeslot is required",
-                                })}
-                              >
-                                <option>9:00 AM - 9:30 AM</option>
-                                <option>9:30 AM - 10:00 AM</option>
-                                <option>10:00 AM - 10:30 AM</option>
-                                <option>10:30 AM - 11:00 AM</option>
-                                <option>11:00 AM - 11:30 AM</option>
-                                <option>11:30 AM - 12:00 AM</option>
-                              </select>
-                            </div>
+
+                            <select
+                              className="form-control"
+                              name="patient_id"
+                              id="select-new2"
+                              {...register2("patient_id", {
+                                required: "Patient is required",
+                              })}
+                            >
+                              {patientsList.map((patient) => {
+                                return (
+                                  <option value={patient._id}>
+                                    {patient.name}
+                                  </option>
+                                );
+                              })}
+                            </select>
                           </div>
-                          <br />
+                          <p className="formErrors">{errors.date?.message}</p>
+                          <div className="form-group">
+                            <label htmlFor="exampleTextarea1">
+                              Select Date<sup>*</sup>
+                            </label>
+                            <Controller
+                              control={control2}
+                              name="date"
+                              render={({ field }) => (
+                                <DatePicker
+                                  selected={field.value}
+                                  onChange={(date) => setStartDate(date)}
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
+                                  minDate={new Date()}
+                                  placeholderText="Select Date"
+                                  isClearable
+                                  {...field}
+                                />
+                              )}
+                            />
+                          </div>
+                          <p className="formErrors">
+                            {errors.start_time?.message}
+                          </p>
+
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName4">
+                              Start Time<sup>*</sup>
+                            </label>
+                            <Controller
+                              control={control2}
+                              name="start_time"
+                              render={({ field }) => (
+                                <DatePicker
+                                  selected={field.value}
+                                  onChange={(date) => setStartTime(date)}
+                                  showTimeSelect
+                                  showTimeSelectOnly
+                                  timeIntervals={20}
+                                  timeCaption="Time"
+                                  placeholderText="Select Start Time"
+                                  dateFormat="h:mm aa"
+                                  {...field}
+                                />
+                              )}
+                            />
+                          </div>
+                          <p className="formErrors">
+                            {errors.end_time?.message}
+                          </p>
+
+                          <div className="form-group">
+                            <label htmlFor="exampleInputName4">
+                              End Time<sup>*</sup>
+                            </label>
+                            <Controller
+                              control={control2}
+                              name="end_time"
+                              render={({ field }) => (
+                                <DatePicker
+                                  selected={field.value}
+                                  onChange={(date) => setEndTime(date)}
+                                  showTimeSelect
+                                  showTimeSelectOnly
+                                  timeIntervals={20}
+                                  timeCaption="Time"
+                                  placeholderText="Select End Time"
+                                  dateFormat="h:mm aa"
+                                  {...field}
+                                />
+                              )}
+                            />
+                          </div>
                           <button
                             type="submit"
                             className="btn btn-gradient-primary mr-2"

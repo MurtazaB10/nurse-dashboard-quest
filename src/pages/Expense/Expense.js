@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import {
   TableContainer,
@@ -11,7 +12,13 @@ import {
 } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-function ProductList() {
+function ExpenseList() {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
   const [data, setData] = useState([]);
   const [startdate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -29,7 +36,9 @@ function ProductList() {
   useEffect(() => {
     fetchData();
   }, []);
-
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <>
       <section className="dashboard">
@@ -75,7 +84,7 @@ function ProductList() {
                         </div>
                         <div className="col-md-4">
                           <div className="form-group mb-0">
-                          <DatePicker
+                            <DatePicker
                               selected={endDate}
                               onChange={(date) => setEndDate(date)}
                               isClearable
@@ -159,61 +168,92 @@ function ProductList() {
               </button>
             </div>
             <div className="modal-body">
-              <form className="forms-sample">
+              <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
+                <p className="formErrors">{errors.Name?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Name<sup>*</sup>
                   </label>
                   <input
                     type="text"
+                    name="Name"
                     className="form-control"
-                    placeholder="Enter  Name"
-                    required
+                    placeholder="Name"
+                    {...register("Name", {
+                      required: "* Name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Alphabets are only allowed",
+                      },
+                    })}
                   />
                 </div>
 
+                <p className="formErrors">{errors.date?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleTextarea1">
                     Select Date<sup>*</sup>
                   </label>
-                  <DatePicker
-                      selected={endDate}
-                      onChange={(date) => setAddDate(date)}
-                      isClearable
+                  <Controller
+                    control={control}
+                    name="date"
+                    render={({ field }) => (
+                      <DatePicker
+                        selected={field.value}
+                        onChange={(date) => setAddDate(date)}
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                        minDate={new Date()}
+                        placeholderText="Select Date"
+                        isClearable
+                        {...field}
                       />
+                    )}
+                  />
                 </div>
+                <p className="formErrors">{errors.amount?.message}</p>
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Amount<sup>*</sup>
                   </label>
                   <input
-                    type="text"
+                    type="number"
+                    name="amount"
                     className="form-control"
-                    placeholder="Enter  Amount"
-                    required
+                    placeholder="Enter Amount"
+                    {...register("amount", {
+                      required: "Amount is required",
+                    })}
                   />
                 </div>
+                <p className="formErrors">{errors.note?.message}</p>
+
                 <div className="form-group">
                   <label htmlFor="exampleInputName1">
                     Note<sup>*</sup>
                   </label>
                   <input
                     type="text"
+                    name="note"
                     className="form-control"
-                    placeholder="Enter  Note"
-                    required
+                    placeholder="Enter Note"
+                    {...register("note", {
+                      required: "Note is required",
+                    })}
                   />
                 </div>
                 <div className="form-group">
                   <label>File upload</label>
                   <input
                     type="file"
-                    name="img[]"
+                    name="picture"
                     className="file-upload-default"
                   />
                   <div className="input-group col-xs-12">
                     <input
                       type="text"
+                      name="doc"
                       className="form-control file-upload-info"
                       disabled
                       placeholder="Upload Image/Video"
@@ -239,4 +279,4 @@ function ProductList() {
     </>
   );
 }
-export default ProductList;
+export default ExpenseList;

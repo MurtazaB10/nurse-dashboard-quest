@@ -1,7 +1,7 @@
 import React from "react";
 
 function Card({appointment}) {
-  console.log(appointment);
+  // console.log(appointment);
   return (
     <tr>
       <td className="clearfix d-block" rowSpan={3}>
@@ -16,7 +16,7 @@ function Card({appointment}) {
             </a>{" "}
             &nbsp; <span />
           </p>
-          <span className="patient-name">{appointment.patient_id.name}</span>
+          <span className="patient-name">{appointment.patient_id}</span>
           <p className="mb-0">
             <a href>
               <span className="badge badge-primary">Arrive</span>
