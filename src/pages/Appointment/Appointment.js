@@ -44,6 +44,7 @@ const Appointment = () => {
   const onSubmitAppointment = async (data) => {
 
     const result = await axios.post("/nurse/addPatientAppointment", data);
+    console.log(result);
 
   };
 

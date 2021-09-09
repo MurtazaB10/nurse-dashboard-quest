@@ -68,7 +68,7 @@ const Dashboard = () => {
   };
   const onSubmitAppointment = async (data) => {
     console.log(data);
-    setPatientInfo(data);
+    // setPatientInfo(data);
     // const result = await axios.post("/nurse/addPatientAppointment", data);
     // console.log(result);
   };
@@ -645,14 +645,14 @@ const Dashboard = () => {
                               })}
                             </select>
                           </div>
-                          <p className="formErrors">{errors.date?.message}</p>
+                          <p className="formErrors">{errors.appointment_date?.message}</p>
                           <div className="form-group">
                             <label htmlFor="exampleTextarea1">
                               Select Date<sup>*</sup>
                             </label>
                             <Controller
                               control={control2}
-                              name="date"
+                              name="appointment_date"
                               render={({ field }) => (
                                 <DatePicker
                                   selected={field.value}
