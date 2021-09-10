@@ -1,13 +1,20 @@
-import React,{useState} from "react";
-import {  useSelector } from "react-redux";
+import React, { useState, state } from "react";
+import { useSelector } from "react-redux";
 
 function Documents() {
-  const [noOfElement,setNoOfElement]=useState(4);
-    const documents = useSelector((state) => state.patientInfo.patient.patientDocument);
-    const slice=documents&&documents.slice(0,noOfElement);
-    const loadMore=()=>{
-      setNoOfElement(noOfElement+noOfElement);
+  const [noOfElement, setNoOfElement] = useState(4);
+  const documents = useSelector(
+    (state) => state.patientInfo.patient.patientDocument
+  );
+  const slice = documents && documents.slice(0, noOfElement);
+  const [showBtn, setShow] = useState(true);
+  const loadMore = () => {
+    setNoOfElement(noOfElement + noOfElement);
+    const noOfElementOnPage = noOfElement + noOfElement;
+    if (Object.keys(documents).length <= noOfElementOnPage) {
+      setShow(false);
     }
+  };
   return (
     <div class="tab-pane fade" id="patienttab3" role="tabpanel">
       <div className="row mt-4">
@@ -33,36 +40,40 @@ function Documents() {
                   </tr>
                 </thead>
                 <tbody>
-                    {slice&&slice.map((document,idx)=>{
-                        return(
-                  <tr key={idx}>
-                    <td>{idx+1}</td>
-                    <td>{document.date}</td>
-                    <td>{document.title}</td>
-                    <td>{document.description}</td>
-                    <td>
-                      <div className="img-vid-box">
-                        <img
-                          src={document.document}
-                          alt="artist-img"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <div className="edit-icon">
-                        <a href="/" className="white mr-10">
-                          <i className="icon mdi mdi-pencil" />
-                        </a>
-                        <a href="/" className="white mr-10">
-                          <i className="icon mdi mdi-eye" />
-                        </a>
-                      </div>
-                    </td>
-                  </tr>)
-                  })
-                  }
+                  {slice &&
+                    slice.map((document, idx) => {
+                      return (
+                        <tr key={idx}>
+                          <td>{idx + 1}</td>
+                          <td>{document.date}</td>
+                          <td>{document.title}</td>
+                          <td>{document.description}</td>
+                          <td>
+                            <div className="img-vid-box">
+                              <img src={document.document} alt="artist-img" />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="edit-icon">
+                              <a href="/" className="white mr-10">
+                                <i className="icon mdi mdi-pencil" />
+                              </a>
+                              <a href="/" className="white mr-10">
+                                <i className="icon mdi mdi-eye" />
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
-                <button className="btn" onClick={()=>loadMore()}>Load More...</button>
+                <button
+                  className="btn"
+                  onClick={() => loadMore()}
+                  style={{ display: showBtn ? "block" : "none" }}
+                >
+                  Load More...
+                </button>
               </table>
             </div>
           </div>

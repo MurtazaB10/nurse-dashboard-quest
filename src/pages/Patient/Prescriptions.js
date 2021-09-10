@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
-import axios from 'axios';
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-function Prescriptions({id}) {
+function Prescriptions({ id }) {
   const {
     register,
     handleSubmit,
@@ -15,8 +15,13 @@ function Prescriptions({id}) {
   const prescriptions = useSelector(
     (state) => state.patientInfo.patient.patientPrescription
   );
-  const onSubmit = async(data) => {
-    data={...data,patient_id:id}
+  const [noOfElement, setNoOfElement] = useState(4);
+  const slice = prescriptions && prescriptions.slice(0, noOfElement);
+  const loadMore = () => {
+    setNoOfElement(noOfElement + noOfElement);
+  };
+  const onSubmit = async (data) => {
+    data = { ...data, patient_id: id };
     const result = await axios.post("/nurse/addPatientPrescription", data);
     console.log(result);
   };
@@ -54,8 +59,8 @@ function Prescriptions({id}) {
                   </tr>
                 </thead>
                 <tbody>
-                  {prescriptions &&
-                    prescriptions.map((prescription, idx) => {
+                  {slice &&
+                    slice.map((prescription, idx) => {
                       return (
                         <tr>
                           <td>{idx + 1}</td>
@@ -68,6 +73,9 @@ function Prescriptions({id}) {
                       );
                     })}
                 </tbody>
+                <button className="btn" onClick={() => loadMore()}>
+                  Load More...
+                </button>
               </table>
             </div>
           </div>
