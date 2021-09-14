@@ -259,7 +259,7 @@ const Dashboard = () => {
                       </div>
                     </>
                   ) : (
-                    <div style={{ height: "12 rem" }}>
+                    <div style={{ height: "12rem" }}>
                       <DashboardPatient />
                     </div>
                   )}
