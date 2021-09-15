@@ -259,7 +259,7 @@ const Dashboard = () => {
                       </div>
                     </>
                   ) : (
-                    <div style={{ height: "12rem" }}>
+                    <div style={{ height: "10rem" }}>
                       <DashboardPatient />
                     </div>
                   )}
@@ -299,7 +299,7 @@ const Dashboard = () => {
                       : [1, 2, 3].map((elem) => {
                           return (
                             <li
-                              style={{ height: "5rem" }}
+                              style={{ height: "6rem" }}
                               className="list-group-item"
                               key={elem}
                             >
