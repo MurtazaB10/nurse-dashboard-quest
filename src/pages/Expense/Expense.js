@@ -20,14 +20,16 @@ function ExpenseList() {
     formState: { errors },
   } = useForm();
   const [data, setData] = useState([]);
-  const [startdate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [addDate, setAddDate] = useState(new Date());
+  const [dateData, setDateData] = useState([]);
 
   async function fetchData() {
     try {
       const result = await axios.get("nurse/expensesList");
       setData(result.data.data);
+      setDateData(result.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -36,9 +38,59 @@ function ExpenseList() {
   useEffect(() => {
     fetchData();
   }, []);
+
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const dateFilter = () => {
+    const results = data.filter((expense) => {
+      var date = new Date(expense.date.substring(0, 10)).toLocaleDateString();
+      var sdate = new Date(startDate).toLocaleDateString();
+      var edate = new Date(endDate).toLocaleDateString();
+      console.log(date);
+      console.log(sdate);
+      console.log(edate);
+      return date >= sdate && date <= edate;
+    });
+    setDateData(results);
+  };
+
+  const daily = () => {
+    const results = data.filter((expense) => {
+      var date = new Date(expense.date.substring(0, 10)).toLocaleDateString();
+      var tdate = new Date().toLocaleDateString();
+      return date === tdate;
+    });
+    setDateData(results);
+  };
+
+  const weekly = () => {
+    const results = data.filter((expense) => {
+      var date = new Date(expense.date.substring(0, 10)).toLocaleDateString();
+      var tdate = new Date();
+      var sdate = new Date();
+      sdate.setDate(tdate.getDate() - 6);
+      return (
+        date >= sdate.toLocaleDateString() && date <= tdate.toLocaleDateString()
+      );
+    });
+    setDateData(results);
+  };
+
+  const month = () => {
+    const results = data.filter((expense) => {
+      var date = new Date(expense.date.substring(0, 10)).toLocaleDateString();
+      var tdate = new Date();
+      var sdate = new Date();
+      sdate.setDate(tdate.getDate() - 29);
+      return (
+        date >= sdate.toLocaleDateString() && date <= tdate.toLocaleDateString()
+      );
+    });
+    setDateData(results);
+  };
+
   return (
     <>
       <section className="dashboard">
@@ -57,26 +109,35 @@ function ExpenseList() {
                     <div className="col-md-6 text-left">
                       <div className="row mt-3 filter-btn-row">
                         <div className="col-md-4">
-                          <a href className="btn btn-gradient-primary w-100">
+                          <button
+                            onClick={daily}
+                            className="btn btn-gradient-primary w-100"
+                          >
                             Daily
-                          </a>
+                          </button>
                         </div>
                         <div className="col-md-4">
-                          <a href className="btn btn-gradient-primary w-100">
+                          <button
+                            onClick={weekly}
+                            className="btn btn-gradient-primary w-100"
+                          >
                             Weekly
-                          </a>
+                          </button>
                         </div>
                         <div className="col-md-4">
-                          <a href className="btn btn-gradient-primary w-100">
+                          <button
+                            onClick={month}
+                            className="btn btn-gradient-primary w-100"
+                          >
                             Month
-                          </a>
+                          </button>
                         </div>
                       </div>
                       <div className="row align-items-center mt-3 filter-btn-row">
                         <div className="col-md-4">
                           <div className="form-group mb-0">
                             <DatePicker
-                              selected={startdate}
+                              selected={startDate}
                               onChange={(date) => setStartDate(date)}
                               isClearable
                             />
@@ -92,9 +153,12 @@ function ExpenseList() {
                           </div>
                         </div>
                         <div className="col-md-4">
-                          <a href className="btn btn-gradient-primary w-100">
+                          <button
+                            className="btn btn-gradient-primary w-100"
+                            onClick={dateFilter}
+                          >
                             Search
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -123,7 +187,7 @@ function ExpenseList() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.map((row) => (
+                      {dateData.map((row) => (
                         <TableRow key={row.name}>
                           <TableCell component="th" scope="row">
                             {row.name}

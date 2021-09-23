@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "./style.css";
 
-function Card({appointment}) {
+function Card({ appointment }) {
   // console.log(appointment);
+  const [mt, setMt] = useState("0%");
+
+  const margin = () => {
+    const st = appointment.start_time;
+    let hr = parseInt(st.substring(0, 2));
+    if (hr <= 7) hr = 3 + hr;
+    else hr = hr - 9;
+    hr = hr * 60 + parseInt(st.substring(3, st.length));
+    hr = 0.205 * hr;
+    setMt(`${hr}%`);
+  };
+
+  useEffect(() => margin());
+
   return (
     <tr>
-      <td className="clearfix d-block" rowSpan={3}>
+      <td style={{ "--mt": mt }} className="clearfix d-block" rowSpan={3}>
         <div className="appointment-box">
           <p className="notes-edit text-right mb-2">
             <a href>
@@ -16,7 +31,10 @@ function Card({appointment}) {
             </a>{" "}
             &nbsp; <span />
           </p>
-          <span className="patient-name">{appointment.patient_id}</span>
+          <span className="patient-name">
+            {appointment.start_time}
+            {appointment.end_time}
+          </span>
           <p className="mb-0">
             <a href>
               <span className="badge badge-primary">Arrive</span>

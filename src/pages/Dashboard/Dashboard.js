@@ -37,6 +37,7 @@ const Dashboard = () => {
   const [endTime, setEndTime] = useState(new Date());
   const [patientInfo, setPatientInfo] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
+  const [show, setShow] = useState(false);
   async function fetchData() {
     try {
       const result = await axios.get("nurse/dashboard");
@@ -67,7 +68,7 @@ const Dashboard = () => {
   const onSubmit = async (data) => {
     const result = await axios.post("/nurse/addPatient", data);
 
-    console.log(data);
+    setShow(false);
   };
   const onSubmitAppointment = async (data) => {
     console.log(data);
@@ -318,6 +319,7 @@ const Dashboard = () => {
                   <button
                     type="button"
                     className="btn-raised btn btn-danger btn-floating"
+                    onClick={() => setShow(true)}
                     data-toggle="modal"
                     data-target="#addproModal"
                   >
@@ -327,85 +329,86 @@ const Dashboard = () => {
               </div>
               {/* End Widget User list */}
             </div>
-            <div
-              className="modal fade"
-              id="addproModal"
-              tabIndex={-1}
-              role="dialog"
-              aria-labelledby="dialog"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">
-                      Add Patient
-                    </h5>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    {/* <pre>{JSON.stringify(patientInfo, undefined, 2)}</pre> */}
-                    <form
-                      className="forms-sample"
-                      onSubmit={handleSubmit(onSubmit)}
-                    >
-                      <div className="row">
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">{errors.name?.message}</p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Patient Name
-                              <sup>*</sup>
-                            </label>
-                            <input
-                              type="text"
-                              name="name"
-                              className="form-control"
-                              placeholder="Enter Patient Name"
-                              {...register("name", {
-                                required: "patient Name is required",
-                                pattern: {
-                                  value: /^[A-Za-z]+$/i,
-                                  message: "Alphabets are only allowed",
-                                },
-                              })}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">
-                            {errors.doctor_id?.message}
-                          </p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Select doctor<sup>*</sup>
-                            </label>
-                            <div>
-                              <select
-                                id="select-new"
+            {show && (
+              <div
+                className="modal fade"
+                id="addproModal"
+                tabIndex={-1}
+                role="dialog"
+                aria-labelledby="dialog"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">
+                        Add Patient
+                      </h5>
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      {/* <pre>{JSON.stringify(patientInfo, undefined, 2)}</pre> */}
+                      <form
+                        className="forms-sample"
+                        onSubmit={handleSubmit(onSubmit)}
+                      >
+                        <div className="row">
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">{errors.name?.message}</p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Patient Name
+                                <sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                name="name"
                                 className="form-control"
-                                name="doctor_id"
-                                {...register("doctor_id", {
-                                  required: "Doctor is required",
+                                placeholder="Enter Patient Name"
+                                {...register("name", {
+                                  required: "patient Name is required",
+                                  pattern: {
+                                    value: /^[A-Za-z]+$/i,
+                                    message: "Alphabets are only allowed",
+                                  },
                                 })}
-                              >
-                                {doctorsList &&
-                                  doctorsList.map((doctor) => {
-                                    return (
-                                      <option value={doctor._id}>
-                                        {doctor.name}
-                                      </option>
-                                    );
+                              />
+                            </div>
+                          </div>
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.doctor_id?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Select doctor<sup>*</sup>
+                              </label>
+                              <div>
+                                <select
+                                  id="select-new"
+                                  className="form-control"
+                                  name="doctor_id"
+                                  {...register("doctor_id", {
+                                    required: "Doctor is required",
                                   })}
-                              </select>
-                              {/* <select
+                                >
+                                  {doctorsList &&
+                                    doctorsList.map((doctor) => {
+                                      return (
+                                        <option value={doctor._id}>
+                                          {doctor.name}
+                                        </option>
+                                      );
+                                    })}
+                                </select>
+                                {/* <select
                             className="form-control"
                             name="doctor"
                             id="select-new2"
@@ -417,183 +420,193 @@ const Dashboard = () => {
                             <option value="female">Female</option>
                             <option value="others">Others</option>
                           </select> */}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">{errors.gender?.message}</p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Select Gender<sup>*</sup>
-                            </label>
-                            <div>
-                              <select
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.gender?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Select Gender<sup>*</sup>
+                              </label>
+                              <div>
+                                <select
+                                  className="form-control"
+                                  name="gender"
+                                  id="select-new2"
+                                  {...register("gender", {
+                                    required: "gender is required",
+                                  })}
+                                >
+                                  <option value="male">Male</option>
+                                  <option value="female">Female</option>
+                                  <option value="others">Others</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.birthday?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleTextarea1">
+                                Birthday<sup>*</sup>
+                              </label>
+                              <Controller
+                                control={control}
+                                name="birthday"
+                                placeholderText="Select DOB"
+                                render={({ field }) => (
+                                  <DatePicker
+                                    selected={field.value}
+                                    onChange={(date) => setStartDate(date)}
+                                    showMonthDropdown
+                                    showYearDropdown
+                                    dropdownMode="select"
+                                    placeholderText="select DOB"
+                                    isClearable
+                                    {...field}
+                                  />
+                                )}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.email?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                E-mail<sup>*</sup>
+                              </label>
+                              <input
+                                type="email"
+                                name="email"
                                 className="form-control"
-                                name="gender"
-                                id="select-new2"
-                                {...register("gender", {
-                                  required: "gender is required",
+                                placeholder="Enter E-mail"
+                                {...register("email", {
+                                  required: "Email is required",
                                 })}
-                              >
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="others">Others</option>
-                              </select>
+                              />
                             </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">
-                            {errors.birthday?.message}
-                          </p>
-                          <div className="form-group">
-                            <label htmlFor="exampleTextarea1">
-                              Birthday<sup>*</sup>
-                            </label>
-                            <Controller
-                              control={control}
-                              name="birthday"
-                              placeholderText="Select DOB"
-                              render={({ field }) => (
-                                <DatePicker
-                                  selected={field.value}
-                                  onChange={(date) => setStartDate(date)}
-                                  showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
-                                  placeholderText="select DOB"
-                                  isClearable
-                                  {...field}
-                                />
-                              )}
-                            />
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">{errors.age?.message}</p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Age<sup>*</sup>
+                              </label>
+                              <input
+                                type="number"
+                                name="age"
+                                className="form-control"
+                                placeholder="Enter Age"
+                                {...register("age", {
+                                  required: "Age  is required",
+                                })}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">{errors.email?.message}</p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              E-mail<sup>*</sup>
-                            </label>
-                            <input
-                              type="email"
-                              name="email"
-                              className="form-control"
-                              placeholder="Enter E-mail"
-                              {...register("email", {
-                                required: "Email is required",
-                              })}
-                            />
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.mobile?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Mobile Number<sup>*</sup>
+                              </label>
+                              <input
+                                type="number"
+                                name="mobile"
+                                className="form-control"
+                                placeholder="Enter Mobile Number"
+                                {...register("mobile", {
+                                  required: "Mobile Number is required",
+                                  pattern: {
+                                    value: /^[0-9\b]+$/,
+                                    message: "exact 10 numbers required",
+                                  },
+                                })}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">{errors.age?.message}</p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Age<sup>*</sup>
-                            </label>
-                            <input
-                              type="number"
-                              name="age"
-                              className="form-control"
-                              placeholder="Enter Age"
-                              {...register("age", {
-                                required: "Age  is required",
-                              })}
-                            />
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.address?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Address<sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                name="address"
+                                className="form-control"
+                                placeholder="Enter Address"
+                                {...register("address", {
+                                  required: "Address is required",
+                                })}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">{errors.mobile?.message}</p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Mobile Number<sup>*</sup>
-                            </label>
-                            <input
-                              type="number"
-                              name="mobile"
-                              className="form-control"
-                              placeholder="Enter Mobile Number"
-                              {...register("mobile", {
-                                required: "Mobile Number is required",
-                                pattern: {
-                                  value: /^[0-9\b]+$/,
-                                  message: "exact 10 numbers required",
-                                },
-                              })}
-                            />
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.occupation?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Occupation<sup>*</sup>
+                              </label>
+                              <input
+                                type="text"
+                                name="occupation"
+                                className="form-control"
+                                placeholder="Enter Occupation"
+                                {...register("occupation", {
+                                  required: "occupation is required",
+                                })}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">
-                            {errors.address?.message}
-                          </p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Address<sup>*</sup>
-                            </label>
-                            <input
-                              type="text"
-                              name="address"
-                              className="form-control"
-                              placeholder="Enter Address"
-                              {...register("address", {
-                                required: "Address is required",
-                              })}
-                            />
+                          <div className="col-md-6 col-12">
+                            <p className="formErrors">
+                              {errors.tel_no?.message}
+                            </p>
+                            <div className="form-group">
+                              <label htmlFor="exampleInputName1">
+                                Phone Number
+                              </label>
+                              <input
+                                type="number"
+                                name="tel_no"
+                                className="form-control"
+                                placeholder="Enter Phone Number"
+                                {...register("tel_no", {
+                                  required: "Phone Number is required",
+                                })}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">
-                            {errors.occupation?.message}
-                          </p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Occupation<sup>*</sup>
-                            </label>
-                            <input
-                              type="text"
-                              name="occupation"
-                              className="form-control"
-                              placeholder="Enter Occupation"
-                              {...register("occupation", {
-                                required: "occupation is required",
-                              })}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6 col-12">
-                          <p className="formErrors">{errors.tel_no?.message}</p>
-                          <div className="form-group">
-                            <label htmlFor="exampleInputName1">
-                              Phone Number
-                            </label>
-                            <input
-                              type="number"
-                              name="tel_no"
-                              className="form-control"
-                              placeholder="Enter Phone Number"
-                              {...register("tel_no", {
-                                required: "Phone Number is required",
-                              })}
-                            />
-                          </div>
-                        </div>
 
-                        <div className="col-12 text-center">
-                          <button
-                            type="submit"
-                            className="btn btn-gradient-primary mr-2"
-                          >
-                            Submit
-                          </button>
+                          <div className="col-12 text-center">
+                            <button
+                              type="submit"
+                              className="btn btn-gradient-primary mr-2"
+                            >
+                              Submit
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
+
             <div className="col-xxl-6 col-lg-6">
               {/* Panel Projects Status */}
               <div className="panel" id="projects-status">

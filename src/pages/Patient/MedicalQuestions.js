@@ -2,6 +2,7 @@ import React from "react";
 import {  useSelector } from "react-redux";
 function MedicalQuestions() {
     const questions = useSelector((state) => state.patientInfo.patient.patientMedicalQues&&state.patientInfo.patient.patientMedicalQues[0]);
+    console.log(questions);
     
   return (
     <div className="col-md-7">
